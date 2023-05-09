@@ -959,3 +959,6 @@ coverage*[.json, .xml, .info]
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans
+
+/coveragereport
+/doxygen-output

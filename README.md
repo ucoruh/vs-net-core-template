@@ -1,5 +1,31 @@
 # Visual Studio .NET Core Project Template
 
+## Releases 
+
+- [![GitHub release badge](https://badgen.net/github/release/ucoruh/csharp-netcore-unit-test-automation)](https://github.com/ucoruh/csharp-netcore-unit-test-automation/releases/latest)
+
+## Platforms
+
+- ![Ubuntu badge](assets/badge-ubuntu.svg) (Supported)
+
+- ![macOS badge](assets/badge-macos.svg) (Supported)
+
+- ![Windows badge](assets/badge-windows.svg) (Supported)
+
+## Test Coverage
+
+**Coverage**
+- ![All](assets/badge_combined.svg)
+
+**Branch Coverage**
+- ![Branch Coverage](assets/badge_branchcoverage.svg)
+
+**Line Coverage**
+- ![Line Coverage](assets/badge_linecoverage.svg)
+
+**Method Coverage**
+- ![Method Coverage](assets/badge_methodcoverage.svg)
+
 ## Overview
 
 This project template provide you to easily create release, testing with coverage and share documentation with other parties. Also process everthing with github actions
@@ -392,4 +418,6 @@ After this step commit and push your work.
 
 ## Github CI and Github Actions
 
-  
+### Create Token
+
+Create Fine-grained personal access tokens [Github Token](https://github.com/settings/tokens?type=beta) and give repository permissions. Also kept token safe.
