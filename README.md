@@ -216,6 +216,18 @@ doxygen -g
 
 This will create Doxyfile for us to modify. Use Doxywizard to modify file. Be sure that your output directory should be **./doxygen-output** and all warnings should be opened and warnings stop operations.
 
+#### ReportGenerator Setup
+
+We need to install [reportgenerator ](https://reportgenerator.io/)for creation of HTML test reports, we will use choco to install visit package manager web site [Chocolatey Software | ReportGenerator (Portable) - Generates reports for various code coverage tools 5.1.20](https://community.chocolatey.org/packages/reportgenerator.portable)
+
+```batch
+@echo off
+@setlocal enableextensions
+@cd /d "%~dp0"
+echo Installing Report Generator...
+choco install reportgenerator.portable
+```
+
 ## Repository Setup
 
 #### Github Repositoy Creation
@@ -281,7 +293,6 @@ if [ $RETURN -eq 1 ]; then
 fi
 
 exit $RETURN
-
 ```
 
 This script will check gitignore file, README.md file and Doxyfile is exist if not it will be terminate your commit operation. Also after `astyle` installation and `astyle-options.txt` generation it will automatically format your source code before each commit. Formatting configuration will be stored in `astyle-options.txt` .
@@ -365,6 +376,20 @@ dotnet new xunit -n CalculatorLibrary.Tests
 dotnet add CalculatorLibrary.Tests/CalculatorLibrary.Tests.csproj reference CalculatorLibrary/CalculatorLibrary.csproj
 ```
 
-After this step commit and push your work.
+After this step commit and push your work. 
 
+## Project Development
 
+- Rename Class Files 
+
+- Rename Test Files
+
+- Write Your Functions
+
+- Write Your Unit Tests
+
+- Write Your Code Documenation
+
+## Github CI and Github Actions
+
+  
