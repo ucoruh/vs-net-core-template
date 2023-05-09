@@ -12,7 +12,10 @@
 
 - ![Windows badge](assets/badge-windows.svg) (Supported)
 
+
 ## Test Coverage
+
+- ![](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml/badge.svg)
 
 **Coverage**
 - ![All](assets/badge_combined.svg)
