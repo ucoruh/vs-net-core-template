@@ -32,10 +32,15 @@ jobs:
       - name: Install Doxygen
         run: sudo apt-get install doxygen -y
         shell: bash
+        
+      - name: Install Report Generator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+        shell: bash
 
       - name: Generate Documentation
         run: doxygen Doxyfile
-
+        shell: bash
+        
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ./CalculatorLibrary.Tests
