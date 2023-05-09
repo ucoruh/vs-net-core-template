@@ -2,7 +2,7 @@
 
 ## Releases 
 
-- [![GitHub release badge](https://badgen.net/github/release/ucoruh/csharp-netcore-unit-test-automation)](https://github.com/ucoruh/csharp-netcore-unit-test-automation/releases/latest)
+- [![GitHub release badge](https://badgen.net/github/release/ucoruh/vs-net-core-template)](https://github.com/ucoruh/vs-net-core-template/releases/latest)
 
 ## Platforms
 

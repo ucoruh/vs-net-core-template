@@ -1,46 +1,47 @@
-name: .NET Windows + Doxygen + Test +  Release
+name: .NET Windows MacOS Linux Release
 
 on:
   push:
-    #branches:
-    #  - main
     tags:
       - 'v*'
-  pull_request:
-    branches:
-      - main
+#on:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    #runs-on: windows-latest
+    runs-on: windows-latest
     permissions:
       contents: read
       issues: read
       checks: write
       pull-requests: write
     steps:
-      - name: Checkout Source Code from Github
+      - name: Checkout
         uses: actions/checkout@v2
         
-      - name: Setup .NET Core # Required to execute ReportGenerator
-        uses: actions/setup-dotnet@v3
-        #with:
-        #  dotnet-version: 6.x
-        #  dotnet-quality: 'ga'
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        
+      - name: Install Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+        shell: powershell
+
+      - name: Install reportgenerator
+        run: choco install reportgenerator.portable -y
+        shell: powershell
         
       - name: Install Doxygen
-        run: sudo apt-get install doxygen -y
-        shell: bash
-        
-      - name: Install Report Generator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-        shell: bash
+        run: choco install doxygen.install -y
 
       - name: Generate Documentation
         run: doxygen Doxyfile
-        shell: bash
-        
+
       - name: Restore dependencies
         run: dotnet restore
         working-directory: ./CalculatorLibrary.Tests
@@ -59,16 +60,6 @@ jobs:
 
       - name: Generate Coverage Report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
-
-      #- name: ReportGenerator
-      #  uses: danielpalme/ReportGenerator-GitHub-Action@5.1.20
-      #  with:
-      #    reports: CalculatorLibrary.Tests/**/coverage.cobertura.xml
-      #    targetdir: coveragereport
-      #    reporttypes: Html;Html_Light;Html_Dark;Html_BlueRed;HtmlSummary;XML;XMLSummary;JsonSummary;Latex;TextSummary;TextDeltaSummary;MarkdownSummary;MarkdownSummaryGithub;MarkdownDeltaSummary;PngChart;Badges
-      #    historydir: report_history
-      #    filefilters: +cs;+java;+h;+cpp;+c
-      #    title: 'Calculator Library Project Test Coverage'
         
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
@@ -89,12 +80,46 @@ jobs:
           name: code-coverage-results
           path: code-coverage-results.md
 
+    #  - name: Add Coverage PR Comment
+    #    uses: marocchino/sticky-pull-request-comment@v2
+    #    if: github.event_name == 'pull_request'
+    #    with:
+    #      recreate: true
+    #      path: code-coverage-results.md
+        
+      - name: Check Test Coverage
+        run: |
+            $ErrorActionPreference = 'Stop'
+            $coverageThreshold = 100.00
+            $coverageReportPath = Get-ChildItem -Recurse -Filter 'coverage.cobertura.xml' | Select-Object -ExpandProperty FullName
+            $lines = Get-Content $coverageReportPath
+            $xmlContent = $lines -join "`n"
+            $coverageXmlList = $xmlContent -split "<\?xml"
+            $totalLines = 0
+            $coveredLines = 0
+            foreach ($coverageXmlString in $coverageXmlList) {
+                if ($coverageXmlString.Trim() -ne '') {
+                    $coverageXmlString = "<?xml" + $coverageXmlString
+                    [xml]$coverageXml = $coverageXmlString
+                    $lineRate = $coverageXml.SelectSingleNode("//coverage").GetAttribute("line-rate")
+                    $coverage = [float]$lineRate * 100.00
+                    if ($coverage -lt $coverageThreshold) {
+                        Write-Host "Current test coverage is below the threshold of $coverageThreshold%."
+                        Write-Host "Current test coverage: $coverage%."
+                        exit 1
+                    }
+                }
+            }
+        shell: powershell
+
+#      - name: Publish
+#        run: dotnet publish --configuration Release --output publish
       - name: Build/Publish for Windows
         run: dotnet publish -c Release -r win-x64 --self-contained true -o publish/windows
 
       - name: Get Commit Summary
         id: commit_summary
-        run: echo "::set-output name=summary::$(git log --format=%B -n 10 ${{ github.sha }})"
+        run: echo "::set-output name=summary::$(git log --format=%B -n 1 ${{ github.sha }})"
 
       - name: Create Release
         id: create_common_release
@@ -119,7 +144,7 @@ jobs:
         run: tar -czvf test-coverage-html.tar.gz -C coveragereport .
         
       - name: Compress Doxygen Output (Html/Xml/Latex)
-        run: tar -czvf doxygen-output-html-xml-latex-rtf.tar.gz -C doxygen-output .
+        run: tar -czvf doxygen-output-html-xml-latex.tar.gz -C Docs .
                 
       - name: Upload Windows Binaries to release asset
         uses: actions/upload-release-asset@v1
@@ -146,15 +171,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./doxygen-output-html-xml-latex-rtf.tar.gz
-          asset_name: doxygen-output-html-xml-latex-rtf.tar.gz
+          asset_path: ./doxygen-output-html-xml-latex.tar.gz
+          asset_name: doxygen-output-html-xml-latex.tar.gz
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-
-      # https://github.com/peaceiris/actions-gh-pages
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          publish_dir: ./doxygen-output/html
