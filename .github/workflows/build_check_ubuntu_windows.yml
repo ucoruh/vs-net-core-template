@@ -21,7 +21,7 @@ jobs:
         pull-requests: write
     steps:
       - name: Checkout Source Code from Github
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
@@ -77,7 +77,7 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout Source Code from Github
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3
         
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
