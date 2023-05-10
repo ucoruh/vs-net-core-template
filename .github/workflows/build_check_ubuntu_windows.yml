@@ -1,4 +1,4 @@
-name: .NET Windows + Doxygen + Test +  Release
+name: .NET Core Release with Test Coverage Control
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   coverage:
-    name: Check Coverage %100
+    name: Check Unit Test Coverage %100
     runs-on: windows-latest
     permissions:
         contents: read
@@ -21,9 +21,9 @@ jobs:
         pull-requests: write
     steps:
       - name: Checkout Source Code from Github
-        uses: actions/checkout@v2
-        
-      - name: Setup .NET Core # Required to execute ReportGenerator
+        uses: actions/checkout@v3.5.2
+
+      - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         
       - name: Restore dependencies
@@ -31,15 +31,15 @@ jobs:
         working-directory: ./CalculatorLibrary.Tests
 
       - name: Install coverlet.msbuild
-        run: dotnet add package coverlet.msbuild --version 3.1.0
+        run: dotnet add package coverlet.msbuild
         working-directory: ./CalculatorLibrary.Tests
 
-      - name: Build
-        run: dotnet build --configuration Release
-        working-directory: ./CalculatorLibrary.Tests
+      #- name: Build
+      #  run: dotnet build --configuration Release
+      #  working-directory: ./CalculatorLibrary.Tests
 
       - name: Test with Coverage
-        run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory:./TestResults --logger:trx
+        run: dotnet test --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory:./TestResults --logger:trx
         working-directory: ./CalculatorLibrary.Tests
 
       - name: Check Test Coverage
@@ -67,7 +67,7 @@ jobs:
             }
         shell: powershell
   build:
-    name: .NET Windows + Doxygen + Test +  Release
+    name: .NET Core Doxygen + Test +  Release (Windows/Linux/MacOS)
     needs: coverage
     runs-on: ubuntu-latest
     permissions:
@@ -77,13 +77,10 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout Source Code from Github
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.5.2
         
-      - name: Setup .NET Core # Required to execute ReportGenerator
+      - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
-        #with:
-        #  dotnet-version: 6.x
-        #  dotnet-quality: 'ga'
         
       - name: Install Doxygen
         run: sudo apt-get install doxygen -y
@@ -134,8 +131,14 @@ jobs:
         with:
           name: code-coverage-results
           path: code-coverage-results.md
+        
+      - name: Build/Publish  for Linux
+        run: dotnet publish -c Release -r linux-x64 --self-contained true -o publish/linux
 
-      - name: Build/Publish for Windows
+      - name: Build/Publish  for macOS
+        run: dotnet publish -c Release -r osx-x64 --self-contained true -o publish/macos
+
+      - name: Build/Publish  for Windows
         run: dotnet publish -c Release -r win-x64 --self-contained true -o publish/windows
 
       - name: Get Commit Summary
@@ -157,17 +160,43 @@ jobs:
             Dr. Ugur CORUH
           draft: false
           prerelease: false
+        
+      - name: Compress Linux binaries
+        run: tar -czvf linux-binaries.tar.gz -C publish/linux .
+
+      - name: Compress macOS binaries
+        run: tar -czvf macos-binaries.tar.gz -C publish/macos .
 
       - name: Compress Windows binaries
         run: tar -czvf windows-binaries.tar.gz -C publish/windows .
         
-      - name: Compress Windows Test Coverage Report
-        run: tar -czvf test-coverage-html.tar.gz -C coveragereport .
+      - name: Compress Test Coverage Report
+        run: tar -czvf application-test-report.tar.gz -C coveragereport .
         
-      - name: Compress Doxygen Output (Html/Xml/Latex)
-        run: tar -czvf doxygen-output-html-xml-latex-rtf.tar.gz -C doxygen-output .
-                
-      - name: Upload Windows Binaries to release asset
+      - name: Compress Doxygen Output (HTML/XML/Latex/RTF)
+        run: tar -czvf application-documentation.tar.gz -C docs .
+        
+      - name: Upload Linux release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./linux-binaries.tar.gz
+          asset_name: linux-binaries.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
+
+      - name: Upload macOS release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./macos-binaries.tar.gz
+          asset_name: macos-binaries.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
+
+      - name: Upload Windows release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
@@ -176,13 +205,13 @@ jobs:
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-
+        
       - name: Upload Test Converage HTML Report to release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./test-coverage-html.tar.gz
-          asset_name: test-coverage-html.tar.gz
+          asset_path: ./application-test-report.tar.gz
+          asset_name: application-test-report.tar.gz
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
@@ -191,8 +220,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./doxygen-output-html-xml-latex-rtf.tar.gz
-          asset_name: doxygen-output-html-xml-latex-rtf.tar.gz
+          asset_path: ./application-documentation.tar.gz
+          asset_name: application-documentation.tar.gz
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
@@ -202,4 +231,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          publish_dir: ./doxygen-output/html
+          publish_dir: ./docs/html

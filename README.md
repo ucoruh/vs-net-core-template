@@ -1,32 +1,35 @@
 # Visual Studio .NET Core Project Template
 
-## Releases 
+## Releases
 
 - [![GitHub release badge](https://badgen.net/github/release/ucoruh/vs-net-core-template)](https://github.com/ucoruh/vs-net-core-template/releases/latest)
 
 ## Platforms
 
-- ![Ubuntu badge](assets/badge-ubuntu.svg) (Supported)
+- ![Ubuntu badge](assets/badge-ubuntu.svg)
 
-- ![macOS badge](assets/badge-macos.svg) (Supported)
+- ![macOS badge](assets/badge-macos.svg)
 
-- ![Windows badge](assets/badge-windows.svg) (Supported)
-
+- ![Windows badge](assets/badge-windows.svg)
 
 ## Test Coverage
 
 [![.NET Windows + Doxygen + Test +  Release](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml/badge.svg?branch=main)](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml)
 
 **Coverage**
+
 - ![All](assets/badge_combined.svg)
 
 **Branch Coverage**
+
 - ![Branch Coverage](assets/badge_branchcoverage.svg)
 
 **Line Coverage**
+
 - ![Line Coverage](assets/badge_linecoverage.svg)
 
 **Method Coverage**
+
 - ![Method Coverage](assets/badge_methodcoverage.svg)
 
 ## Overview
@@ -42,6 +45,8 @@ Install required application to your PC
 Install all components or update your installation be sure that you have installed  **.Net Core 7.0**  and **XUnit**
 
 ### Package Manager Setup
+
+#### Windows Setup
 
 We will install required application with package manager on Windows so use following script to install [chocolatey](https://chocolatey.org/install) and [scoop](https://scoop.sh/)
 
@@ -243,7 +248,7 @@ After doxygen installation create default doxygen file with -g option
 doxygen -g
 ```
 
-This will create Doxyfile for us to modify. Use Doxywizard to modify file. Be sure that your output directory should be **./doxygen-output** and all warnings should be opened and warnings stop operations.
+This will create Doxyfile for us to modify. Use Doxywizard to modify file. Be sure that your output directory should be **./docs** and all warnings should be opened and warnings stop operations.
 
 #### ReportGenerator Setup
 
@@ -274,6 +279,12 @@ Use following pre-commit script and replace it with `.git/hook/precommit`
 
 OPTIONS="--options=astyle-options.txt"
 
+# Check if .gitignore file exists
+if [ ! -f astyle-options.txt ]; then
+    echo "[!] astyle-options.txt file not found. Please make sure the astyle-options.txt file is present." >&2
+    exit 1
+fi
+
 RETURN=0
 ASTYLE=$(command -v astyle)
 if [ $? -ne 0 ]; then
@@ -287,7 +298,7 @@ if [ ! -f .gitignore ]; then
     exit 1
 fi
 
-# Check if .gitignore file exists
+# Check if README.md file exists
 if [ ! -f README.md ]; then
     echo "[!] README.md file not found. Please make sure the README.md file is present." >&2
     exit 1
@@ -322,9 +333,11 @@ if [ $RETURN -eq 1 ]; then
 fi
 
 exit $RETURN
+
+
 ```
 
-This script will check gitignore file, README.md file and Doxyfile is exist if not it will be terminate your commit operation. Also after `astyle` installation and `astyle-options.txt` generation it will automatically format your source code before each commit. Formatting configuration will be stored in `astyle-options.txt` .
+This script will check astyle-options.txt file, gitignore file, README.md file and Doxyfile is exist if not it will be terminate your commit operation. Also after `astyle` installation and `astyle-options.txt` generation it will automatically format your source code before each commit. Formatting configuration will be stored in `astyle-options.txt` .
 
 #### Create .gitignore with TOPTAL API via batch script
 
@@ -353,11 +366,11 @@ pause
 
 #### Create an Empty README.md file
 
-Create and EMPTY README.md file and during project fill required parts 
+Create and EMPTY `README.md` file and during project fill required parts 
 
 #### Create Default Doxyfile
 
-Use following command to generate default `Doxyfile` if you didn't create or you can use pre-configured configuration and you can edit over this configurations. Be sure that your output directory should be **./doxygen-output** and all warnings should be opened and warnings stop operations.
+Use following command to generate default `Doxyfile` if you didn't create or you can use pre-configured configuration and you can edit over this configurations. Be sure that your output directory should be **./docs** and all warnings should be opened and warnings stop operations.
 
 ```batch
 doxygen -g
@@ -368,6 +381,10 @@ doxygen -g
 You can use gitextension to commit your work, check if you get any error than return steps and check missing parts.
 
 ## Project Creation
+
+Project creation will be based on CLI and dotnet you can see examples in the link
+
+[dotnet new](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new)
 
 ### Check dotnet version and installation
 
@@ -403,6 +420,24 @@ dotnet new xunit -n CalculatorLibrary.Tests
 
 ```batch
 dotnet add CalculatorLibrary.Tests/CalculatorLibrary.Tests.csproj reference CalculatorLibrary/CalculatorLibrary.csproj
+```
+
+### Add Consol Application
+
+```batch
+dotnet new console -n CalculatorApp
+```
+
+### Add Console Application to Solution
+
+```batch
+dotnet sln add CalculatorApp
+```
+
+### Add Library to Application Dependecy
+
+```batch
+dotnet add CalculatorApp/CalculatorApp.csproj reference CalculatorLibrary/CalculatorLibrary.csproj
 ```
 
 After this step commit and push your work. 
