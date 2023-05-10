@@ -4,6 +4,13 @@
 
 OPTIONS="--options=astyle-options.txt"
 
+
+# Check if .gitignore file exists
+if [ ! -f astyle-options.txt ]; then
+    echo "[!] astyle-options.txt file not found. Please make sure the astyle-options.txt file is present." >&2
+    exit 1
+fi
+
 RETURN=0
 ASTYLE=$(command -v astyle)
 if [ $? -ne 0 ]; then
@@ -17,7 +24,7 @@ if [ ! -f .gitignore ]; then
     exit 1
 fi
 
-# Check if .gitignore file exists
+# Check if README.md file exists
 if [ ! -f README.md ]; then
     echo "[!] README.md file not found. Please make sure the README.md file is present." >&2
     exit 1
