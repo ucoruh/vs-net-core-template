@@ -139,15 +139,15 @@ jobs:
         working-directory: ./CalculatorLibrary.Tests
 
       - name: Generate Coverage Report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:docs/coveragereport" -reporttypes:Html
         
       - name: Generate Coverage Report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:assets" -reporttypes:Badges
         
       - name: Copy Folders
         run: |
-            cp README.md "docs\index.md"
-            cp -R assets "docs\assets"
+            cp README.md "docs/index.md"
+            cp -R assets "docs/assets"
         
       - name: Run Coverxygen
         run: |
