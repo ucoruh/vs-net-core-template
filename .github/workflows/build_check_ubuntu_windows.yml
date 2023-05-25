@@ -71,7 +71,7 @@ jobs:
     needs: coverage
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       issues: read
       checks: write
       pull-requests: write
@@ -83,7 +83,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         
       - name: Set up Python
-      - uses: actions/setup-python@v4
+        uses: actions/setup-python@v4
         with:
           python-version: 3.x
                 
