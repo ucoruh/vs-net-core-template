@@ -82,15 +82,45 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+        
       - name: Install Doxygen
         run: sudo apt-get install doxygen -y
+        shell: bash
+        
+      - name: Install LCOV
+        run: sudo apt-get install lcov
+        shell: bash
+        
+      - name: Install coverxygen
+        run: pip3 install coverxygen
+        shell: bash
+        
+      - name: Install libxml2-utils
+        run: sudo apt-get install -y libxml2-utils
         shell: bash
         
       - name: Install Report Generator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
         shell: bash
+        
+      - name: Install mkdocs (material theme configured in yaml)
+        run: pip install mkdocs-material
+        shell: bash
 
-      - name: Generate Documentation
+      - name: Generate Folders
+        run: |
+            currentDir=$(pwd)
+            mkdir -p $currentDir/docs/coverxygen
+            mkdir -p $currentDir/docs/doxygen
+            mkdir -p $currentDir/docs/coveragereport
+            cp README.md "docs\index.md"
+            cp -R assets "docs\assets"
+
+      - name: Generate doxygen documentation
         run: doxygen Doxyfile
         shell: bash
         
@@ -113,6 +143,15 @@ jobs:
       - name: Generate Coverage Report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
         
+      - name: Run Coverxygen
+        run: |
+            currentDir=$(pwd)
+            mkdir -p $currentDir/site/coverxygen
+            python -m coverxygen --xml-dir $currentDir/site/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/site/coverxygen/lcov.info --prefix $currentDir/
+        
+      - name: Run genhtml
+        run: genhtml .site/coverxygen/lcov.info -o site/coverxygen
+        
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
@@ -125,7 +164,11 @@ jobs:
           indicators: true
           output: both
           thresholds: '60 80'
-          
+       
+      - name: Build mkdocs site
+        run: mkdocs build
+        shell: bash
+
       - name: Upload Code Coverage Results
         uses: actions/upload-artifact@v2
         with:
@@ -170,11 +213,14 @@ jobs:
       - name: Compress Windows binaries
         run: tar -czvf windows-binaries.tar.gz -C publish/windows .
         
+      - name: Compress Document Coverage Report
+        run: tar -czvf doc-coverage-report.tar.gz -C docs/coverxygen .
+        
       - name: Compress Test Coverage Report
-        run: tar -czvf application-test-report.tar.gz -C coveragereport .
+        run: tar -czvf test-coverage-report.tar.gz -C docs/coveragereport .
         
       - name: Compress Doxygen Output (HTML/XML/Latex/RTF)
-        run: tar -czvf application-documentation.tar.gz -C docs .
+        run: tar -czvf doxygen-documents.tar.gz -C docs/doxygen .
         
       - name: Upload Linux release asset
         uses: actions/upload-release-asset@v1
@@ -210,8 +256,18 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./application-test-report.tar.gz
-          asset_name: application-test-report.tar.gz
+          asset_path: ./test-coverage-report.tar.gz
+          asset_name: test-coverage-report.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
+          
+      - name: Upload Document Converage HTML Report to release asset
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./doc-coverage-report.tar.gz
+          asset_name: doc-coverage-report.tar.gz
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
@@ -220,8 +276,8 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./application-documentation.tar.gz
-          asset_name: application-documentation.tar.gz
+          asset_path: ./doxygen-documents.tar.gz
+          asset_name: doxygen-documents.tar.gz
           asset_content_type: application/gzip
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
@@ -231,4 +287,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          publish_dir: ./docs/html
+          publish_dir: ./site

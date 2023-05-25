@@ -962,3 +962,4 @@ coverage*[.json, .xml, .info]
 
 /coveragereport
 /docs
+/site

@@ -1,0 +1,25 @@
+# Project information
+site_name: ".Net Core Template"
+docs_dir: docs  # Where to find the English markdown files
+site_dir: site  # Where to put the English HTML files
+site_author: 'Asst. Prof. Dr. Uğur CORUH'
+site_url: 'https://ucoruh.github.io/vs-net-core-template/'
+site_description: >-
+    .Net Core Project Template for CI/CD
+
+# Repository
+repo_name: 'GitHub'
+repo_url: 'https://ucoruh.github.io/vs-net-core-template/'
+edit_uri: ""
+
+# Copyright
+copyright: Copyright &copy; 2019 - 2023 Uğur CORUH
+
+theme:
+  name: material
+  
+nav:
+    - Introduction: 'index.md'
+    - 'Doxygen': 'doxygen/html/index.html'
+    - 'Test Coverage': 'coveragereport/index.html'
+    - 'Doc Coverage': 'coverxygen/index.html'
