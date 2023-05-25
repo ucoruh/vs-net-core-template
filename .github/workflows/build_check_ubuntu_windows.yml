@@ -148,13 +148,15 @@ jobs:
       - name: Copy Folders
         run: |
             cp README.md "docs/index.md"
-            cp -R /assets/*  /docs/assets
+            cp -r ./assets/ ./docs
+        shell: bash
         
       - name: Run Coverxygen
         run: |
           currentDir=$(pwd)
           mkdir -p $currentDir/docs/coverxygen
           python -m coverxygen --xml-dir $currentDir/docs/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/docs/coverxygen/lcov.info --prefix $currentDir/
+        shell: bash
       
       - name: Run genhtml
         run: genhtml docs/coverxygen/lcov.info -o docs/coverxygen
