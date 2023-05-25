@@ -114,6 +114,7 @@ jobs:
       - name: Generate Folders
         run: |
             currentDir=$(pwd)
+            mkdir -p $currentDir/docs/assets
             mkdir -p $currentDir/docs/coverxygen
             mkdir -p $currentDir/docs/doxygen
             mkdir -p $currentDir/docs/coveragereport
