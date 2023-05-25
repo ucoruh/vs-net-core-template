@@ -15,7 +15,7 @@ jobs:
     name: Check Unit Test Coverage %100
     runs-on: windows-latest
     permissions:
-        contents: read
+        contents: write
         issues: read
         checks: write
         pull-requests: write
@@ -289,9 +289,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
 
-      # https://github.com/peaceiris/actions-gh-pages
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+
+      - uses: actions/cache@v3
         with:
-          github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          publish_dir: ./site
+          key: mkdocs-material-${{ env.cache_id }}
+          path: .cache
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material 
+      - run: mkdocs gh-deploy --force
+
+
+      # https://github.com/peaceiris/actions-gh-pages
+      #- name: Deploy
+      #  uses: peaceiris/actions-gh-pages@v3
+      #  with:
+      #    github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
+      #    publish_dir: ./site
