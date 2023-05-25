@@ -117,8 +117,6 @@ jobs:
             mkdir -p $currentDir/docs/coverxygen
             mkdir -p $currentDir/docs/doxygen
             mkdir -p $currentDir/docs/coveragereport
-            cp README.md "docs\index.md"
-            cp -R assets "docs\assets"
 
       - name: Generate doxygen documentation
         run: doxygen Doxyfile
@@ -143,14 +141,23 @@ jobs:
       - name: Generate Coverage Report
         run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coveragereport" -reporttypes:Html
         
+      - name: Generate Coverage Report
+        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:assets" -reporttypes:Badges
+        
+      - name: Copy Folders
+        run: |
+            cp README.md "docs\index.md"
+            cp -R assets "docs\assets"
+        
       - name: Run Coverxygen
         run: |
-            currentDir=$(pwd)
-            mkdir -p $currentDir/docs/coverxygen
-            python -m coverxygen --xml-dir $currentDir/docs/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/docs/coverxygen/lcov.info --prefix $currentDir/
-        
+          currentDir=$(pwd)
+          mkdir -p $currentDir/docs/coverxygen
+          python -m coverxygen --xml-dir $currentDir/docs/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/docs/coverxygen/lcov.info --prefix $currentDir/
+      
       - name: Run genhtml
-        run: genhtml .docs/coverxygen/lcov.info -o docs/coverxygen
+        run: genhtml docs/coverxygen/lcov.info -o docs/coverxygen
+        shell: bash
         
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
