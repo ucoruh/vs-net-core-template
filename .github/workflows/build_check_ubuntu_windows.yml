@@ -148,7 +148,7 @@ jobs:
       - name: Copy Folders
         run: |
             cp README.md "docs/index.md"
-            cp -R assets "docs/assets"
+            cp -R /assets/*  /docs/assets
         
       - name: Run Coverxygen
         run: |

@@ -42,7 +42,7 @@ cd ..
 call reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:docs/coveragereport" -reporttypes:Html
 call reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:assets" -reporttypes:Badges
 
-echo Copy the "assets" folder and its contents to "docs\assets" recursively
+echo Copy the "assets" folder and its contents to "docs" recursively
 call robocopy assets "docs\assets" /E
 
 echo Copy the "README.md" file to "docs\index.md"

@@ -14,7 +14,7 @@
 
 ## Test Coverage
 
-[![.NET Windows + Doxygen + Test +  Release](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml/badge.svg?branch=main)](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml)
+[![.NET Windows + Doxygen + Test +  Release](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml/badge.svg)](https://github.com/ucoruh/vs-net-core-template/actions/workflows/build_check_ubuntu_windows.yml)
 
 **Coverage**
 
