@@ -146,11 +146,11 @@ jobs:
       - name: Run Coverxygen
         run: |
             currentDir=$(pwd)
-            mkdir -p $currentDir/site/coverxygen
-            python -m coverxygen --xml-dir $currentDir/site/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/site/coverxygen/lcov.info --prefix $currentDir/
+            mkdir -p $currentDir/docs/coverxygen
+            python -m coverxygen --xml-dir $currentDir/docs/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/docs/coverxygen/lcov.info --prefix $currentDir/
         
       - name: Run genhtml
-        run: genhtml .site/coverxygen/lcov.info -o site/coverxygen
+        run: genhtml .docs/coverxygen/lcov.info -o docs/coverxygen
         
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
