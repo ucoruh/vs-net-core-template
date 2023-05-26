@@ -7,7 +7,9 @@ rd /S /Q "release"
 mkdir release
 
 echo Delete the "docs" folder and its contents
-rd /S /Q "docs"
+rd /S /Q "docs/coverxygen"
+rd /S /Q "docs/coveragereport"
+rd /S /Q "docs/doxygen"
 mkdir docs
 cd docs
 mkdir coverxygen
@@ -28,7 +30,7 @@ echo Run Coverxygen
 call python -m coverxygen --xml-dir ./docs/doxygen/xml --src-dir ./ --format lcov --output ./docs/coverxygen/lcov.info --prefix %currentDir%\
 
 echo Run lcov genhtml
-call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml ./docs/coverxygen/lcov.info -o docs/coverxygen
+call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml --legend --title "Documentation Coverage Report" ./docs/coverxygen/lcov.info -o docs/coverxygen
 
 echo Testing Application with Coverage
 cd CalculatorLibrary.Tests

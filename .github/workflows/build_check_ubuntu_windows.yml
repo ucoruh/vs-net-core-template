@@ -159,7 +159,7 @@ jobs:
         shell: bash
       
       - name: Run genhtml
-        run: genhtml docs/coverxygen/lcov.info -o docs/coverxygen
+        run: genhtml docs/coverxygen/lcov.info --legend --title "Documentation Coverage Report" -o docs/coverxygen
         shell: bash
         
       - name: Code Coverage Report

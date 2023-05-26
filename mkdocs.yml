@@ -20,6 +20,7 @@ theme:
   
 nav:
     - Introduction: 'index.md'
+    - Developers: 'developers.md'
     - 'Doxygen': 'doxygen/html/index.html'
     - 'Test Coverage': 'coveragereport/index.html'
     - 'Doc Coverage': 'coverxygen/index.html'
