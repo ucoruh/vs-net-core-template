@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="classCalculatorLibrary_1_1Calculator" kind="class"><name>CalculatorLibrary::Calculator</name>
+    <member refid="classCalculatorLibrary_1_1Calculator_1a93a61b3bf1e2e2f8ba36c204e6ea70e2" kind="function"><name>Add</name></member>
+    <member refid="classCalculatorLibrary_1_1Calculator_1a1e0c6e0d9230c9706ed110d37b5f9c86" kind="function"><name>Subtract</name></member>
+    <member refid="classCalculatorLibrary_1_1Calculator_1a406dec0181b7298d015a1bf5eb688d02" kind="function"><name>Multiply</name></member>
+    <member refid="classCalculatorLibrary_1_1Calculator_1ad6f58cec383f5deb4eea6cecaefe787d" kind="function"><name>Divide</name></member>
+  </compound>
+  <compound refid="classProgram" kind="class"><name>Program</name>
+    <member refid="classProgram_1ada72f8d1518f89bc2e6ad807d5059564" kind="function"><name>Main</name></member>
+  </compound>
+  <compound refid="namespaceCalculatorLibrary" kind="namespace"><name>CalculatorLibrary</name>
+  </compound>
+  <compound refid="Program_8cs" kind="file"><name>Program.cs</name>
+  </compound>
+  <compound refid="Calculator_8cs" kind="file"><name>Calculator.cs</name>
+  </compound>
+  <compound refid="README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="dir_1d11f2a0f19712ad40099364ecbdffb2" kind="dir"><name>CalculatorApp</name>
+  </compound>
+  <compound refid="dir_73af11b250af7054eee5cd2a23004b6a" kind="dir"><name>CalculatorLibrary</name>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

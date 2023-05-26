@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classCalculatorLibrary_1_1Calculator" kind="class" language="C#" prot="public">
+    <compoundname>CalculatorLibrary::Calculator</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classCalculatorLibrary_1_1Calculator_1a93a61b3bf1e2e2f8ba36c204e6ea70e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int CalculatorLibrary.Calculator.Add</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>Add</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Adds two integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first integer to add. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second integer to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The sum of <emphasis>a</emphasis> and <emphasis>b</emphasis>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="CalculatorLibrary/Calculator.cs" line="8" column="14" bodyfile="CalculatorLibrary/Calculator.cs" bodystart="8" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classCalculatorLibrary_1_1Calculator_1a1e0c6e0d9230c9706ed110d37b5f9c86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int CalculatorLibrary.Calculator.Subtract</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>Subtract</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Subtracts two integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first integer to subtract from. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second integer to subtract. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of subtracting <emphasis>b</emphasis> from <emphasis>a</emphasis>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="CalculatorLibrary/Calculator.cs" line="16" column="14" bodyfile="CalculatorLibrary/Calculator.cs" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classCalculatorLibrary_1_1Calculator_1a406dec0181b7298d015a1bf5eb688d02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int CalculatorLibrary.Calculator.Multiply</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>Multiply</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Multiplies two integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first integer to multiply. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second integer to multiply. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The product of <emphasis>a</emphasis> and <emphasis>b</emphasis>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="CalculatorLibrary/Calculator.cs" line="24" column="14" bodyfile="CalculatorLibrary/Calculator.cs" bodystart="24" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classCalculatorLibrary_1_1Calculator_1ad6f58cec383f5deb4eea6cecaefe787d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int CalculatorLibrary.Calculator.Divide</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>Divide</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Divides two integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The numerator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The denominator. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The result of dividing <emphasis>a</emphasis> by <emphasis>b</emphasis>. </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername>DivideByZeroException</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if <emphasis>b</emphasis> is zero. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="CalculatorLibrary/Calculator.cs" line="33" column="14" bodyfile="CalculatorLibrary/Calculator.cs" bodystart="33" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A class for performing basic arithmetic operations. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="CalculatorLibrary/Calculator.cs" line="3" column="7" bodyfile="CalculatorLibrary/Calculator.cs" bodystart="3" bodyend="41"/>
+    <listofallmembers>
+      <member refid="classCalculatorLibrary_1_1Calculator_1a93a61b3bf1e2e2f8ba36c204e6ea70e2" prot="public" virt="non-virtual"><scope>CalculatorLibrary::Calculator</scope><name>Add</name></member>
+      <member refid="classCalculatorLibrary_1_1Calculator_1ad6f58cec383f5deb4eea6cecaefe787d" prot="public" virt="non-virtual"><scope>CalculatorLibrary::Calculator</scope><name>Divide</name></member>
+      <member refid="classCalculatorLibrary_1_1Calculator_1a406dec0181b7298d015a1bf5eb688d02" prot="public" virt="non-virtual"><scope>CalculatorLibrary::Calculator</scope><name>Multiply</name></member>
+      <member refid="classCalculatorLibrary_1_1Calculator_1a1e0c6e0d9230c9706ed110d37b5f9c86" prot="public" virt="non-virtual"><scope>CalculatorLibrary::Calculator</scope><name>Subtract</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

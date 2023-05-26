@@ -1,0 +1,166 @@
+\hypertarget{classCalculatorLibrary_1_1Calculator}{}\doxysection{Calculator\+Library.\+Calculator Class Reference}
+\label{classCalculatorLibrary_1_1Calculator}\index{CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}}
+
+
+A class for performing basic arithmetic operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classCalculatorLibrary_1_1Calculator_a93a61b3bf1e2e2f8ba36c204e6ea70e2}{Add}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Adds two integers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classCalculatorLibrary_1_1Calculator_a1e0c6e0d9230c9706ed110d37b5f9c86}{Subtract}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Subtracts two integers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classCalculatorLibrary_1_1Calculator_a406dec0181b7298d015a1bf5eb688d02}{Multiply}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Multiplies two integers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classCalculatorLibrary_1_1Calculator_ad6f58cec383f5deb4eea6cecaefe787d}{Divide}} (int a, int b)
+\begin{DoxyCompactList}\small\item\em Divides two integers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for performing basic arithmetic operations. 
+
+Definition at line 3 of file Calculator.\+cs.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCalculatorLibrary_1_1Calculator_a93a61b3bf1e2e2f8ba36c204e6ea70e2}\label{classCalculatorLibrary_1_1Calculator_a93a61b3bf1e2e2f8ba36c204e6ea70e2}} 
+\index{CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}!Add@{Add}}
+\index{Add@{Add}!CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily int Calculator\+Library.\+Calculator.\+Add (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Adds two integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first integer to add. \\
+\hline
+{\em b} & The second integer to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sum of {\itshape a} and {\itshape b}. 
+\end{DoxyReturn}
+
+
+Definition at line 8 of file Calculator.\+cs.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8                                \{}
+\DoxyCodeLine{9     \textcolor{keywordflow}{return} a + b;}
+\DoxyCodeLine{10   \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classCalculatorLibrary_1_1Calculator_ad6f58cec383f5deb4eea6cecaefe787d}\label{classCalculatorLibrary_1_1Calculator_ad6f58cec383f5deb4eea6cecaefe787d}} 
+\index{CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}!Divide@{Divide}}
+\index{Divide@{Divide}!CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}}
+\doxysubsubsection{\texorpdfstring{Divide()}{Divide()}}
+{\footnotesize\ttfamily int Calculator\+Library.\+Calculator.\+Divide (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Divides two integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The numerator. \\
+\hline
+{\em b} & The denominator. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of dividing {\itshape a} by {\itshape b}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Divide\+By\+Zero\+Exception} & if {\itshape b} is zero. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 33 of file Calculator.\+cs.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{33                                   \{}
+\DoxyCodeLine{34     \textcolor{keywordflow}{if} (b == 0) \{}
+\DoxyCodeLine{35       \textcolor{keywordflow}{throw} \textcolor{keyword}{new} DivideByZeroException();}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordflow}{return} a / b;}
+\DoxyCodeLine{39   \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classCalculatorLibrary_1_1Calculator_a406dec0181b7298d015a1bf5eb688d02}\label{classCalculatorLibrary_1_1Calculator_a406dec0181b7298d015a1bf5eb688d02}} 
+\index{CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily int Calculator\+Library.\+Calculator.\+Multiply (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Multiplies two integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first integer to multiply. \\
+\hline
+{\em b} & The second integer to multiply. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The product of {\itshape a} and {\itshape b}. 
+\end{DoxyReturn}
+
+
+Definition at line 24 of file Calculator.\+cs.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24                                     \{}
+\DoxyCodeLine{25     \textcolor{keywordflow}{return} a * b;}
+\DoxyCodeLine{26   \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classCalculatorLibrary_1_1Calculator_a1e0c6e0d9230c9706ed110d37b5f9c86}\label{classCalculatorLibrary_1_1Calculator_a1e0c6e0d9230c9706ed110d37b5f9c86}} 
+\index{CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!CalculatorLibrary.Calculator@{CalculatorLibrary.Calculator}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily int Calculator\+Library.\+Calculator.\+Subtract (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+
+
+Subtracts two integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first integer to subtract from. \\
+\hline
+{\em b} & The second integer to subtract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of subtracting {\itshape b} from {\itshape a}. 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file Calculator.\+cs.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{16                                     \{}
+\DoxyCodeLine{17     \textcolor{keywordflow}{return} a -\/ b;}
+\DoxyCodeLine{18   \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Calculator\+Library/\mbox{\hyperlink{Calculator_8cs}{Calculator.\+cs}}\end{DoxyCompactItemize}

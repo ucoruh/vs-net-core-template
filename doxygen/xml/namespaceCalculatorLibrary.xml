@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespaceCalculatorLibrary" kind="namespace" language="C#">
+    <compoundname>CalculatorLibrary</compoundname>
+    <innerclass refid="classCalculatorLibrary_1_1Calculator" prot="public">CalculatorLibrary::Calculator</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="CalculatorLibrary/Calculator.cs" line="1" column="1"/>
+  </compounddef>
+</doxygen>
