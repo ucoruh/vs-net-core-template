@@ -15,10 +15,29 @@ sayfa bunun neye izin verip neye izin vermediğini ve `10-release`'in izin verme
 (Bu yazı yazılırken GitHub'ın kendi belgelerine göre; güncel sayılar için
 [GitHub'ın fiyatlandırma sayfasına](https://github.com/pricing) bakın.)
 
-Pages, özel bir Free depoda çalışmadığı için **bu şablon hiç Pages'e dayanmaz**. `9-open-site`
-scripti siteyi kendi diskinizden açar, `10-release` ise üretilen bütün siteyi sürümün içine
-`site.zip` olarak paketler -- ders sorumlusunun (veya depoya erişimi olan herkesin) Pages olmadan
-görmesini sağlayan yöntem budur.
+Pages, özel bir Free depoda çalışmadığı için **bu şablon Pages'i asla zorunlu kılmaz**. `9-open-site`
+siteyi kendi diskinizden küçük bir yerel HTTP sunucusu üzerinden sunar ve açar (bkz.
+[Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)), `10-release`/`release.yml` ise
+üretilen bütün siteyi her sürümün içine `site.zip` olarak paketler -- ders sorumlusunun (veya
+depoya erişimi olan herkesin) Pages olmadan görmesini sağlayan yöntem budur. **Herkese açık
+(public)** bir depoda (ör. bu şablonun kendi `ucoruh/vs-net-core-template`'i) Pages normal şekilde
+çalışır ve bunların hiçbirine ihtiyaç duymaz -- bkz. aşağıdaki "Pages dağıtım iş akışı".
+
+## Pages dağıtım iş akışı
+
+`.github/workflows/pages.yml`, `main`'e her push'ta (ve elle, `workflow_dispatch` ile) bütün siteyi
+yeniden derleyip `gh-pages` dalına yayınlar. Önce `github.event.repository.private`'ı kontrol eder:
+
+- **Herkese açık depo:** normal şekilde dağıtır. Canlı site
+  `https://<siz>.github.io/<deponuz>/` adresinde olur.
+- **Özel depo:** dağıtım adımı **atlanır**, koşunun hem `::notice` uyarısında hem de iş özetinde
+  (job summary) bir açıklamayla birlikte -- *meğer ki* `PAGES_ON_PRIVATE` depo değişkeni `true`
+  olarak ayarlanmış olsun. GitHub Pro'ya (ya da Student Developer Pack'e) sahip olduğunuzda *ve*
+  **Settings -> Pages** altından Pages'i açtığınızda, bunu **Settings -> Secrets and variables ->
+  Actions -> Variables** altından ayarlayın -- sonraki push normal şekilde dağıtır.
+
+Her iki durumda da `release.yml` (aşağıda) her zaman `site.zip`'i ekler, böylece Pages etkin olsun
+olmasın site ders sorumlusuna ulaşır.
 
 ## GitHub Student Developer Pack alın (isteğe bağlı, Pro verir)
 
@@ -95,13 +114,16 @@ sunucusu olmadan çalışan göreli bir bağlantıdır.
 
 ## İsteğe bağlı: Actions sürüm iş akışı
 
-`.github/workflows/release.yml`, aynı yayınlamayı yapmanın **elle tetiklenen**, alternatif bir
-yolu -- `workflow_dispatch` ile ya da bir `v*` etiketi push ederek tetiklenir -- `10-release`'i
+`.github/workflows/release.yml`, aynı yayınlamayı kendi makineniz yerine CI'dan yapmanın alternatif
+bir yolu -- bir `v*` etiketi push ederek ya da elle (`workflow_dispatch`) tetiklenir -- `10-release`'i
 yerelde çalıştırmak istemiyorsanız işinize yarar, bedeli Actions dakikalarıdır (tam bir derleme +
-yayınlama + paketleme koşusu genelde aylık kotanızdan birkaç dakika harcar; günlük
-`build_check_ubuntu_windows.yml` iş akışı bunu tam da bu bütçeyi yemesin diye her push'ta **değil**,
-yalnızca istek/etiket üzerine çalıştırır). Kaç dakikanız kaldığından emin değilseniz yerelde
-`10-release`'i tercih edin.
+yayınlama + paketleme koşusu genelde aylık kotanızdan birkaç dakika harcar; günlük `ci.yml` iş akışı
+bunu tam da bu bütçeyi yemesin diye her push'ta **değil**, yalnızca istek/etiket üzerine çalıştırır).
+Yukarıdaki tabloyla aynı varlık kümesini artı bir `source.zip` kaynak arşivini paketler ve canlı
+siteye bağlanan, her varlığı listeleyen sürüm notları yazar. Özel bir depoda, ders sorumlusunu
+işbirlikçi olarak eklemenizi hatırlatan bir `::notice`/iş özeti ekler (yukarı bakın) -- sürümlerin
+kendisi Pages dağıtımının aksine özel depoda **atlanmaz**. Kaç dakikanız kaldığından emin değilseniz
+yerelde `10-release`'i tercih edin.
 
 ## Sürüm sorun giderme
 

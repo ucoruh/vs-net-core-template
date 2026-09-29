@@ -11,8 +11,11 @@ rehberinde sık görülen bir konu olan **"Kütüphane Yönetim Sistemi" (Librar
 - [ ] Her `.csproj`'daki kök ad alanını (`RootNamespace`) ve her `namespace` bloğunu yeniden adlandırın.
 - [ ] `Doxyfile`'ın `PROJECT_NAME`/`PROJECT_BRIEF`'ini, `docfx.json`'ın metadata `src`'ini ve
       `toc.yml`/`docs/toc.yml` başlıklarını güncelleyin.
-- [ ] `README.md`'yi kendi projenizin açıklamasıyla değiştirin (bu, sitenin ana sayfası olan
-      `docs/index.md` olur -- bkz. [Hangi rapor hangisi?](reports-explained.tr.md)).
+- [ ] `README.md`'yi (GitHub'a bakan sayfa) **ve** `docs/home.md`'yi (derleme sırasında
+      `index.md`'ye kopyalanan sitenin ana sayfası -- bkz.
+      [Hangi rapor hangisi?](reports-explained.tr.md)) kendi projenizin açıklamasıyla güncelleyin;
+      `docs/home.md`'deki kart ızgaraları rapor/kılavuzlara göreli yollarla bağlanır, başka bir
+      değişiklik gerekmez.
 - [ ] Her yeni sınıf için **önce** testleri yazın; tıpkı `CalculatorCliTests.cs`'nin
       `CalculatorCli`'ye güvenmeden önce onu test etmesi gibi.
 - [ ] "Ayrıştırma (parsing) kütüphanede yaşar, `Program.cs`'de değil" şeklini koruyun (aşağıda),
@@ -86,7 +89,10 @@ geçersiz girdi testi. `CalculatorTests.cs`/`CalculatorCliTests.cs` şekli göst
 - `Doxyfile`: `PROJECT_NAME`, `PROJECT_BRIEF` ve `INPUT` listesi (klasör adları değişti).
 - `docfx.json`: `metadata[0].src[0].src` yolu (`CalculatorLibrary` yerine `LibraryCatalog`).
 - `toc.yml` / `docs/toc.yml`: hâlâ "Calculator" diyen sayfa başlıkları.
-- `README.md`: projenizin gerçek açıklaması (sitenin ana sayfası olur).
+- `README.md`: projenizin gerçek açıklaması, GitHub'ın kendi depo sayfası için.
+- `docs/home.md`: sitenin gerçek ana sayfası için aynı açıklama (`7-build-app`, DocFX derlemesinden
+  hemen önce bunu `index.md`'ye kopyalar -- bkz.
+  [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)).
 
 **8. Yeniden derleyin ve kontrol edin.**
 

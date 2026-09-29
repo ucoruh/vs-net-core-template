@@ -49,8 +49,11 @@ bir .NET projesinin gerçekte yayınladığı budur (aynı yöntemle üretilen
 [Microsoft'un kendi API belgeleriyle](https://learn.microsoft.com/dotnet/api/) karşılaştırın). C#
 generic'lerini, nullable işaretlerini ve kalıtımı Doxygen'den daha iyi anlar.
 
-**Site (#8).** Yukarıdakilerin hepsi, artı şu an okuduğunuz kılavuzlar, tek yerden bağlantılı. Ne
-zaman ne çalıştırılır için bkz. [Günlük iş akışı](daily-workflow.tr.md).
+**Site (#8).** Yukarıdakilerin hepsi, artı şu an okuduğunuz kılavuzlar, tek yerden bağlantılı --
+ana sayfası bir kart ızgarasıdır (kaynak: `docs/home.md`), ve yukarıdaki her rapor, çıplak bir
+bağlantı yerine sitenin içinde, düzenli bir `<iframe>` içinde gösterildiği kendi sayfasına sahiptir
+(kaynak: `docs/report-pages/*.md`; bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)).
+Ne zaman ne çalıştırılır için bkz. [Günlük iş akışı](daily-workflow.tr.md).
 
 ## Neden tek bir araç seçilmiyor?
 

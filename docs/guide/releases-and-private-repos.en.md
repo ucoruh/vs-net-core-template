@@ -15,10 +15,30 @@ the one thing it does not: private [GitHub Pages](https://pages.github.com/).
 (Figures per GitHub's own documentation as of this writing; check
 [GitHub's pricing page](https://github.com/pricing) for the current numbers.)
 
-Because Pages does not work on a private Free repository, **this template does not rely on Pages
-at all**. The `9-open-site` script opens the site from your own disk, and `10-release` ships the
-whole built site inside the release as `site.zip` -- that is how your instructor (or anyone with
-repo access) views it without Pages.
+Because Pages does not work on a private Free repository, **this template never *requires* Pages**.
+`9-open-site` serves and opens the site from your own disk (over a small local HTTP server -- see
+[Showing a report inside your site](embed-html-in-site.en.md)), and `10-release`/`release.yml` ship
+the whole built site inside every release as `site.zip` -- that is how your instructor (or anyone
+with repo access) views it without Pages. On a **public** repository (this template's own
+`ucoruh/vs-net-core-template`, for example), Pages works normally and needs none of this -- see
+"The Pages deploy workflow" below.
+
+## The Pages deploy workflow
+
+`.github/workflows/pages.yml` rebuilds the full site and publishes it to the `gh-pages` branch on
+every push to `main` (and by hand, `workflow_dispatch`). It checks
+`github.event.repository.private` first:
+
+- **Public repository:** deploys normally. The live site ends up at
+  `https://<you>.github.io/<your-repo>/`.
+- **Private repository:** the deploy step is **skipped**, with an explanation both as a `::notice`
+  annotation on the run and in the run's job summary -- *unless* the repository variable
+  `PAGES_ON_PRIVATE` is set to `true`. Set it under **Settings -> Secrets and variables -> Actions ->
+  Variables** once you have GitHub Pro (or the Student Developer Pack) *and* have turned Pages on
+  under **Settings -> Pages** -- then the next push deploys normally.
+
+Either way, `release.yml` (below) always attaches `site.zip`, so the site reaches your instructor
+regardless of whether Pages is enabled.
 
 ## Get the GitHub Student Developer Pack (optional, gives you Pro)
 
@@ -96,11 +116,15 @@ without a web server.
 
 ## Optional: the Actions release workflow
 
-`.github/workflows/release.yml` is a **manual**, alternative way to do the same publish, triggered
-by `workflow_dispatch` or pushing a `v*` tag -- useful if you would rather not run `10-release`
-locally, at the cost of Actions minutes (a full build + publish + package run typically costs a few
-minutes of your monthly quota; the day-to-day `build_check_ubuntu_windows.yml` workflow does **not**
-run this on every push, only on request/tag, precisely to not eat into that budget). Prefer
+`.github/workflows/release.yml` is an alternative way to do the same publish from CI instead of your
+own machine, triggered by pushing a `v*` tag or by hand (`workflow_dispatch`) -- useful if you would
+rather not run `10-release` locally, at the cost of Actions minutes (a full build + publish +
+package run typically costs a few minutes of your monthly quota; the day-to-day `ci.yml` workflow
+does **not** run this on every push, only on request/tag, precisely to not eat into that budget).
+It packages the same asset set as `10-release` (see the table above) plus a `source.zip` source
+archive, and writes release notes that link to the live site and list every asset. On a private
+repository it adds a `::notice`/step-summary reminder to add your instructor as a collaborator (see
+above) -- releases themselves are **not** skipped on private (unlike the Pages deploy). Prefer
 `10-release` locally when you are not sure how many minutes you have left.
 
 ## Troubleshooting releases

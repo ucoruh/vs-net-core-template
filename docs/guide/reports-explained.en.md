@@ -48,7 +48,10 @@ in `CalculatorLibrary.csproj`) -- this is what a professional .NET project actua
 to [Microsoft's own API docs](https://learn.microsoft.com/dotnet/api/), which are built the same way).
 It understands C# generics, nullable annotations and inheritance better than Doxygen does.
 
-**The site (#8).** Everything above, plus the guides you are reading now, linked from one place. See
+**The site (#8).** Everything above, plus the guides you are reading now, linked from one place --
+its landing page is a card grid (source: `docs/home.md`), and every report above gets its own page
+inside the site showing it in a styled `<iframe>` rather than a bare link (source:
+`docs/report-pages/*.md`; see [Showing a report inside your site](embed-html-in-site.en.md)). See
 [Daily workflow](daily-workflow.en.md) for what to run and in what order.
 
 ## Why not just pick one tool?

@@ -13,7 +13,7 @@
 | `6-install-docfx-and-report-tools` | Doxygen/Graphviz kurar, sabitlenmiş yerel `dotnet tool` bildirimini (manifest) geri yükler (ReportGenerator, DocFX) | makine başına bir kez, `.config/dotnet-tools.json` değiştiğinde tekrar |
 | `7-build-app` | Geri yükleme (restore), derleme, kapsamayla test, Doxygen, her iki kod-kapsama rapor ailesi, her iki belge-kapsama rapor ailesi, DocFX sitesi | ne zaman taze rapor istiyorsanız |
 | `8-run-app` | Örnek uygulamayı çalıştırır (verilen argümanları iletir); girdi (input) beklemez, asla bloklamaz | uygulamanın kendisini denemek için |
-| `9-open-site` | `site/index.html`'i açar | `7-build-app`'ten sonra |
+| `9-open-site` | `site/`'i yerel bir HTTP sunucusu üzerinden sunar ve açar (böylece rapor `<iframe>`'leri yüklenir -- bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)) | `7-build-app`'ten sonra |
 | `10-release` | İkilileri (binaries) + her raporu + siteyi `site.zip` olarak paketler, `gh` ile bir GitHub Release yayınlar | bir sürümü teslim etmeye hazır olduğunuzda (bkz. [Sürümler ve özel depolar](releases-and-private-repos.tr.md)) |
 
 ## Pre-commit kancasını bir kez kurun
@@ -34,23 +34,28 @@ otomatik biçimlendirir; `.gitignore`, `README.md` veya `Doxyfile` eksikse commi
 3. Küçük, mantıklı adımlarla, açık bir mesajla commit atın (emir kipi: "Add X", "Added X" veya
    "Stuff" değil).
 4. `git push -u origin feature/<kisa-ad>`, `main`'e bir çekme isteği (pull request) açın.
-5. GitHub Actions (`.github/workflows/build_check_ubuntu_windows.yml`) hem Windows hem Ubuntu'da
-   otomatik olarak geri yükler, derler ve test eder -- birleştirmeden (merge) önce yeşil olmasını
-   bekleyin. Her push'ta hiçbir şey **yayınlamaz** (bu, elle çalıştırılan `10-release`'in işi); ayrı,
-   elle tetiklenen sürüm iş akışı ve dakika maliyeti için bkz.
-   [Sürümler ve özel depolar](releases-and-private-repos.tr.md).
+5. GitHub Actions (`.github/workflows/ci.yml`) hem Windows hem Ubuntu'da otomatik olarak geri
+   yükler, derler ve test eder; ayrıca bütün siteyi bir kez (Ubuntu'da) derleyip indirilebilir bir
+   derleme artefaktı olarak yükler (PR'ın kontrollerinde / koşunun özet sayfasında görünür) --
+   birleştirmeden (merge) önce yeşil olmasını bekleyin. Her push'ta bir sürüm yayınlamaz ya da
+   Pages dağıtmaz; bkz. aşağısı ve [Sürümler ve özel depolar](releases-and-private-repos.tr.md).
 6. PR incelendikten (varsa bir takım arkadaşınız tarafından) ve CI yeşil olduktan sonra birleştirin.
+   `main`'e birleştirildikten sonra `.github/workflows/pages.yml` siteyi yeniden derleyip otomatik
+   olarak `gh-pages` dalına yayınlar (özel bir depoda `PAGES_ON_PRIVATE` olmadan bir açıklamayla
+   atlanır -- bkz. [Sürümler ve özel depolar](releases-and-private-repos.tr.md)).
 
 ## Her şey nereye gider
 
 `docs/` ve `site/` altındaki her şey `7-build-app` tarafından üretilir ve commit **edilmez** (bkz.
-`.gitignore`) -- README'nin gösterdiği ve bir derleme çalıştırılmadan GitHub'da görünmesi için
-commit edilmeye değer olan `assets/` altındaki küçük SVG rozetler dışında.
+`.gitignore`) -- sitenin ana sayfasının (`docs/home.md`) gösterdiği ve bir derleme çalıştırılmadan
+GitHub'da/Pages'te görünmesi için commit edilmeye değer olan `assets/` altındaki küçük SVG rozetler
+(hem kod hem belge kapsaması) dışında.
 
 | Ne | Yol |
 |----|-----|
-| Bütün site | `site/index.html` |
-| Her bir rapor | bkz. [Hangi rapor hangisi?](reports-explained.tr.md) |
+| Bütün site | `site/index.html` (çift tıklamak yerine `9-open-site` ile açın) |
+| Her bir rapor, kendi `<iframe>` sayfasında | bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md) ve [Hangi rapor hangisi?](reports-explained.tr.md) |
+| Canlı site (`main`'e push'tan sonra, Pages etkinse) | `https://<sizin>.github.io/<deponuz>/` |
 | Sürüm paketleri | `release/` (`10-release`'den, o da commit edilmez) |
 
 ## Sırada

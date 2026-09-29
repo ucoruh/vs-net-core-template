@@ -11,8 +11,10 @@ own topic's name throughout.
 - [ ] Rename the root namespace in each `.csproj` (`RootNamespace`) and every `namespace` block.
 - [ ] Update `Doxyfile`'s `PROJECT_NAME`/`PROJECT_BRIEF`, `docfx.json`'s metadata `src`, and the
       titles in `toc.yml`/`docs/toc.yml`.
-- [ ] Replace `README.md` with your own project's description (it becomes `docs/index.md`, the site's
-      home page -- see [Which report is which?](reports-explained.en.md)).
+- [ ] Update `README.md` (the GitHub-facing page) **and** `docs/home.md` (the site's landing page,
+      copied to `index.md` at build time — see [Which report is which?](reports-explained.en.md))
+      with your own project's description; the card grids in `docs/home.md` link to reports/guides
+      by relative path and do not need to change otherwise.
 - [ ] Write tests **first** for each new class, the same way `CalculatorCliTests.cs` tests
       `CalculatorCli` before you'd trust it.
 - [ ] Keep the "parsing lives in the library, not in `Program.cs`" shape (see below) so your own
@@ -84,7 +86,9 @@ normal/boundary cases, `Assert.Throws<T>` for invalid input).
 - `Doxyfile`: `PROJECT_NAME`, `PROJECT_BRIEF`, and the `INPUT` list (folder names changed).
 - `docfx.json`: the `metadata[0].src[0].src` path (`LibraryCatalog` instead of `CalculatorLibrary`).
 - `toc.yml` / `docs/toc.yml`: page titles that still say "Calculator".
-- `README.md`: your project's real description (this becomes the site's home page).
+- `README.md`: your project's real description, for GitHub's own repository page.
+- `docs/home.md`: the same description for the site's actual landing page (`7-build-app` copies it
+  to `index.md` right before the DocFX build — see [Showing a report inside your site](embed-html-in-site.en.md)).
 
 **8. Rebuild and check.**
 
