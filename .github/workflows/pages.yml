@@ -1,0 +1,106 @@
+name: Deploy Pages
+
+# Builds the full site (every report, both families, the DocFX site) and publishes it to the
+# gh-pages branch on every push to main (and by hand). Java and C# already serve Pages from
+# gh-pages; this workflow is what keeps this template's C# gh-pages branch current.
+#
+# Private repositories: GitHub Pages needs GitHub Pro/Team (or the free GitHub Student Developer
+# Pack) to work on a private repo -- see docs/guide/releases-and-private-repos.en.md. On a private
+# repository this workflow SKIPS the deploy unless the repository variable PAGES_ON_PRIVATE is set
+# to "true" (Settings -> Secrets and variables -> Actions -> Variables), and explains why in a
+# ::notice annotation and in the job summary. The site still reaches students/instructors on a
+# private repo as release.yml's site.zip asset either way.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  check-private:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.decide.outputs.skip }}
+    steps:
+      - name: Decide whether to deploy Pages
+        id: decide
+        env:
+          IS_PRIVATE: ${{ github.event.repository.private }}
+          PAGES_ON_PRIVATE: ${{ vars.PAGES_ON_PRIVATE }}
+        run: |
+          if [ "$IS_PRIVATE" = "true" ] && [ "$PAGES_ON_PRIVATE" != "true" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Pages deploy skipped::This repository is private; GitHub Pages needs GitHub Pro/Team (the free GitHub Student Developer Pack gives Pro) to serve a private repo. Set the repository variable PAGES_ON_PRIVATE to \"true\" once you have Pro and have enabled Pages (Settings -> Pages), then re-run this workflow. The full site still ships inside every GitHub Release as site.zip -- see docs/guide/releases-and-private-repos.en.md."
+            {
+              echo "## Pages deploy skipped"
+              echo
+              echo "This repository is **private**. GitHub Pages does not serve a private repository"
+              echo "unless it has GitHub Pro/Team (the free [GitHub Student Developer"
+              echo "Pack](https://education.github.com/pack) gives Pro)."
+              echo
+              echo "To enable: get Pro, turn Pages on under **Settings -> Pages**, then set the"
+              echo "repository variable \`PAGES_ON_PRIVATE\` to \`true\` under **Settings -> Secrets"
+              echo "and variables -> Actions -> Variables**, and re-run this workflow."
+              echo
+              echo "Until then, the built site still reaches anyone with repo access: every GitHub"
+              echo "Release includes it as the \`site.zip\` asset (download, unzip, open"
+              echo "\`index.html\`). See [Releases & private repositories]"
+              echo "(../../blob/main/docs/guide/releases-and-private-repos.en.md)."
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  deploy:
+    needs: check-private
+    if: needs.check-private.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup .NET (version pinned in global.json)
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install Doxygen, Graphviz, lcov and coverxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz lcov perl zip
+          python3 -m pip install --user coverxygen
+
+      - name: Restore local dotnet tools (ReportGenerator, DocFX)
+        run: dotnet tool restore
+
+      - name: Build everything (7-build-app.sh)
+        run: |
+          chmod +x 7-build-app.sh dotnet-env.sh
+          ./7-build-app.sh
+
+      - name: Deploy site/ to the gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          commit_message: "Deploy site for ${{ github.sha }}"
+
+      - name: Live site URL in the job summary
+        run: |
+          {
+            echo "## Site deployed"
+            echo
+            echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          } >> "$GITHUB_STEP_SUMMARY"

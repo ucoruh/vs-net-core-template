@@ -111,13 +111,18 @@ fi
 echo "Zipping the whole site (release/site.zip -- unzip, open index.html)..."
 ( cd site && zip -qr ../release/site.zip . )
 
+echo "Packaging a source archive (release/source.zip)..."
+git archive --format=zip --output=release/source.zip HEAD
+
 echo "Writing release notes..."
 {
     echo "# $RELEASE_TAG"
     echo
     echo "Built and packaged locally by 10-release.sh. See docs/guide/reports-explained.en.md"
     echo "for what each packaged report is, and docs/guide/releases-and-private-repos.en.md for"
-    echo "how to read this on GitHub Free with a private repository."
+    echo "how to read this on GitHub Free with a private repository. If GitHub Pages is enabled"
+    echo "for this repository, the live site is also at your repository's Pages URL (Settings ->"
+    echo "Pages) -- otherwise open site.zip locally."
     echo
     echo "## Commits"
     echo

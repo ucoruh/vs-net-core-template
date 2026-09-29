@@ -1,9 +1,14 @@
 name: Build and Test
 
-# Lean by design: restore, build, run the sample's unit tests with coverage, on both Windows and
-# Ubuntu, on every push and PR. Nothing here publishes binaries, builds the DocFX site, or creates
-# a release -- that is release.yml (manual/tag-triggered), or the local 10-release script. See
-# docs/guide/releases-and-private-repos.en.md for the Actions-minutes trade-off.
+# Two jobs, both lean:
+#   build-and-test -- restore, build, run the sample's unit tests with coverage, on both Windows
+#                      and Ubuntu, on every push and PR. Publishes nothing.
+#   build-site      -- the full 7-build-app.sh (every report, both families, the DocFX site),
+#                      uploaded as a build artifact so a PR reviewer can download and preview it
+#                      without waiting for a Pages deploy. Runs once (ubuntu-latest only) to keep
+#                      this cheap; the actual Pages deploy is pages.yml, only on push to main.
+# See docs/guide/releases-and-private-repos.en.md for the Actions-minutes trade-off, and
+# docs/guide/embed-html-in-site.en.md for what "the site" means here.
 
 on:
   push:
@@ -23,10 +28,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup .NET (version pinned in global.json)
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
 
@@ -60,3 +65,41 @@ jobs:
           if [ -f code-coverage-results.md ]; then
             cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
           fi
+
+  build-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup .NET (version pinned in global.json)
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+
+      - name: Install Doxygen, Graphviz, lcov and coverxygen
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz lcov perl zip
+          python3 -m pip install --user coverxygen
+
+      - name: Restore local dotnet tools (ReportGenerator, DocFX)
+        run: dotnet tool restore
+
+      - name: Build everything (7-build-app.sh)
+        run: |
+          chmod +x 7-build-app.sh dotnet-env.sh
+          ./7-build-app.sh
+
+      - name: Upload the site as a build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: site
+          path: site/
+          retention-days: 7
+          if-no-files-found: error

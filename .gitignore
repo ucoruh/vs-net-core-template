@@ -982,13 +982,24 @@ coverage*[.json, .xml, .info]
 /report_history/*.json
 !/report_history/.gitkeep
 
-# Files 7-build-app copies from tracked sources (assets/, README.md) into docs/assets and a
+# Files 7-build-app copies from tracked sources (assets/, docs/home.md) into docs/assets and a
 # root-level index.md (which becomes site/index.html, the site's real home page)
 /docs/assets/badge_*
 /docs/assets/badge-*
 /docs/assets/favicon.png
 /docs/assets/rteu_logo.jpg
+/docs/assets/doccoverage
 /index.md
+
+# Custom DocFX template's compiled output (public/ is tracked source; DocFX may write a small
+# cache/manifest next to it on some versions)
+/templates/rteu/obj
+
+# Per-report .zip files 7-build-app drops inside each report's own (already-ignored) output
+# folder for the site's "Download (zip)" buttons -- covered by the folder ignores above and by
+# the generic *.zip rule near the top of this file; listed here only for clarity.
+# (docs/testresults/*.zip, docs/coveragereport/*.zip, docs/coverage-genhtml/*.zip,
+#  docs/coverxygen/*.zip, docs/doccoverage-reportgenerator/*.zip, docs/doxygen/html/*.zip)
 
 # dotnet publish output (produced by 10-release). Packaged release assets under /release/ are
 # already excluded by the "[Rr]elease/" pattern above (from the toptal Visual Studio template);

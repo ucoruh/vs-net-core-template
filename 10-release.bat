@@ -127,12 +127,18 @@ echo Zipping the whole site ^(release\site.zip -- unzip, open index.html^)...
 powershell -NoProfile -Command "Compress-Archive -Path 'site\*' -DestinationPath 'release\site.zip' -Force"
 if errorlevel 1 exit /b 1
 
+echo Packaging a source archive ^(release\source.zip^)...
+call git archive --format=zip --output=release\source.zip HEAD
+if errorlevel 1 exit /b 1
+
 echo Writing release notes...
 > release\notes.md echo # %RELEASE_TAG%
 >> release\notes.md echo.
 >> release\notes.md echo Built and packaged locally by 10-release.bat. See docs\guide\reports-explained.en.md
 >> release\notes.md echo for what each packaged report is, and docs\guide\releases-and-private-repos.en.md for
->> release\notes.md echo how to read this on GitHub Free with a private repository.
+>> release\notes.md echo how to read this on GitHub Free with a private repository. If GitHub Pages is
+>> release\notes.md echo enabled for this repository, the live site is also at your repository's Pages
+>> release\notes.md echo URL ^(Settings -^> Pages^) -- otherwise open site.zip locally.
 >> release\notes.md echo.
 >> release\notes.md echo ## Commits
 >> release\notes.md echo.
