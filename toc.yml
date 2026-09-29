@@ -1,0 +1,8 @@
+- name: Documentation
+  href: index.md
+  tocHref: docs/toc.yml
+  topicHref: index.md
+- name: API Reference
+  href: docs/api/index.md
+  tocHref: api/toc.yml
+  topicHref: docs/api/index.md

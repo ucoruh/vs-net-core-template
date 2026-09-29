@@ -1,0 +1,47 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "CalculatorLibrary",
+          "files": [ "CalculatorLibrary.csproj" ]
+        }
+      ],
+      "dest": "api",
+      "outputFormat": "mref",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "content": [
+      { "files": [ "api/**.yml" ] },
+      { "files": [ "toc.yml", "index.md" ] },
+      {
+        "files": [ "**/*.md", "**/toc.yml" ],
+        "src": "docs",
+        "dest": "docs",
+        "exclude": [ "assets/**", "coveragereport/**", "coverage-genhtml/**", "coverxygen/**", "doccoverage-reportgenerator/**", "doxygen/**", "testresults/**" ]
+      }
+    ],
+    "resource": [
+      { "files": [ "**" ], "src": "assets", "dest": "assets" },
+      { "files": [ "assets/**" ], "src": "docs", "dest": "docs/assets" },
+      { "files": [ "coveragereport/**" ], "src": "docs", "dest": "docs/reports" },
+      { "files": [ "coverage-genhtml/**" ], "src": "docs", "dest": "docs/reports" },
+      { "files": [ "coverxygen/**" ], "src": "docs", "dest": "docs/reports" },
+      { "files": [ "doccoverage-reportgenerator/**" ], "src": "docs", "dest": "docs/reports" },
+      { "files": [ "doxygen/html/**" ], "src": "docs", "dest": "docs/reports" },
+      { "files": [ "testresults/*.html" ], "src": "docs", "dest": "docs/reports" }
+    ],
+    "globalMetadata": {
+      "_appTitle": "Calculator Application with Library — .NET Core Template",
+      "_appName": "vs-net-core-template",
+      "_appFooter": "Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.",
+      "_enableSearch": true
+    },
+    "dest": "site",
+    "template": [ "default", "modern" ],
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+  }
+}
