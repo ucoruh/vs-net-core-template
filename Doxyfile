@@ -541,8 +541,16 @@ EXTRACT_PACKAGE        = NO
 # If the EXTRACT_STATIC tag is set to YES, all static members of a file will be
 # included in the documentation.
 # The default value is: NO.
+#
+# Set to YES here: CalculatorCli (CalculatorLibrary/CalculatorCli.cs) is a "public static class"
+# by design (see docs/guide/from-topic-to-project.en.md) -- with the default NO, every one of its
+# members is static, so Doxygen extracted nothing from it at all and silently produced no
+# class_..._calculator_cli.html page, even though it is still cross-referenced from the source
+# browser (a dangling link, caught by this template's own link-checker script). Any project using
+# the common C# "static utility class" pattern needs this on to get real, ecosystem-neutral API
+# docs for those classes.
 
-EXTRACT_STATIC         = NO
+EXTRACT_STATIC         = YES
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES, classes (and structs) defined
 # locally in source files will be included in the documentation. If set to NO,

@@ -12,6 +12,8 @@
       href: guide/from-topic-to-project.en.md
     - name: Daily workflow
       href: guide/daily-workflow.en.md
+    - name: Showing a report inside your site
+      href: guide/embed-html-in-site.en.md
     - name: Releases & private repositories
       href: guide/releases-and-private-repos.en.md
     - name: Troubleshooting
@@ -26,6 +28,8 @@
       href: guide/from-topic-to-project.tr.md
     - name: Günlük iş akışı
       href: guide/daily-workflow.tr.md
+    - name: Sitenizin içinde bir raporu göstermek
+      href: guide/embed-html-in-site.tr.md
     - name: Sürümler ve özel depolar
       href: guide/releases-and-private-repos.tr.md
     - name: Sorun giderme
@@ -35,14 +39,14 @@
 - name: Reports
   items:
     - name: Unit test results (TRX → native HTML)
-      href: reports/testresults/test-results.html
+      href: report-pages/unit-tests.md
     - name: Code coverage — ReportGenerator (cobertura)
-      href: reports/coveragereport/index.html
+      href: report-pages/coverage-reportgenerator.md
     - name: Code coverage — genhtml (native lcov)
-      href: reports/coverage-genhtml/index.html
+      href: report-pages/coverage-genhtml.md
     - name: Documentation coverage — genhtml (native lcov)
-      href: reports/coverxygen/index.html
+      href: report-pages/doccoverage-genhtml.md
     - name: Documentation coverage — ReportGenerator
-      href: reports/doccoverage-reportgenerator/index.html
+      href: report-pages/doccoverage-reportgenerator.md
     - name: Doxygen API docs
-      href: reports/doxygen/html/index.html
+      href: report-pages/doxygen-api.md

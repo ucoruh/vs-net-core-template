@@ -79,8 +79,8 @@ rem 0. Clean and recreate the folders this script (re-)generates. Idempotent:
 rem    guard every rd with an exist check so a fresh clone (nothing to delete
 rem    yet) does not print a scary, harmless error.
 rem ---------------------------------------------------------------------------
-echo [0/8] Cleaning previous output...
-for %%D in (docs\doxygen docs\coverxygen docs\doccoverage-reportgenerator docs\coveragereport docs\coverage-genhtml docs\testresults site) do (
+echo [0/9] Cleaning previous output...
+for %%D in (docs\doxygen docs\coverxygen docs\doccoverage-reportgenerator docs\coveragereport docs\coverage-genhtml docs\testresults assets\doccoverage site) do (
     if exist "%%D" rd /S /Q "%%D"
 )
 mkdir docs\doxygen 2>nul
@@ -89,6 +89,7 @@ mkdir docs\doccoverage-reportgenerator 2>nul
 mkdir docs\coveragereport 2>nul
 mkdir docs\coverage-genhtml 2>nul
 mkdir docs\testresults 2>nul
+mkdir assets\doccoverage 2>nul
 mkdir site 2>nul
 echo Done.
 echo.
@@ -96,7 +97,7 @@ echo.
 rem ---------------------------------------------------------------------------
 rem 1. Restore + build (Release)
 rem ---------------------------------------------------------------------------
-echo [1/8] Restoring and building the solution (Release, .NET %DOTNET_ROOT%)...
+echo [1/9] Restoring and building the solution (Release, .NET %DOTNET_ROOT%)...
 call dotnet restore CalculatorLibrary.sln
 call :check "dotnet restore" || exit /b 1
 call dotnet build CalculatorLibrary.sln --configuration Release
@@ -107,7 +108,7 @@ rem ---------------------------------------------------------------------------
 rem 2. Tests with coverage: TRX + native HTML logger, cobertura + lcov coverage
 rem    in one run (see CalculatorLibrary.Tests\coverlet.runsettings)
 rem ---------------------------------------------------------------------------
-echo [2/8] Running tests with coverage...
+echo [2/9] Running tests with coverage...
 call dotnet test CalculatorLibrary.Tests\CalculatorLibrary.Tests.csproj ^
     --no-build --configuration Release --verbosity normal ^
     --collect:"XPlat Code Coverage" --settings CalculatorLibrary.Tests\coverlet.runsettings ^
@@ -121,7 +122,7 @@ rem ---------------------------------------------------------------------------
 rem 3. Doxygen: ecosystem-neutral API docs (same tool the C/C++ and Java
 rem    templates use), reads the same XML doc comments DocFX reads later.
 rem ---------------------------------------------------------------------------
-echo [3/8] Generating Doxygen documentation...
+echo [3/9] Generating Doxygen documentation...
 where doxygen >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] doxygen not found. Run 6-install-docfx-and-report-tools.bat first.
@@ -134,7 +135,7 @@ echo.
 rem ---------------------------------------------------------------------------
 rem 4. Documentation coverage: coverxygen -> lcov -> genhtml AND ReportGenerator
 rem ---------------------------------------------------------------------------
-echo [4/8] Documentation coverage (coverxygen)...
+echo [4/9] Documentation coverage (coverxygen)...
 call :find_python
 if not defined COVERXYGEN_PYTHON (
     echo [ERROR] No Python interpreter with the "coverxygen" module was found.
@@ -162,8 +163,14 @@ if "%GENHTML_FOUND%"=="1" (
     echo   Skipping genhtml documentation-coverage report ^(genhtml not available^).
 )
 
-call dotnet reportgenerator "-reports:docs\coverxygen\lcov.info" "-targetdir:docs\doccoverage-reportgenerator" -reporttypes:Html
+call dotnet reportgenerator "-reports:docs\coverxygen\lcov.info" "-targetdir:docs\doccoverage-reportgenerator" "-reporttypes:Html;Badges"
 call :check "reportgenerator - documentation coverage" || exit /b 1
+
+rem Doc-coverage badges into their own assets\doccoverage\ subfolder: ReportGenerator always writes
+rem the same fixed filenames (badge_linecoverage.svg, ...), so a second pass sharing plain assets\
+rem with the code-coverage badges (step 5 below) would silently overwrite them.
+call dotnet reportgenerator "-reports:docs\coverxygen\lcov.info" "-targetdir:assets\doccoverage" -reporttypes:Badges
+call :check "reportgenerator - documentation coverage badges" || exit /b 1
 :after_doc_coverage
 echo.
 
@@ -171,7 +178,7 @@ rem ---------------------------------------------------------------------------
 rem 5. Code coverage: ReportGenerator (cobertura, + badges + history) AND
 rem    genhtml (lcov) -- both read from the SAME coverlet run (step 2).
 rem ---------------------------------------------------------------------------
-echo [5/8] Code coverage reports...
+echo [5/9] Code coverage reports...
 call dotnet reportgenerator "-reports:docs\testresults\**\coverage.cobertura.xml" "-targetdir:docs\coveragereport" "-reporttypes:Html;Badges" -historydir:report_history
 call :check "reportgenerator - code coverage HTML" || exit /b 1
 
@@ -207,25 +214,55 @@ echo.
 rem ---------------------------------------------------------------------------
 rem 6. Copy assets and README for the site
 rem ---------------------------------------------------------------------------
-echo [6/8] Copying assets and building the site's home page content...
+echo [6/9] Copying assets and building the site's home page content...
 rem docs\assets is for pages that already live under docs\ (e.g. docs\developers.md's image);
 rem the top-level assets\ resource mapping in docfx.json covers the root index.md below.
 robocopy assets docs\assets /E /NFL /NDL /NJH /NJS >nul
 call :check_robocopy "robocopy assets -> docs\assets" || exit /b 1
 rem A root-level index.md, not docs\index.md: this is the site's actual home page (site\index.html)
 rem and what lets the shipped site.zip work as "unzip, open index.html" (see
-rem docs/guide/releases-and-private-repos.en.md). Its relative links (docs/guide/..., assets/...)
-rem are written to resolve correctly from the repository root -- which is also where this file
-rem lives -- so, unlike an earlier docs\index.md copy, no link needs an extra "../".
-copy /Y README.md index.md >nul
-call :check "copy README.md -> index.md" || exit /b 1
+rem docs/guide/releases-and-private-repos.en.md). docs\home.md (not README.md -- README.md is the
+rem separate, plain GitHub-facing page) is the polished landing-page source; its relative links
+rem (docs/guide/..., assets/...) are written to resolve correctly from the repository root -- which
+rem is also where this copy lives -- so no link needs an extra "../".
+copy /Y docs\home.md index.md >nul
+call :check "copy docs\home.md -> index.md" || exit /b 1
 echo.
 
 rem ---------------------------------------------------------------------------
-rem 7. DocFX site: API reference (from XML doc comments) + conceptual guide
+rem 7. Zip each report's own folder so the in-site report-viewer pages
+rem    (docs\report-pages\*.md) can offer a "Download (zip)" button. Dropped
+rem    INSIDE each report's own output folder, so docfx.json's existing
+rem    "<folder>/**" resource globs pick them up automatically -- except
+rem    testresults, whose glob is deliberately narrow (*.html only, to avoid
+rem    shipping raw .trx/coverage.* files), so it also lists *.zip explicitly.
+rem ---------------------------------------------------------------------------
+echo [7/9] Zipping reports for the site's "Download (zip)" buttons...
+powershell -NoProfile -Command "Compress-Archive -Path 'docs\testresults\*' -DestinationPath 'docs\testresults\unit-test-results.zip' -Force"
+call :check "zip unit test results" || exit /b 1
+powershell -NoProfile -Command "Compress-Archive -Path 'docs\coveragereport\*' -DestinationPath 'docs\coveragereport\coverage-reportgenerator-report.zip' -Force"
+call :check "zip code coverage - ReportGenerator" || exit /b 1
+if exist docs\coverage-genhtml\index.html (
+    powershell -NoProfile -Command "Compress-Archive -Path 'docs\coverage-genhtml\*' -DestinationPath 'docs\coverage-genhtml\coverage-genhtml-report.zip' -Force"
+    call :check "zip code coverage - genhtml" || exit /b 1
+)
+if exist docs\coverxygen\index.html (
+    powershell -NoProfile -Command "Compress-Archive -Path 'docs\coverxygen\*' -DestinationPath 'docs\coverxygen\doccoverage-genhtml-report.zip' -Force"
+    call :check "zip doc coverage - genhtml" || exit /b 1
+)
+if exist docs\doccoverage-reportgenerator\index.html (
+    powershell -NoProfile -Command "Compress-Archive -Path 'docs\doccoverage-reportgenerator\*' -DestinationPath 'docs\doccoverage-reportgenerator\doccoverage-reportgenerator-report.zip' -Force"
+    call :check "zip doc coverage - ReportGenerator" || exit /b 1
+)
+powershell -NoProfile -Command "Compress-Archive -Path 'docs\doxygen\html\*' -DestinationPath 'docs\doxygen\html\doxygen-api-docs.zip' -Force"
+call :check "zip doxygen API docs" || exit /b 1
+echo.
+
+rem ---------------------------------------------------------------------------
+rem 8. DocFX site: API reference (from XML doc comments) + conceptual guide
 rem    articles + every report linked (see toc.yml / docs\toc.yml).
 rem ---------------------------------------------------------------------------
-echo [7/8] Building the DocFX site...
+echo [8/9] Building the DocFX site...
 call dotnet tool restore
 call :check "dotnet tool restore" || exit /b 1
 call dotnet docfx metadata docfx.json
@@ -235,9 +272,9 @@ call :check "docfx build" || exit /b 1
 echo.
 
 rem ---------------------------------------------------------------------------
-rem 8. Summary
+rem 9. Summary
 rem ---------------------------------------------------------------------------
-echo [8/8] Done.
+echo [9/9] Done.
 echo.
 echo   Site:                              site\index.html            (open with 9-open-site.bat)
 echo   Unit test results (native):        docs\testresults\test-results.html
