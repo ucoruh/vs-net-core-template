@@ -290,8 +290,8 @@ var assemblies = [
   {
     "name": "CalculatorLibrary",
     "classes": [
-      { "name": "CalculatorLibrary.Calculator", "rp": "CalculatorLibrary_Calculator.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 49, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [100], "bch": [100], "mch": [], "mfch": [], "hc": [{ "et": "09/29/2026 - 21:43:25", "cl": 6, "ucl": 0, "cal": 6, "tl": 49, "lcq": 100, "cb": 2, "tb": 2, "bcq": 100, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
-      { "name": "CalculatorLibrary.CalculatorCli", "rp": "CalculatorLibrary_CalculatorCli.html", "cl": 25, "ucl": 0, "cal": 25, "tl": 84, "cb": 12, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [100], "bch": [100], "mch": [], "mfch": [], "hc": [{ "et": "09/29/2026 - 21:43:25", "cl": 25, "ucl": 0, "cal": 25, "tl": 84, "lcq": 100, "cb": 12, "tb": 12, "bcq": 100, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
+      { "name": "CalculatorLibrary.Calculator", "rp": "CalculatorLibrary_Calculator.html", "cl": 6, "ucl": 0, "cal": 6, "tl": 49, "cb": 2, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [100], "bch": [100], "mch": [], "mfch": [], "hc": [{ "et": "09/29/2026 - 21:55:23", "cl": 6, "ucl": 0, "cal": 6, "tl": 49, "lcq": 100, "cb": 2, "tb": 2, "bcq": 100, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
+      { "name": "CalculatorLibrary.CalculatorCli", "rp": "CalculatorLibrary_CalculatorCli.html", "cl": 25, "ucl": 0, "cal": 25, "tl": 84, "cb": 12, "tb": 12, "cm": 0, "fcm": 0, "tm": 0, "lch": [100], "bch": [100], "mch": [], "mfch": [], "hc": [{ "et": "09/29/2026 - 21:55:23", "cl": 25, "ucl": 0, "cal": 25, "tl": 84, "lcq": 100, "cb": 12, "tb": 12, "bcq": 100, "cm": 0, "fcm": 0, "tm": 0, "mcq": 0, "mfcq": 0 }], "metrics": { } },
     ]},
 ];
 
