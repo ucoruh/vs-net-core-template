@@ -40,15 +40,23 @@ exit /b 0
 :find_genhtml
 set "GENHTML_PATH="
 set "GENHTML_FOUND=0"
+set "PERL="
 for /f "delims=" %%G in ('where genhtml 2^>nul') do if not defined GENHTML_PATH set "GENHTML_PATH=%%G"
 if not defined GENHTML_PATH if exist "C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml" set "GENHTML_PATH=C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml"
 if defined GENHTML_PATH (
-    where perl >nul 2>&1
-    if not errorlevel 1 set "GENHTML_FOUND=1"
+    rem genhtml is a Perl script; `where perl` often lists Git's bundled MSYS perl
+    rem (...\Git\usr\bin\perl.exe) FIRST on PATH. That perl fails on genhtml with
+    rem "genhtml: ERROR: cannot read C:/...File.cs" (MSYS/Cygwin-style path handling)
+    rem -- a Windows-native perl (Strawberry, ActiveState, ...) is required. Skip any
+    rem match under "\usr\bin\" and take the first remaining one.
+    for /f "delims=" %%P in ('where perl 2^>nul ^| findstr /V /I /L /C:"\usr\bin"') do if not defined PERL set "PERL=%%P"
+    if defined PERL set "GENHTML_FOUND=1"
 )
 if "%GENHTML_FOUND%"=="0" (
-    echo [WARN] genhtml/perl not found. Run 4-install-lcov.bat, then re-run this script to also
-    echo        get the native lcov HTML reports. Continuing without them for now.
+    echo [WARN] genhtml/^(a Windows-native^) perl not found. Run 4-install-lcov.bat and install a
+    echo        Windows-native Perl ^(e.g. "choco install strawberryperl -y"^) if only Git's MSYS
+    echo        perl is on PATH, then re-run this script to also get the native lcov HTML reports.
+    echo        Continuing without them for now.
 )
 exit /b 0
 
@@ -157,7 +165,7 @@ call :check "coverxygen" || exit /b 1
 
 call :find_genhtml
 if "%GENHTML_FOUND%"=="1" (
-    call perl "%GENHTML_PATH%" --legend --title "Documentation Coverage Report" docs\coverxygen\lcov.info -o docs\coverxygen
+    call "%PERL%" "%GENHTML_PATH%" --legend --title "Documentation Coverage Report" docs\coverxygen\lcov.info -o docs\coverxygen
     call :check "genhtml - documentation coverage" || exit /b 1
 ) else (
     echo   Skipping genhtml documentation-coverage report ^(genhtml not available^).
@@ -200,7 +208,7 @@ set "LCOV_COVERAGE_FILE="
 if "%GENHTML_FOUND%"=="1" for /f "delims=" %%F in ('dir /b /s "docs\testresults\coverage.info" 2^>nul') do if not defined LCOV_COVERAGE_FILE set "LCOV_COVERAGE_FILE=%%F"
 
 if "%GENHTML_FOUND%"=="1" if defined LCOV_COVERAGE_FILE (
-    call perl "%GENHTML_PATH%" --legend --title "Code Coverage Report - lcov via coverlet" "%LCOV_COVERAGE_FILE%" -o docs\coverage-genhtml
+    call "%PERL%" "%GENHTML_PATH%" --legend --title "Code Coverage Report - lcov via coverlet" "%LCOV_COVERAGE_FILE%" -o docs\coverage-genhtml
     call :check "genhtml - code coverage" || exit /b 1
 )
 if "%GENHTML_FOUND%"=="1" if not defined LCOV_COVERAGE_FILE (
