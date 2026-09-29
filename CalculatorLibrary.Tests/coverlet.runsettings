@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Settings for the VSTest "XPlat Code Coverage" data collector (coverlet.collector), applied by
+  7-build-app.{bat,sh} through dotnet test's "collect" and "settings" options.
+
+  Format=cobertura,lcov asks coverlet for BOTH report formats in one test run, so the build script
+  can feed the same coverage data to two different HTML generators for comparison:
+    - coverage.cobertura.xml goes to ReportGenerator (docs/coveragereport)
+    - coverage.info (lcov)   goes to genhtml, the native lcov tool (docs/coverage-genhtml)
+-->
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>cobertura,lcov</Format>
+          <Exclude>[CalculatorLibrary.Tests]*</Exclude>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
