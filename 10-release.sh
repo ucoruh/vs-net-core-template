@@ -114,15 +114,42 @@ echo "Zipping the whole site (release/site.zip -- unzip, open index.html)..."
 echo "Packaging a source archive (release/source.zip)..."
 git archive --format=zip --output=release/source.zip HEAD
 
+# Best-effort "https://<owner>.github.io/<repo>/" derived from the "origin" remote, for the release
+# notes and release/README.md below. Falls back to a generic instruction if "origin" is missing or
+# not a recognized github.com URL -- a normal, expected outcome (e.g. no Pages configured yet).
+originUrl="$(git config --get remote.origin.url 2>/dev/null || true)"
+siteBaseUrl=""
+if [ -n "$originUrl" ]; then
+    repoPath="$(echo "$originUrl" | sed -E 's#^(https://github\.com/|git@github\.com:)##; s#\.git$##')"
+    if [ "$repoPath" != "$originUrl" ]; then
+        owner="${repoPath%%/*}"
+        repo="${repoPath#*/}"
+        siteBaseUrl="https://${owner}.github.io/${repo}/"
+    fi
+fi
+[ -z "$siteBaseUrl" ] && siteBaseUrl="your repository's Pages URL -- Settings -> Pages / "
+
 echo "Writing release notes..."
 {
     echo "# $RELEASE_TAG"
     echo
     echo "Built and packaged locally by 10-release.sh. See docs/guide/reports-explained.en.md"
     echo "for what each packaged report is, and docs/guide/releases-and-private-repos.en.md for"
-    echo "how to read this on GitHub Free with a private repository. If GitHub Pages is enabled"
-    echo "for this repository, the live site is also at your repository's Pages URL (Settings ->"
-    echo "Pages) -- otherwise open site.zip locally."
+    echo "how to read this on GitHub Free with a private repository. If GitHub Pages is not"
+    echo "enabled for this repository, open release/site.zip locally instead of the links below."
+    echo
+    echo "## Live site"
+    echo
+    echo "- Home: ${siteBaseUrl}"
+    echo "- Unit test results: ${siteBaseUrl}docs/report-pages/unit-tests.html"
+    echo "- Code coverage (ReportGenerator): ${siteBaseUrl}docs/report-pages/coverage-reportgenerator.html"
+    echo "- Code coverage (genhtml): ${siteBaseUrl}docs/report-pages/coverage-genhtml.html"
+    echo "- Documentation coverage (genhtml): ${siteBaseUrl}docs/report-pages/doccoverage-genhtml.html"
+    echo "- Documentation coverage (ReportGenerator): ${siteBaseUrl}docs/report-pages/doccoverage-reportgenerator.html"
+    echo "- Doxygen API docs: ${siteBaseUrl}docs/report-pages/doxygen-api.html"
+    echo "- DocFX API reference: ${siteBaseUrl}docs/api/index.html"
+    echo
+    echo "See release/README.md (also attached below) for what every packaged archive contains."
     echo
     echo "## Commits"
     echo
@@ -133,6 +160,32 @@ echo "Writing release notes..."
         git log -n 20 --oneline
     fi
 } > release/notes.md
+
+echo "Writing release/README.md (lists every packaged archive)..."
+{
+    echo "# Release assets -- $RELEASE_TAG"
+    echo
+    echo "Everything in this folder is also attached to the GitHub Release. Unzip \`site.zip\`"
+    echo "and open \`index.html\` for the full site, or open any archive below directly. Live"
+    echo "site: ${siteBaseUrl}"
+    echo
+    echo "| Archive | Contents |"
+    echo "|---|---|"
+    echo "| \`windows-binaries.tar.gz\` | Self-contained \`win-x64\` publish of the sample app |"
+    echo "| \`linux-binaries.tar.gz\` | Self-contained \`linux-x64\` publish of the sample app |"
+    echo "| \`macos-binaries.tar.gz\` | Self-contained \`osx-x64\` publish of the sample app |"
+    echo "| \`source.zip\` | Source archive at this commit (\`git archive\`) |"
+    echo "| \`site.zip\` | The whole built site -- unzip, open \`index.html\` |"
+    echo "| \`unit-test-results.tar.gz\` | Native VSTest HTML + TRX unit-test results |"
+    echo "| \`code-coverage-reportgenerator.tar.gz\` | Code coverage, ReportGenerator HTML |"
+    echo "| \`code-coverage-genhtml.tar.gz\` | Code coverage, native genhtml (lcov) |"
+    echo "| \`doc-coverage-genhtml.tar.gz\` | Documentation coverage, native genhtml (lcov) |"
+    echo "| \`doc-coverage-reportgenerator.tar.gz\` | Documentation coverage, ReportGenerator HTML |"
+    echo "| \`doxygen-api-docs.tar.gz\` | Doxygen API reference (ecosystem-neutral; the DocFX-native API reference ships inside \`site.zip\`) |"
+    echo "| \`notes.md\` | This release's GitHub Release description |"
+    echo
+    echo 'See docs/guide/reports-explained.en.md ("Which report is which?") for what each report shows.'
+} > release/README.md
 echo
 
 # --- 4. Publish (or, in --dry-run, just show what would happen) ---

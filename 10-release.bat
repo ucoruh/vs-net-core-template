@@ -131,14 +131,50 @@ echo Packaging a source archive ^(release\source.zip^)...
 call git archive --format=zip --output=release\source.zip HEAD
 if errorlevel 1 exit /b 1
 
+rem --- Best-effort "https://<owner>.github.io/<repo>/" derived from the "origin" remote, for the
+rem     release notes and release\README.md below. Plain batch substring substitution only (no
+rem     PowerShell/regex nesting -- that combination is exactly the kind of quoting trap
+rem     docs\guide\troubleshooting.en.md warns about); falls back to a generic instruction if
+rem     "origin" is missing or not a recognized github.com URL (e.g. an SSH remote on a host
+rem     alias, or no Pages configured yet), which is a normal, expected outcome.
+rem NOTE: every read of REPO_PATH below uses "!delayed!" expansion, not "%percent%" -- each read
+rem happens in the SAME parenthesized block as (or a block nested inside) the "set" that produced
+rem it, and %percent% expansion is resolved once, when the block is PARSED, not per statement (see
+rem docs\guide\troubleshooting.en.md); this bit us here exactly as documented, with the second
+rem "set" silently reading REPO_PATH's pre-block value (undefined) and wiping out the first.
+set "ORIGIN_URL="
+for /f "usebackq delims=" %%U in (`git config --get remote.origin.url 2^>nul`) do set "ORIGIN_URL=%%U"
+set "SITE_BASE_URL="
+if defined ORIGIN_URL (
+    set "REPO_PATH=%ORIGIN_URL:https://github.com/=%"
+    set "REPO_PATH=!REPO_PATH:git@github.com:=!"
+    if not "!REPO_PATH!"=="%ORIGIN_URL%" (
+        set "REPO_PATH=!REPO_PATH:.git=!"
+        for /f "tokens=1,2 delims=/" %%A in ("!REPO_PATH!") do set "SITE_BASE_URL=https://%%A.github.io/%%B/"
+    )
+)
+if not defined SITE_BASE_URL set "SITE_BASE_URL=your repository's Pages URL -- Settings -^> Pages / "
+
 echo Writing release notes...
 > release\notes.md echo # %RELEASE_TAG%
 >> release\notes.md echo.
 >> release\notes.md echo Built and packaged locally by 10-release.bat. See docs\guide\reports-explained.en.md
 >> release\notes.md echo for what each packaged report is, and docs\guide\releases-and-private-repos.en.md for
->> release\notes.md echo how to read this on GitHub Free with a private repository. If GitHub Pages is
->> release\notes.md echo enabled for this repository, the live site is also at your repository's Pages
->> release\notes.md echo URL ^(Settings -^> Pages^) -- otherwise open site.zip locally.
+>> release\notes.md echo how to read this on GitHub Free with a private repository. If GitHub Pages is not
+>> release\notes.md echo enabled for this repository, open release\site.zip locally instead of the links below.
+>> release\notes.md echo.
+>> release\notes.md echo ## Live site
+>> release\notes.md echo.
+>> release\notes.md echo - Home: %SITE_BASE_URL%
+>> release\notes.md echo - Unit test results: %SITE_BASE_URL%docs/report-pages/unit-tests.html
+>> release\notes.md echo - Code coverage ^(ReportGenerator^): %SITE_BASE_URL%docs/report-pages/coverage-reportgenerator.html
+>> release\notes.md echo - Code coverage ^(genhtml^): %SITE_BASE_URL%docs/report-pages/coverage-genhtml.html
+>> release\notes.md echo - Documentation coverage ^(genhtml^): %SITE_BASE_URL%docs/report-pages/doccoverage-genhtml.html
+>> release\notes.md echo - Documentation coverage ^(ReportGenerator^): %SITE_BASE_URL%docs/report-pages/doccoverage-reportgenerator.html
+>> release\notes.md echo - Doxygen API docs: %SITE_BASE_URL%docs/report-pages/doxygen-api.html
+>> release\notes.md echo - DocFX API reference: %SITE_BASE_URL%docs/api/index.html
+>> release\notes.md echo.
+>> release\notes.md echo See release\README.md ^(also attached below^) for what every packaged archive contains.
 >> release\notes.md echo.
 >> release\notes.md echo ## Commits
 >> release\notes.md echo.
@@ -149,6 +185,31 @@ if defined PREV_TAG (
 ) else (
     git log -n 20 --oneline >> release\notes.md
 )
+echo.
+
+echo Writing release\README.md ^(lists every packaged archive^)...
+> release\README.md echo # Release assets -- %RELEASE_TAG%
+>> release\README.md echo.
+>> release\README.md echo Everything in this folder is also attached to the GitHub Release. Unzip
+>> release\README.md echo `site.zip` and open `index.html` for the full site, or open any archive below
+>> release\README.md echo directly. Live site: %SITE_BASE_URL%
+>> release\README.md echo.
+>> release\README.md echo ^| Archive ^| Contents ^|
+>> release\README.md echo ^|---^|---^|
+>> release\README.md echo ^| `windows-binaries.tar.gz` ^| Self-contained `win-x64` publish of the sample app ^|
+>> release\README.md echo ^| `linux-binaries.tar.gz` ^| Self-contained `linux-x64` publish of the sample app ^|
+>> release\README.md echo ^| `macos-binaries.tar.gz` ^| Self-contained `osx-x64` publish of the sample app ^|
+>> release\README.md echo ^| `source.zip` ^| Source archive at this commit ^(`git archive`^) ^|
+>> release\README.md echo ^| `site.zip` ^| The whole built site -- unzip, open `index.html` ^|
+>> release\README.md echo ^| `unit-test-results.tar.gz` ^| Native VSTest HTML + TRX unit-test results ^|
+>> release\README.md echo ^| `code-coverage-reportgenerator.tar.gz` ^| Code coverage, ReportGenerator HTML ^|
+>> release\README.md echo ^| `code-coverage-genhtml.tar.gz` ^| Code coverage, native genhtml ^(lcov^) ^|
+>> release\README.md echo ^| `doc-coverage-genhtml.tar.gz` ^| Documentation coverage, native genhtml ^(lcov^) ^|
+>> release\README.md echo ^| `doc-coverage-reportgenerator.tar.gz` ^| Documentation coverage, ReportGenerator HTML ^|
+>> release\README.md echo ^| `doxygen-api-docs.tar.gz` ^| Doxygen API reference ^(ecosystem-neutral; the DocFX-native API reference ships inside `site.zip`^) ^|
+>> release\README.md echo ^| `notes.md` ^| This release's GitHub Release description ^|
+>> release\README.md echo.
+>> release\README.md echo See docs/guide/reports-explained.en.md ^("Which report is which?"^) for what each report shows.
 echo.
 
 rem --- 4. Publish (or, in --dry-run, just show what would happen) ---

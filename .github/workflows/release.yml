@@ -123,21 +123,54 @@ jobs:
         shell: bash
         run: git archive --format=zip --output=release/source.zip "${{ github.sha }}"
 
-      - name: Write release notes (links the live site and lists every asset)
+      - name: Write release notes and release/README.md (link the live site, every report page and every asset)
         shell: bash
+        env:
+          SITE_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
         run: |
           {
             echo "# ${{ steps.version.outputs.tag }}"
             echo
             echo "Built by the \`release.yml\` GitHub Actions workflow."
             echo
-            echo "- Live site (if Pages is enabled for this repository): https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+            echo "## Live site"
+            echo
+            echo "(If Pages is not enabled for this repository, open \`site.zip\` below locally instead.)"
+            echo
+            echo "- Home: ${SITE_BASE_URL}"
+            echo "- Unit test results: ${SITE_BASE_URL}docs/report-pages/unit-tests.html"
+            echo "- Code coverage (ReportGenerator): ${SITE_BASE_URL}docs/report-pages/coverage-reportgenerator.html"
+            echo "- Code coverage (genhtml): ${SITE_BASE_URL}docs/report-pages/coverage-genhtml.html"
+            echo "- Documentation coverage (genhtml): ${SITE_BASE_URL}docs/report-pages/doccoverage-genhtml.html"
+            echo "- Documentation coverage (ReportGenerator): ${SITE_BASE_URL}docs/report-pages/doccoverage-reportgenerator.html"
+            echo "- Doxygen API docs: ${SITE_BASE_URL}docs/report-pages/doxygen-api.html"
+            echo "- DocFX API reference: ${SITE_BASE_URL}docs/api/index.html"
+            echo
             echo "- [Which report is which?](../../blob/main/docs/guide/reports-explained.en.md) explains every packaged report."
             echo "- [Releases & private repositories](../../blob/main/docs/guide/releases-and-private-repos.en.md) explains what a private repo can/cannot do."
             echo
             echo "## Assets"
             echo
-            echo "| Asset | Contents |"
+            echo "See release/README.md (also attached below) -- the same table, generated once and reused."
+            echo
+            echo "## Commits"
+            echo
+          } > release/notes.md
+          prevTag="$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)"
+          if [ -n "$prevTag" ]; then
+            git log "$prevTag"..HEAD --oneline >> release/notes.md
+          else
+            git log -n 20 --oneline >> release/notes.md
+          fi
+
+          {
+            echo "# Release assets -- ${{ steps.version.outputs.tag }}"
+            echo
+            echo "Everything in this folder is also attached to the GitHub Release. Unzip \`site.zip\`"
+            echo "and open \`index.html\` for the full site, or open any archive below directly. Live"
+            echo "site: ${SITE_BASE_URL}"
+            echo
+            echo "| Archive | Contents |"
             echo "|---|---|"
             echo "| \`windows-binaries.tar.gz\` | Self-contained \`win-x64\` publish of the sample app |"
             echo "| \`linux-binaries.tar.gz\` | Self-contained \`linux-x64\` publish of the sample app |"
@@ -149,17 +182,11 @@ jobs:
             echo "| \`code-coverage-genhtml.tar.gz\` | Code coverage, native genhtml (lcov) |"
             echo "| \`doc-coverage-genhtml.tar.gz\` | Documentation coverage, native genhtml (lcov) |"
             echo "| \`doc-coverage-reportgenerator.tar.gz\` | Documentation coverage, ReportGenerator HTML |"
-            echo "| \`doxygen-api-docs.tar.gz\` | Doxygen API reference (ecosystem-neutral) |"
+            echo "| \`doxygen-api-docs.tar.gz\` | Doxygen API reference (ecosystem-neutral; the DocFX-native API reference ships inside \`site.zip\`) |"
+            echo "| \`notes.md\` | This release's GitHub Release description |"
             echo
-            echo "## Commits"
-            echo
-          } > release/notes.md
-          prevTag="$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)"
-          if [ -n "$prevTag" ]; then
-            git log "$prevTag"..HEAD --oneline >> release/notes.md
-          else
-            git log -n 20 --oneline >> release/notes.md
-          fi
+            echo 'See docs/guide/reports-explained.en.md ("Which report is which?") for what each report shows.'
+          } > release/README.md
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v3
