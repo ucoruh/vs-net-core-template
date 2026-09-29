@@ -1,9 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <!-- TargetFramework/Nullable/ImplicitUsings come from ../Directory.Build.props -->
+    <RootNamespace>CalculatorLibrary</RootNamespace>
+
+    <!-- XML doc comments become CalculatorLibrary.xml next to the DLL; DocFX turns them into the API
+         reference site (docs/guide/../..), and Doxygen reads the same triple-slash comments too. -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>
