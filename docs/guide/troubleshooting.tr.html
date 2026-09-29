@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Sorun giderme | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Sorun giderme | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/troubleshooting.tr.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sorun-giderme">Sorun giderme</h1>
+
+<p>Aşağıdaki her satır, bu şablon derlenirken gerçekten yaşanan bir şeydir -- tam mesaj (ya da <em>sessiz</em>
+bir başarısızlıksa, onun yerine ne göreceğiniz) ve depoya uygulanan veya sizin kendinizin
+uygulayacağı çözüm.</p>
+<table>
+<thead>
+<tr>
+<th>Belirti / mesaj</th>
+<th>Neden</th>
+<th>Çözüm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net7.0</code> projesi derleniyor ama <code>.NET 7.0 is out of support</code> uyarıları var, ya da yalnızca ilgisiz eski bir çalışma zamanı (runtime) kurulu olduğu için çalışıyor</td>
+<td>Hedef çerçeve (target framework), .NET 7 desteği bittiğinden beri (Mayıs 2024) güncellenmemiş</td>
+<td>Bu şablonda düzeltildi: her <code>.csproj</code>, <code>Directory.Build.props</code> üzerinden <code>net10.0</code>'ı hedefliyor, <code>global.json</code>'da sabitlendi. Kendi çatalınızda (fork) görürseniz <code>4-install-dotnet-sdk</code>'yı yeniden çalıştırın ve <code>global.json</code>'ı kontrol edin.</td>
+</tr>
+<tr>
+<td><strong>Çözüm (solution)</strong> üzerinde <code>dotnet publish</code>, <code>warning NETSDK1194: The &quot;--output&quot; option isn't supported when building a solution...</code> yazdırır ve <code>CalculatorLibrary</code>, <code>CalculatorApp</code>, <code>CalculatorLibrary.Tests</code> çıktısını sessizce tek bir klasörde karıştırır</td>
+<td><code>-o</code> ile bir <code>.sln</code> yayınlamak her projenin çıktısını aynı dizinde birleştirir -- güncel SDK'larda kesin bir hata değil, bu yüzden ikililer tuhaf davranana kadar fark edilmesi kolay değil</td>
+<td><strong>Çözümü değil, uygulama projesini</strong> yayınlayın: <code>dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r win-x64 -o publish\windows</code> (<code>10-release</code>'in yaptığı tam olarak bu).</td>
+</tr>
+<tr>
+<td><code>docs/coverxygen/lcov.info</code> oluşuyor ama <strong>0 bayt</strong>, hata yok, <code>genhtml</code>/ReportGenerator sonra &quot;veri yok&quot; gösteriyor</td>
+<td>coverxygen'in <code>--prefix</code>'i bir <em>filtre</em>dir (yalnızca bu yolun altındaki dosyaları tut) ve orijinal scriptte <code>%currentDir%</code> hiç ayarlanmamış -- filtre hiçbir şeyle eşleşmemiş</td>
+<td><code>7-build-app</code>, en başta <code>currentDir</code>/<code>currentDirFwd</code>'i ayarlar ve <code>--prefix &quot;%currentDirFwd%/&quot;</code> geçirir.</td>
+</tr>
+<tr>
+<td>Yukarıdaki satır, <code>currentDir</code> ayarlanacak şekilde düzeltildi ama Windows'ta <strong>hâlâ</strong> boş bir <code>lcov.info</code> üretiyor</td>
+<td>Doxygen, dosya yollarını içeride <strong>Windows'ta bile eğik çizgiyle (forward slash)</strong> kaydeder; <code>--prefix</code>, ters eğik çizgili (backslash) bir yolla karşılaştırılınca hiç eşleşmez</td>
+<td>Eğik çizgili bir prefix kullanın: <code>set &quot;currentDirFwd=%currentDir:\=/%&quot;</code>, sonra <code>--prefix &quot;%currentDirFwd%/&quot;</code> (<code>7-build-app.bat</code>'te zaten yapılıyor; yolların doğal olarak eğik çizgili olduğu Linux'ta ilgisiz).</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scriptinde <code>'genhtml' is not recognized as an internal or external command</code>, oysa <code>where genhtml</code> onu buluyor ve Git Bash'te doğrudan çalıştırmak işe yarıyor</td>
+<td>(Windows <code>lcov</code> Chocolatey paketinden) <code>genhtml</code>, <strong><code>.exe</code>/<code>.bat</code> uzantısı olmayan</strong> bir Perl scriptidir; <code>cmd.exe</code>, uzantısız bir dosyayı doğrudan çalıştıramaz (shebang'ı okuyan bir POSIX kabuğunun aksine)</td>
+<td>Onu çıplak <code>genhtml</code> olarak değil, <code>perl &quot;&lt;genhtml-yolu&gt;&quot;</code> olarak çağırın -- <code>7-build-app.bat</code>, yolu <code>where genhtml</code> ile çözer (yoksa varsayılan Chocolatey yoluna döner) ve her zaman perl üzerinden çalıştırır.</td>
+</tr>
+<tr>
+<td><code>pip install coverxygen</code> başarılı olmasına rağmen <code>python -m coverxygen</code>, <code>ModuleNotFoundError: No module named 'coverxygen'</code> ile başarısız oluyor ve belge kapsama raporu sessizce boş</td>
+<td>Birden fazla Python kurulu bir makinede, PATH'teki düz <code>python</code>, coverxygen hiç kurulmamış ilgisiz bir yorumlayıcıya (ör. bir vektör grafik düzenleyicinin kendi paketlediği python.exe, gerçek bir Python'dan PATH'te daha önce bulunan) çözülebilir</td>
+<td>Açık bir yorumlayıcı kullanın: <code>py -3.12 -m coverxygen ...</code> (<code>4-install-coverxygen.bat</code>/<code>7-build-app.bat</code>'in yaptığı); WSL/Linux'ta açıkça <code>python3</code> kullanın.</td>
+</tr>
+<tr>
+<td><code>.gitignore</code>, <code>.csproj</code> ya da kapsama sayıları kod nedeni olmadan her derlemede değişiyor</td>
+<td>Eski script her derlemede <code>dotnet add package coverlet.msbuild</code> çalıştırıyordu, <code>CalculatorLibrary.Tests.csproj</code>'u mutasyona uğratıp her seferinde sabitlenmemiş bir sürümü yeniden çözüyordu</td>
+<td>Kaldırıldı: kapsama, <code>--collect:&quot;XPlat Code Coverage&quot;</code> ile (zaten referans verilen <code>coverlet.collector</code> paketinden VSTest toplayıcısı) toplanır -- <code>coverlet.msbuild</code> bu toplama yöntemi tarafından hiç kullanılmıyordu ve artık hiç referans verilmiyor. Paket sürümleri doğrudan <code>.csproj</code>'da sabitlenir; bir derleme scriptinden asla <code>dotnet add package</code> çalıştırmayın.</td>
+</tr>
+<tr>
+<td>Bir xUnit <code>[InlineData(new string[] { ... })]</code> üzerinde <code>error CS0182: An attribute argument must be a constant expression...</code></td>
+<td>Bir dizi değişmez değerini (array literal) doğrudan <code>[InlineData]</code>'ya geçiremezsiniz (özniteliğin kendi <code>params object[]</code>'i ile belirsiz)</td>
+<td>Bunun yerine statik bir <code>IEnumerable&lt;object[]&gt;</code> ile <code>[MemberData(nameof(SomeMethod))]</code> kullanın (bkz. <code>CalculatorCliTests.WrongArgumentCounts</code>).</td>
+</tr>
+<tr>
+<td><code>int.MinValue / -1 == int.MinValue</code> doğrulayan bir test, kod hiçbir <code>checked</code> bloğu kullanmamasına rağmen bir değer döndürmek yerine <code>System.OverflowException</code> fırlatıyor</td>
+<td>Bu bir bölme, pozitif bir <code>int</code> olarak temsil edilemez (büyüklüğü <code>int.MaxValue</code>'dan bir fazladır); .NET, <code>checked</code>/<code>unchecked</code> bağlamından bağımsız olarak burada her zaman <code>OverflowException</code> fırlatır</td>
+<td>Bir dönüş değeri yerine istisnayı test edin: <code>Assert.Throws&lt;OverflowException&gt;(() =&gt; calc.Divide(int.MinValue, -1))</code> (bkz. <code>CalculatorTests</code>). Bu, etrafından dolaşılacak bir hata değil, bilinmeye değer gerçek bir sınır durumudur.</td>
+</tr>
+<tr>
+<td>Etiket dosyada açıkça varken bir <code>.bat</code> scripti <code>The system cannot find the batch label specified - &lt;etiket&gt;</code> ile başarısız oluyor</td>
+<td>Dosyada <strong>Unix tarzı, yalnızca LF</strong> satır sonları var (ör. Windows dışı bir araçla düzenlendikten sonra); <code>cmd.exe</code>'nin <code>GOTO</code>/<code>CALL :etiket</code> araması, yalnızca-LF bir dosyada etiketi bulamayabilir</td>
+<td>CRLF'ye çevirin (ör. Git Bash'te: <code>sed -i 's/\r$//' dosya.bat &amp;&amp; sed -i 's/$/\r/' dosya.bat</code>, ya da bir düzenleyicide: &quot;Satır sonlarıyla kaydet: CRLF&quot;). Bu depodaki her <code>.bat</code> CRLF'dir; öyle kalsın.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scripti bir <code>if (...)</code>/<code>for (...)</code> bloğu içinde <code>&lt;bir kelime&gt; was unexpected at this time.</code> ile başarısız oluyor</td>
+<td>O blok içinde -- bir tırnaklı dizenin içinde olsa bile, bir yorum olarak olsa bile -- gerçek bir <code>(</code> veya <code>)</code> var ve bu, <code>cmd.exe</code>'nin blok sınırları için parantez eşleştirme taramasını karıştırıyor</td>
+<td>Bir parantezli blok içinde yaşayan hiçbir metinde gerçek parantez kullanmayın (<code>&quot;genhtml (documentation coverage)&quot;</code>i <code>&quot;genhtml - documentation coverage&quot;</code> olarak yeniden yazın vb.), ya da <strong>tırnak dışında</strong> <code>^(</code>/<code>^)</code> ile kaçış karakteri (escape) kullanın.</td>
+</tr>
+<tr>
+<td><code>cd /d &quot;%~dp0&quot;</code>'dan hemen sonra bile, dosya tam orada olmasına rağmen <code>'birsscript.bat' is not recognized as an internal or external command</code></td>
+<td>Makinede <code>NoDefaultCurrentDirectoryInExePath</code> ortam değişkeni ayarlı (yönetilen/laboratuvar bilgisayarlarında yaygın bir sertleştirme ayarı), bu da <code>cmd.exe</code>'nin çıplak dosya adları için örtük &quot;geçerli dizini de ara&quot; yedeğini devre dışı bırakır</td>
+<td>Kardeş scriptleri çıplak dosya adıyla değil, tam yolla çağırın: <code>call dotnet-env.bat</code> değil, <code>call &quot;%~dp0dotnet-env.bat&quot;</code> -- bu depodaki her script bunu zaten yapıyor.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> derleme adımı başarısız oluyor ama script mutlu bir şekilde bir sonraki adıma geçip yine de 0 koduyla çıkıyor</td>
+<td><code>call :etiket</code> ile ulaşılan bir alt yordam (subroutine) içindeki <code>exit /b 1</code>, yalnızca <em>o alt yordamı</em> bitirir (bir <code>return</code> gibi), bütün scripti değil -- çağıran, sonucu açıkça kontrol etmelidir</td>
+<td>Her zaman <code>call :check &quot;adım adı&quot; \|\| exit /b 1</code> olarak çağırın (ya da hemen ardından eşdeğer bir <code>if errorlevel 1 exit /b 1</code>), asla tek başına <code>call :check &quot;...&quot;</code> değil.</td>
+</tr>
+<tr>
+<td>Bir <code>if (...)</code>/<code>for (...)</code> bloğu içinde açıkça <code>set</code> edilmiş bir değişken, <strong>aynı blok içinde</strong>, hemen ardından boş (ya da eski) okunuyor</td>
+<td><code>cmd.exe</code>, <code>%degisken%</code>'i her çalıştırmada değil, blok <em>ayrıştırıldığında</em> bir kez değiştirir -- aynı değişkenin aynı paylaşılan blok içinde önce set edilip sonra okunması, sessizce blok başlamadan önceki değeri kullanır</td>
+<td>Ya <code>setlocal enabledelayedexpansion</code>'ı etkinleştirip o okuma için <code>!degisken!</code> kullanın, ya da (bu şablonun mümkün olduğunda tercih ettiği gibi) set ile okumayı ayrı, üst düzey ifadelere bölün, böylece okuma, set zaten çalıştıktan sonra kendi taze ayrıştırılmış satırında gerçekleşir.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scriptindeki <code>robocopy</code> adımı, kopyalama açıkça işe yaramış olsa bile başarısız sayılıyor</td>
+<td><code>robocopy</code>'nin 0-7 çıkış kodlarının hepsi başarı/bilgilendirme niteliğindedir (1 = dosyalar kopyalandı, 2 = fazladan dosyalar, ...); yalnızca 8+ gerçek bir başarısızlıktır -- <code>robocopy</code>'den sonra düz bir <code>if errorlevel 1</code> sürekli yanlış tetiklenir</td>
+<td><code>robocopy</code> için özel olarak <code>if errorlevel 1</code> değil <code>if errorlevel 8</code> kontrol edin (<code>7-build-app.bat</code>'teki <code>:check_robocopy</code>'ye bakın).</td>
+</tr>
+<tr>
+<td><code>docfx build</code> sırasında <code>warning InvalidFileLink</code> / <code>Unable to find file &quot;reports/....html&quot;</code> yazdırılıyor</td>
+<td>Bunlar <strong>kaynak (resource)</strong> dosyalarını (kopyalanan rapor HTML klasörlerini) işaret ediyor; DocFX'in TOC bağlantı doğrulayıcısı, bağlantıları kontrol ettiği noktada yalnızca <em>içerik</em> belgelerini izler, kaynak dosyaları değil</td>
+<td>Zararsız: dosyalar yine de kopyalanır ve bağlantılar yine de çalışır (üretilen site açılarak doğrulandı). Bunun yerine gerçek içerik olması gereken bir <code>.md</code> dosyası için görürseniz <code>docfx.json</code>'ın <code>content</code> glob'larını/hariç tutmalarını (exclude) kontrol edin.</td>
+</tr>
+<tr>
+<td>Yepyeni bir <code>.git\refs\heads\desktop.ini</code> (veya benzeri) beliriyor ve <code>git branch</code>, <code>warning: ignoring broken ref refs/heads/desktop.ini</code> yazdırıyor</td>
+<td>Depo bir Google Drive senkronize klasörünün içinde yaşıyor ve Drive, kendi <code>desktop.ini</code> klasör-özelleştirme dosyasını <code>.git</code>'in içine yazıyor</td>
+<td>Zararsız; git bozuk referansı (ref) yok sayar. Bunu <code>.git</code>'i elle düzenleyerek &quot;düzeltmeye&quot; çalışmayın.</td>
+</tr>
+<tr>
+<td>Klon <code>/mnt/g/My Drive/...</code> altında yaşarken WSL depoyu göremiyor, ya da görüyor ama her dosya işlemi aşırı yavaş</td>
+<td>Google Drive for desktop sanal/bulut bir dosya sistemidir; <code>G:</code> sürücüsü üzerinden WSL'e bağlansa (mount) bile gerçek, tamamen POSIX-uyumlu bir dosya sistemi değildir</td>
+<td>Önce depoyu normal bir Linux yoluna kopyalayın (ör. <code>~/vs-net-core-template</code>) ve her <code>.sh</code> scriptini oradan çalıştırın -- bu şablonun kendi <code>.sh</code> scriptleri tam olarak böyle test edildi (bkz. <a href="install.tr.html">Her şeyi kurma</a>).</td>
+</tr>
+<tr>
+<td><code>choco install astyle</code>, bitirmek yerine bir <code>[Y/n]</code> onayı bekleyerek duruyor</td>
+<td>Bazı Chocolatey kurulum komutları, <code>-y</code> geçilmedikçe onay ister</td>
+<td>Düzeltildi: bu şablonun scriptlerindeki her <code>choco install</code>, <code>-y</code> geçiyor. Kendinizinkini eklerseniz aynısını yapın.</td>
+</tr>
+<tr>
+<td>Numaralı bir script afişini yazdırıyor ve sonra terminale kontrolü hiç geri vermeden öylece oturuyor</td>
+<td>Bir scriptin eski bir kopyası <code>pause</code> çağırıyordu (ya da başka türlü konsol girdisini bekliyordu)</td>
+<td>Bu şablondaki her script girdide bloklamaktan tamamen kaçınır (hiç <code>pause</code> yok). Örnek uygulama yalnızca kendi argümanlarını okur, konsolu asla okumaz, bkz. <a href="from-topic-to-project.tr.html">Konudan projeye</a>.</td>
+</tr>
+<tr>
+<td>Bir derleme adımı, özellikle antivirüs tanımlarını güncelledikten hemen sonra dosya-kilitli/&quot;başka bir işlem tarafından kullanılıyor&quot; hatasıyla başarısız oluyor</td>
+<td>Windows Defender (veya başka bir antivirüs), yeni yazılan <code>.dll</code>/<code>.exe</code> dosyalarını tararken kısa süreliğine kilitler, bir sonraki derleme adımıyla yarışır</td>
+<td>Scripti yeniden çalıştırın (genelde yeterli); sürekli oluyorsa antivirüs ayarlarınızda depo klasörüne ve <code>%LocalAppData%\Microsoft\dotnet</code>'e bir istisna ekleyin.</td>
+</tr>
+<tr>
+<td>Çok derin iç içe geçmiş bir klon konumunda, yol ile ilgili bir derleme hatası açıkça var olan bir dosyadan bahsediyor</td>
+<td>Windows'un klasik ~260 karakter yol sınırı, uzun bir Google Drive yolu artı <code>bin</code>/<code>obj</code> artı uzun bir RID/yapılandırma alt klasörüyle daha kolay tetiklenir</td>
+<td>Bir sürücü köküne daha yakın klonlayın, ya da Windows uzun yol (long-path) desteğini etkinleştirin (<code>git config --system core.longpaths true</code> artı Windows 10/11'in &quot;Win32 uzun yollarını etkinleştir&quot; ayarı).</td>
+</tr>
+<tr>
+<td><code>site/index.html</code>'i (veya bir raporu) bir <code>file://</code> yolu üzerinden açmak boş bir sayfa ya da kırık bağlantılar gösteriyor ama HTTP üzerinden sunulunca çalışıyor</td>
+<td>Nadir, ama bazı tarayıcılar <code>file://</code> sayfalarının bitişik JSON getirmesini kısıtlar (ör. DocFX'in arama indeksi)</td>
+<td>Bunun yerine yerelde sunun: <code>9-open-site.bat</code>/<code>.sh</code> (artık bunu otomatik yapıyor), <code>dotnet docfx serve site</code> (varsayılan <code>http://localhost:8080</code>), ya da herhangi bir statik dosya sunucusu.</td>
+</tr>
+<tr>
+<td>Bir rapor sayfasının <code>&lt;iframe&gt;</code>'i boş kalıyor, oysa aynı sayfadaki &quot;Yeni sekmede aç&quot; çalışıyor</td>
+<td>Site, <code>9-open-site</code>'nin yerel sunucusu yerine çıplak bir <code>file://</code> yolu üzerinden açıldı -- tam açıklama ve diğer bütün iframe sorunları için bkz. <a href="embed-html-in-site.tr.html">Sitenizin içinde bir raporu göstermek</a></td>
+<td><code>9-open-site.bat</code>/<code>.sh</code>'yi kullanın ve yazdırılan <code>http://localhost:8080/</code> URL'sini açın.</td>
+</tr>
+<tr>
+<td><code>9-open-site.bat</code>/<code>.sh</code>, siteyi sunmak yerine bir hatayla çıkıyor</td>
+<td>8080 portu (varsayılan) makinenizde başka bir şey tarafından zaten kullanılıyor</td>
+<td>Farklı bir port verin: <code>9-open-site.bat 8081</code> / <code>./9-open-site.sh 8081</code>.</td>
+</tr>
+<tr>
+<td><code>Compress-Archive</code> (<code>7-build-app.bat</code>'in rapor-zipleme adımında) dosya-kullanımda hatasıyla başarısız oluyor</td>
+<td>Script yeniden çalışırken bir raporun HTML dosyası hâlâ bir tarayıcıda/editörde açıktı, ya da antivirüs onu yazılırken tarıyordu (yukarıdaki antivirüs satırına bakın)</td>
+<td><code>docs/&lt;rapor&gt;/</code> altında açık bir dosyası olan her şeyi kapatın, sonra <code>7-build-app.bat</code>'i yeniden çalıştırın; adım yeniden çalıştırılabilir (idempotent).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hâlâ-takıldınız-mı">Hâlâ takıldınız mı?</h2>
+<p><a href="daily-workflow.tr.html">Günlük iş akışı</a> veya <a href="use-the-template.tr.html">Şablonu kullanma</a>'daki tam
+adımı yeniden okuyun, doğru dosyaya baktığınızdan emin olmak için
+<a href="reports-explained.tr.html">Hangi rapor hangisi?</a>'i kontrol edin.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/troubleshooting.tr.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

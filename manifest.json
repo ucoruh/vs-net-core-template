@@ -1,0 +1,5031 @@
+{
+  "docfx_version": "2.81.0+ba844df625370a6bd7c1ecab0d0ec4d1d9128ac4",
+  "source_base_path": "/home/runner/work/vs-net-core-template/vs-net-core-template",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.Calculator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.Calculator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary.Calculator",
+      "Summary": "<p sourcefile=\"api/CalculatorLibrary.Calculator.yml\" sourcestartlinenumber=\"1\">Performs basic arithmetic operations on integers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.CalculatorCli.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.CalculatorCli.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary.CalculatorCli",
+      "Summary": "<p sourcefile=\"api/CalculatorLibrary.CalculatorCli.yml\" sourcestartlinenumber=\"1\">Parses and runs the calculator's command-line arguments.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge-macos.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge-macos.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge-ubuntu.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge-ubuntu.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge-windows.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge-windows.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_branchcoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_branchcoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_linecoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_linecoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_methodcoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_methodcoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/doccoverage/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/favicon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "assets/rteu_logo.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/rteu_logo.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/2023-05-26-11-23-01-image.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/2023-05-26-11-23-01-image.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge-macos.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge-macos.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge-ubuntu.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge-ubuntu.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge-windows.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge-windows.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_branchcoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_branchcoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_linecoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_linecoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_methodcoverage.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_methodcoverage.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/doccoverage/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/doccoverage/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/favicon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/assets/rteu_logo.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/assets/assets/rteu_logo.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/Calculator.cs.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/Calculator.cs.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/Calculator.cs.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/Calculator.cs.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/Calculator.cs.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/Calculator.cs.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/CalculatorCli.cs.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/CalculatorLibrary/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/CalculatorLibrary/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/amber.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/amber.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/cmd_line",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/cmd_line"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/coverage-genhtml-report.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/coverage-genhtml-report.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/emerald.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/emerald.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/gcov.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/gcov.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/glass.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/glass.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/ruby.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/ruby.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/snow.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/snow.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverage-genhtml/updown.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverage-genhtml/updown.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/CalculatorLibrary_Calculator.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/CalculatorLibrary_Calculator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/CalculatorLibrary_CalculatorCli.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/CalculatorLibrary_CalculatorCli.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/class.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/class.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/coverage-reportgenerator-report.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/coverage-reportgenerator-report.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_cog.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_cog.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_cog_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_cog_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_cube.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_cube.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_cube_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_cube_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_fork.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_fork.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_fork_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_fork_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_info-circled.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_info-circled.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_info-circled_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_info-circled_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_minus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_minus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_minus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_minus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_plus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_plus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_plus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_plus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_search-minus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_search-minus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_search-minus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_search-minus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_search-plus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_search-plus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_search-plus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_search-plus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_sponsor.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_sponsor.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_star.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_star.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_star_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_star_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_up-dir.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_up-dir.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_up-dir_active.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_up-dir_active.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_up-down-dir.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_up-down-dir.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_up-down-dir_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_up-down-dir_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_wrench.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_wrench.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/icon_wrench_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/icon_wrench_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/index.htm",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/index.htm"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/main.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/main.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coveragereport/report.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coveragereport/report.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/amber.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/amber.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/cmd_line",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/cmd_line"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/doccoverage-genhtml-report.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/doccoverage-genhtml-report.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/emerald.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/emerald.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/gcov.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/gcov.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/glass.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/glass.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/lcov.info",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/lcov.info"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/ruby.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/ruby.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/snow.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/snow.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/updown.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/updown.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/Program.cs.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorApp/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorApp/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/Calculator.cs.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/CalculatorCli.cs.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/CalculatorLibrary/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/CalculatorLibrary/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/README.md.func-c.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/README.md.func-c.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/README.md.func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/README.md.func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/README.md.gcov.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/README.md.gcov.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/index-sort-f.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/index-sort-f.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/index-sort-l.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/index-sort-l.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/coverxygen/vs-net-core-template/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/coverxygen/vs-net-core-template/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/developers.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/developers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorApp_Program.cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorApp_Program.cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorLibrary_Calculator.cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorLibrary_Calculator.cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorLibrary_CalculatorCli.cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_CalculatorLibrary_CalculatorCli.cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_README.md.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/_home_runner_work_vs_net_core_template_vs_net_core_template_README.md.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_fullmethodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_fullmethodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_branchcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_fullmethodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_linecoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_linecoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_blue.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_blue.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_brightgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_brightgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_green.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_green.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_lightgrey.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_lightgrey.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_orange.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_orange.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_red.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_red.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_yellow.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_yellow.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_yellowgreen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/badge_shieldsio_methodcoverage_yellowgreen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/class.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/class.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/doccoverage-reportgenerator-report.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/doccoverage-reportgenerator-report.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_cog.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_cog.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_cog_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_cog_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_cube.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_cube.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_cube_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_cube_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_fork.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_fork.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_fork_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_fork_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_info-circled.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_info-circled.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_info-circled_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_info-circled_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_minus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_minus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_minus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_minus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_plus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_plus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_plus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_plus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_search-minus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_search-minus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_search-minus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_search-minus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_search-plus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_search-plus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_search-plus_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_search-plus_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_sponsor.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_sponsor.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_star.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_star.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_star_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_star_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_up-dir.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_up-dir.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_up-dir_active.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_up-dir_active.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_up-down-dir.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_up-down-dir.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_up-down-dir_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_up-down-dir_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_wrench.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_wrench.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/icon_wrench_dark.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/icon_wrench_dark.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/index.htm",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/index.htm"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/main.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/main.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doccoverage-reportgenerator/report.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doccoverage-reportgenerator/report.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/CalculatorCli_8cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/CalculatorCli_8cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/CalculatorCli_8cs_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/CalculatorCli_8cs_source.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/Calculator_8cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/Calculator_8cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/Calculator_8cs_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/Calculator_8cs_source.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/Program_8cs.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/Program_8cs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/Program_8cs_source.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/Program_8cs_source.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/README_8md.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/README_8md.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/annotated.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/annotated.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/badge_branchcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/badge_branchcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/badge_combined.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/badge_combined.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/badge_linecoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/badge_linecoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/badge_methodcoverage.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/badge_methodcoverage.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/bc_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/bc_s.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/bc_sd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/bc_sd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/classCalculatorLibrary_1_1Calculator-members.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/classCalculatorLibrary_1_1Calculator-members.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/classCalculatorLibrary_1_1Calculator.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/classCalculatorLibrary_1_1Calculator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/classCalculatorLibrary_1_1CalculatorCli-members.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/classCalculatorLibrary_1_1CalculatorCli-members.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/classCalculatorLibrary_1_1CalculatorCli.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/classCalculatorLibrary_1_1CalculatorCli.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/classes.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/classes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/closed.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/closed.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/dir_1d11f2a0f19712ad40099364ecbdffb2.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/dir_1d11f2a0f19712ad40099364ecbdffb2.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/dir_73af11b250af7054eee5cd2a23004b6a.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/dir_73af11b250af7054eee5cd2a23004b6a.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/doc.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/doc.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/docd.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/docd.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/doxygen-api-docs.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/doxygen-api-docs.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/doxygen.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/doxygen.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/doxygen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/doxygen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/dynsections.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/dynsections.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/files.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/files.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/folderclosed.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/folderclosed.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/folderclosedd.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/folderclosedd.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/folderopen.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/folderopen.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/folderopend.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/folderopend.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/functions.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/functions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/functions_func.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/functions_func.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/functions_vars.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/functions_vars.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/index.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/jquery.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/jquery.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/menu.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/menu.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/menudata.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/menudata.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/minus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/minus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/minusd.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/minusd.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/namespaceCalculatorApp.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/namespaceCalculatorApp.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/namespaceCalculatorLibrary.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/namespaceCalculatorLibrary.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/namespaces.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/namespaces.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/nav_f.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/nav_f.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/nav_fd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/nav_fd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/nav_g.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/nav_g.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/nav_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/nav_h.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/nav_hd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/nav_hd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/open.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/open.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/plus.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/plus.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/plusd.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/plusd.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/rteu_logo.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/rteu_logo.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_1.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_2.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_3.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_4.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_5.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_5.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_6.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_6.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_7.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_7.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_8.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_8.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_9.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_9.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_a.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_a.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_b.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_b.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_c.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_c.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/all_d.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/all_d.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/classes_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/classes_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/close.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/close.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/files_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/files_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/files_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/files_1.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/files_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/files_2.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/functions_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/functions_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/functions_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/functions_1.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/functions_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/functions_2.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/functions_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/functions_3.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/functions_4.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/functions_4.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/mag.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/mag.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/mag_d.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/mag_d.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/mag_sel.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/mag_sel.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/mag_seld.svg",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/mag_seld.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/namespaces_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/namespaces_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/pages_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/pages_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/pages_1.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/pages_1.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/pages_2.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/pages_2.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/pages_3.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/pages_3.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/search.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/search.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/search.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/search.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/searchdata.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/searchdata.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/search/variables_0.js",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/search/variables_0.js"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/splitbar.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/splitbar.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/splitbard.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/splitbard.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/sync_off.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/sync_off.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/sync_on.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/sync_on.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_a.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_a.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_ad.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_ad.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_b.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_b.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_bd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_bd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_h.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_h.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_hd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_hd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_s.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_s.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tab_sd.png",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tab_sd.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/doxygen/html/tabs.css",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/doxygen/html/tabs.css"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/daily-workflow.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/daily-workflow.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/daily-workflow.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/daily-workflow.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/embed-html-in-site.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/embed-html-in-site.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/embed-html-in-site.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/embed-html-in-site.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/from-topic-to-project.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/from-topic-to-project.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/from-topic-to-project.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/from-topic-to-project.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/install.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/install.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/install.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/install.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/releases-and-private-repos.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/releases-and-private-repos.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/releases-and-private-repos.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/releases-and-private-repos.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/reports-explained.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/reports-explained.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/reports-explained.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/reports-explained.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/troubleshooting.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/troubleshooting.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/troubleshooting.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/troubleshooting.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/use-the-template.en.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/use-the-template.en.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/guide/use-the-template.tr.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/guide/use-the-template.tr.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/coverage-genhtml.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/coverage-genhtml.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/coverage-reportgenerator.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/coverage-reportgenerator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/doccoverage-genhtml.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/doccoverage-genhtml.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/doccoverage-reportgenerator.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/doccoverage-reportgenerator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/doxygen-api.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/doxygen-api.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/report-pages/unit-tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/report-pages/unit-tests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/testresults/test-results.html",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/testresults/test-results.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "docs/testresults/unit-test-results.zip",
+      "output": {
+        "resource": {
+          "relative_path": "docs/reports/testresults/unit-test-results.zip"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

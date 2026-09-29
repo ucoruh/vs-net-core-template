@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Troubleshooting | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Troubleshooting | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/troubleshooting.en.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="troubleshooting">Troubleshooting</h1>
+
+<p>Every row below is something that actually happened while building this template -- the exact
+message (or, where it was a <em>silent</em> failure, what you would see instead) and the fix that was
+applied to the repository or that you apply yourself.</p>
+<table>
+<thead>
+<tr>
+<th>Symptom / message</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net7.0</code> project builds, but <code>.NET 7.0 is out of support</code> warnings, or it only works because an unrelated old runtime happens to be installed</td>
+<td>Target framework not updated since .NET 7 went out of support (May 2024)</td>
+<td>Fixed in this template: every <code>.csproj</code> targets <code>net10.0</code> via <code>Directory.Build.props</code>, pinned in <code>global.json</code>. If you see this on your own fork, re-run <code>4-install-dotnet-sdk</code> and check <code>global.json</code>.</td>
+</tr>
+<tr>
+<td><code>dotnet publish</code> on the <strong>solution</strong> prints <code>warning NETSDK1194: The &quot;--output&quot; option isn't supported when building a solution...</code> and silently mixes <code>CalculatorLibrary</code>, <code>CalculatorApp</code> and <code>CalculatorLibrary.Tests</code> output into one folder</td>
+<td>Publishing a <code>.sln</code> with <code>-o</code> merges every project's output into the same directory -- not a hard error in current SDKs, so it is easy to miss until binaries behave strangely</td>
+<td>Publish the <strong>app project</strong>, not the solution: <code>dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r win-x64 -o publish\windows</code> (this is what <code>10-release</code> does).</td>
+</tr>
+<tr>
+<td><code>docs/coverxygen/lcov.info</code> is created but is <strong>0 bytes</strong>, no error printed, <code>genhtml</code>/ReportGenerator then show &quot;no data&quot;</td>
+<td><code>coverxygen</code>'s <code>--prefix</code> is a <em>filter</em> (keep only files under this path), and <code>%currentDir%</code> was never set in the original script -- so the filter matched nothing</td>
+<td><code>7-build-app</code> sets <code>currentDir</code>/<code>currentDirFwd</code> at the top and passes <code>--prefix &quot;%currentDirFwd%/&quot;</code>.</td>
+</tr>
+<tr>
+<td>The line above, fixed to set <code>currentDir</code>, <strong>still</strong> produces an empty <code>lcov.info</code> on Windows</td>
+<td>Doxygen records file paths internally with <strong>forward slashes even on Windows</strong>; <code>--prefix</code> compared against a backslash path never matches</td>
+<td>Use a forward-slash prefix: <code>set &quot;currentDirFwd=%currentDir:\=/%&quot;</code>, then <code>--prefix &quot;%currentDirFwd%/&quot;</code> (already done in <code>7-build-app.bat</code>; irrelevant on Linux, where paths are forward-slash natively).</td>
+</tr>
+<tr>
+<td><code>'genhtml' is not recognized as an internal or external command</code> in a <code>.bat</code> script, even though <code>where genhtml</code> finds it and running it directly in Git Bash works</td>
+<td><code>genhtml</code> (from the Windows <code>lcov</code> Chocolatey package) is a Perl script with <strong>no <code>.exe</code>/<code>.bat</code> extension</strong>; <code>cmd.exe</code> cannot execute an extensionless file directly (unlike a POSIX shell, which reads the shebang)</td>
+<td>Invoke it as <code>perl &quot;&lt;path-to-genhtml&gt;&quot;</code>, not bare <code>genhtml</code> -- <code>7-build-app.bat</code> resolves the path via <code>where genhtml</code> (falling back to the default Chocolatey path) and always runs it through <code>perl</code>.</td>
+</tr>
+<tr>
+<td><code>python -m coverxygen</code> fails with <code>ModuleNotFoundError: No module named 'coverxygen'</code> even after <code>pip install coverxygen</code> succeeded, and the documentation-coverage report is silently empty</td>
+<td>On a machine with several Python installs, plain <code>python</code> on PATH can resolve to an unrelated interpreter (e.g. a vector-graphics editor's bundled <code>python.exe</code>, found earlier on PATH than a real Python) that never had <code>coverxygen</code> installed into it</td>
+<td>Use an explicit interpreter: <code>py -3.12 -m coverxygen ...</code> (what <code>4-install-coverxygen.bat</code>/<code>7-build-app.bat</code> do); on WSL/Linux use <code>python3</code> explicitly.</td>
+</tr>
+<tr>
+<td><code>.gitignore</code>, the <code>.csproj</code> or coverage numbers change on every single build for no code reason</td>
+<td>The old script ran <code>dotnet add package coverlet.msbuild</code> <strong>on every build</strong>, mutating <code>CalculatorLibrary.Tests.csproj</code> and re-resolving an unpinned version each time</td>
+<td>Removed: coverage is collected with <code>--collect:&quot;XPlat Code Coverage&quot;</code> (the VSTest collector, from the already-referenced <code>coverlet.collector</code> package) -- <code>coverlet.msbuild</code> was never actually used by that collection method and is not referenced at all now. Package versions are pinned directly in the <code>.csproj</code>; never run <code>dotnet add package</code> from a build script.</td>
+</tr>
+<tr>
+<td><code>error CS0182: An attribute argument must be a constant expression...</code> on an xUnit <code>[InlineData(new string[] { ... })]</code></td>
+<td>You cannot pass an array literal straight into <code>[InlineData]</code> (ambiguous with the attribute's own <code>params object[]</code>)</td>
+<td>Use <code>[MemberData(nameof(SomeMethod))]</code> with a <code>static IEnumerable&lt;object[]&gt;</code> instead (see <code>CalculatorCliTests.WrongArgumentCounts</code>).</td>
+</tr>
+<tr>
+<td>A test asserting <code>int.MinValue / -1 == int.MinValue</code> throws <code>System.OverflowException</code> instead of returning a value, even though the code never uses a <code>checked</code> block</td>
+<td>This one division cannot be represented as a positive <code>int</code> (its magnitude is one larger than <code>int.MaxValue</code>); .NET always raises <code>OverflowException</code> here regardless of <code>checked</code>/<code>unchecked</code> context</td>
+<td>Test for the exception instead of a return value: <code>Assert.Throws&lt;OverflowException&gt;(() =&gt; calc.Divide(int.MinValue, -1))</code> (see <code>CalculatorTests</code>). This is a real boundary case worth knowing, not a bug to work around.</td>
+</tr>
+<tr>
+<td>A <code>.bat</code> script fails with <code>The system cannot find the batch label specified - &lt;label&gt;</code>, even though the label is clearly in the file</td>
+<td>The file has <strong>Unix-style LF-only line endings</strong> (e.g. after editing with a non-Windows tool); <code>cmd.exe</code>'s <code>GOTO</code>/<code>CALL :label</code> search can fail to find labels in an LF-only file</td>
+<td>Convert to CRLF (e.g. in Git Bash: <code>sed -i 's/\r$//' file.bat &amp;&amp; sed -i 's/$/\r/' file.bat</code>, or in an editor: &quot;Save with line endings: CRLF&quot;). Every <code>.bat</code> in this repository is CRLF; keep it that way.</td>
+</tr>
+<tr>
+<td>A <code>.bat</code> script fails with <code>&lt;some word&gt; was unexpected at this time.</code> inside an <code>if (...)</code>/<code>for (...)</code> block</td>
+<td>A literal <code>(</code> or <code>)</code> appears inside that block -- even inside a quoted string, even as a comment -- and confuses <code>cmd.exe</code>'s parenthesis-matching scan for the block's boundaries</td>
+<td>Avoid literal parentheses in any text that lives inside a parenthesized block (rewrite <code>&quot;genhtml (documentation coverage)&quot;</code> as <code>&quot;genhtml - documentation coverage&quot;</code>, etc.), or escape them with <code>^(</code>/<code>^)</code> <strong>outside of quotes</strong>.</td>
+</tr>
+<tr>
+<td><code>'somescript.bat' is not recognized as an internal or external command</code>, even right after <code>cd /d &quot;%~dp0&quot;</code>, even though the file is right there</td>
+<td>The machine has the environment variable <code>NoDefaultCurrentDirectoryInExePath</code> set (a common hardening setting on managed/lab PCs), which disables <code>cmd.exe</code>'s implicit &quot;also search the current directory&quot; fallback for bare filenames</td>
+<td>Call sibling scripts by full path, not bare filename: <code>call &quot;%~dp0dotnet-env.bat&quot;</code>, not <code>call dotnet-env.bat</code> -- every script in this repository already does this.</td>
+</tr>
+<tr>
+<td>A <code>.bat</code> build step fails, but the script happily continues to the next step and exits with code 0 anyway</td>
+<td><code>exit /b 1</code> inside a subroutine reached via <code>call :label</code> only ends <em>that subroutine</em> (like a <code>return</code>), not the whole script -- the caller must explicitly check the result</td>
+<td>Always call as <code>call :check &quot;step name&quot; \|\| exit /b 1</code> (or an equivalent <code>if errorlevel 1 exit /b 1</code> immediately after), never <code>call :check &quot;...&quot;</code> alone.</td>
+</tr>
+<tr>
+<td>A variable that was clearly just <code>set</code> inside an <code>if (...)</code>/<code>for (...)</code> block reads back as empty (or stale) immediately afterward, <strong>inside that same block</strong></td>
+<td><code>cmd.exe</code> substitutes <code>%var%</code> once, when the block is <em>parsed</em>, not per execution -- a set-then-read of the same variable inside one shared block silently uses the value from before the block started</td>
+<td>Either enable <code>setlocal enabledelayedexpansion</code> and use <code>!var!</code> for that read, or (what this template prefers where practical) split the set and the read into separate top-level statements so the read happens in its own, freshly-parsed line after the set has already executed.</td>
+</tr>
+<tr>
+<td>A <code>robocopy</code> step in a <code>.bat</code> script is treated as failed even though the copy clearly worked</td>
+<td><code>robocopy</code>'s exit codes 0-7 are all success/informational (1 = files copied, 2 = extra files, ...); only 8+ is a real failure -- a plain <code>if errorlevel 1</code> after <code>robocopy</code> misfires constantly</td>
+<td>Check <code>if errorlevel 8</code> for robocopy specifically, not <code>if errorlevel 1</code> (see <code>:check_robocopy</code> in <code>7-build-app.bat</code>).</td>
+</tr>
+<tr>
+<td>DocFX prints <code>warning InvalidFileLink</code> / <code>Unable to find file &quot;reports/....html&quot;</code> during <code>docfx build</code></td>
+<td>These point at <strong>resource</strong> files (the copied report HTML folders); DocFX's TOC-link validator only tracks <em>content</em> documents, not resource files, at the point it checks links</td>
+<td>Benign: the files are still copied and the links still work (confirmed by opening the built site). If instead you see it for a <code>.md</code> file that should be real content, check <code>docfx.json</code>'s <code>content</code> globs/excludes.</td>
+</tr>
+<tr>
+<td>A brand-new <code>.git\refs\heads\desktop.ini</code> (or similar) appears, and <code>git branch</code> prints <code>warning: ignoring broken ref refs/heads/desktop.ini</code></td>
+<td>The repository lives inside a Google Drive-synced folder, and Drive writes its own <code>desktop.ini</code> folder-customization file into <code>.git</code>'s internals</td>
+<td>Harmless; git ignores the broken ref. Do not try to &quot;fix&quot; it by editing <code>.git</code> by hand.</td>
+</tr>
+<tr>
+<td>WSL cannot see the repository, or sees it but every file operation is extremely slow, when the clone lives under <code>/mnt/g/My Drive/...</code></td>
+<td>Google Drive for desktop is a virtual/cloud filesystem; even mounted into WSL through the <code>G:</code> drive, it is not a real, fully POSIX-compatible filesystem</td>
+<td>Copy the repository into a normal Linux path first (e.g. <code>~/vs-net-core-template</code>) and run every <code>.sh</code> script from there -- this is exactly how this template's own <code>.sh</code> scripts were tested (see <a href="install.en.html">Install</a>).</td>
+</tr>
+<tr>
+<td><code>choco install astyle</code> sits waiting for a <code>[Y/n]</code> confirmation instead of finishing</td>
+<td>Some Chocolatey install commands prompt for confirmation unless <code>-y</code> is passed</td>
+<td>Fixed: every <code>choco install</code> in this template's scripts passes <code>-y</code>. If you add your own, do the same.</td>
+</tr>
+<tr>
+<td>A numbered script prints its banner and then just sits there, never returning control to the terminal</td>
+<td>An old copy of a script called <code>pause</code> (or otherwise waited on console input)</td>
+<td>Every script in this template avoids blocking on input entirely (no <code>pause</code>). The sample app only reads its arguments, never the console, see <a href="from-topic-to-project.en.html">From topic to project</a>.</td>
+</tr>
+<tr>
+<td>A build step fails with a file-locked/&quot;being used by another process&quot; error, especially right after antivirus updated its definitions</td>
+<td>Windows Defender (or another AV) briefly locks freshly-written <code>.dll</code>/<code>.exe</code> files while scanning them, racing with the next build step</td>
+<td>Re-run the script (usually enough); if it happens constantly, add an exclusion for the repository folder and <code>%LocalAppData%\Microsoft\dotnet</code> in your antivirus settings.</td>
+</tr>
+<tr>
+<td>A path-related build error mentions a file that clearly exists, on a very deeply nested clone location</td>
+<td>Windows' classic ~260-character path limit, more likely to bite with a long Google Drive path plus <code>bin</code>/<code>obj</code> plus a long RID/config subfolder</td>
+<td>Clone closer to a drive root, or enable Windows long-path support (<code>git config --system core.longpaths true</code> plus the Windows 10/11 &quot;Enable Win32 long paths&quot; setting).</td>
+</tr>
+<tr>
+<td>Opening <code>site/index.html</code> (or a report) shows a blank page or broken links when opened via a <code>file://</code> path but works when served over HTTP</td>
+<td>Rare, but some browsers restrict <code>file://</code> pages from fetching adjacent JSON (DocFX's search index, for example)</td>
+<td>Serve it locally instead: <code>9-open-site.bat</code>/<code>.sh</code> (this is what it does automatically now), <code>dotnet docfx serve site</code> (default <code>http://localhost:8080</code>), or any static file server.</td>
+</tr>
+<tr>
+<td>A report page's <code>&lt;iframe&gt;</code> stays blank even though &quot;Open in a new tab&quot; on the same page works</td>
+<td>The site was opened via a bare <code>file://</code> path instead of <code>9-open-site</code>'s local server -- see <a href="embed-html-in-site.en.html">Showing a report inside your site</a> for the full explanation and every other iframe-related problem.</td>
+<td>Use <code>9-open-site.bat</code>/<code>.sh</code> and open the printed <code>http://localhost:8080/</code> URL.</td>
+</tr>
+<tr>
+<td><code>9-open-site.bat</code>/<code>.sh</code> exits with an error instead of serving the site</td>
+<td>Port 8080 (the default) is already in use by something else on your machine</td>
+<td>Pass a different port: <code>9-open-site.bat 8081</code> / <code>./9-open-site.sh 8081</code>.</td>
+</tr>
+<tr>
+<td><code>Compress-Archive</code> (in <code>7-build-app.bat</code>'s report-zipping step) fails with a file-in-use error</td>
+<td>A report's HTML file was still open in a browser/editor while the script re-ran, or antivirus was scanning it mid-write (see the antivirus row above)</td>
+<td>Close anything that has a file under <code>docs/&lt;report&gt;/</code> open, then re-run <code>7-build-app.bat</code>; the step is idempotent.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="still-stuck">Still stuck?</h2>
+<p>Re-read the exact step in <a href="daily-workflow.en.html">Daily workflow</a> or
+<a href="use-the-template.en.html">Use this template</a>, and check
+<a href="reports-explained.en.html">Which report is which?</a> to make sure you are looking at the right file.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/troubleshooting.en.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

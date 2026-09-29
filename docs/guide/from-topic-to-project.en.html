@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>From a project topic to your own project | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="From a project topic to your own project | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/from-topic-to-project.en.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="from-a-project-topic-to-your-own-project">From a project topic to your own project</h1>
+
+<p>This walks through turning the sample <code>Calculator*</code> project into a real project, using <strong>&quot;Library
+Management System&quot;</strong> (a typical course project-guide topic) as the worked example. Substitute your
+own topic's name throughout.</p>
+<h2 id="checklist">Checklist</h2>
+<ul>
+<li>[ ] Pick a short PascalCase project name (<code>LibraryCatalog</code>, not <code>Library Management System</code>).</li>
+<li>[ ] Rename the solution, the three project folders and their <code>.csproj</code> files.</li>
+<li>[ ] Rename the root namespace in each <code>.csproj</code> (<code>RootNamespace</code>) and every <code>namespace</code> block.</li>
+<li>[ ] Update <code>Doxyfile</code>'s <code>PROJECT_NAME</code>/<code>PROJECT_BRIEF</code>, <code>docfx.json</code>'s metadata <code>src</code>, and the
+titles in <code>toc.yml</code>/<code>docs/toc.yml</code>.</li>
+<li>[ ] Update <code>README.md</code> (the GitHub-facing page) <strong>and</strong> <code>docs/home.md</code> (the site's landing page,
+copied to <code>index.md</code> at build time — see <a href="reports-explained.en.html">Which report is which?</a>)
+with your own project's description; the card grids in <code>docs/home.md</code> link to reports/guides
+by relative path and do not need to change otherwise.</li>
+<li>[ ] Write tests <strong>first</strong> for each new class, the same way <code>CalculatorCliTests.cs</code> tests
+<code>CalculatorCli</code> before you'd trust it.</li>
+<li>[ ] Keep the &quot;parsing lives in the library, not in <code>Program.cs</code>&quot; shape (see below) so your own
+command-line handling stays testable.</li>
+<li>[ ] Run <code>7-build-app</code> after every rename step -- do not batch every change together and hope.</li>
+</ul>
+<h2 id="step-by-step-the-librarycatalog-example">Step by step (the &quot;LibraryCatalog&quot; example)</h2>
+<p><strong>1. Rename the folders and files.</strong></p>
+<pre><code class="lang-bash">git mv CalculatorLibrary LibraryCatalog
+git mv CalculatorLibrary/CalculatorLibrary.csproj LibraryCatalog/LibraryCatalog.csproj
+git mv CalculatorLibrary/Calculator.cs LibraryCatalog/Book.cs                # or your first real class
+git mv CalculatorLibrary/CalculatorCli.cs LibraryCatalog/LibraryCatalogCli.cs
+
+git mv CalculatorApp CalculatorApp.old &amp;&amp; git mv CalculatorApp.old LibraryCatalogApp
+git mv LibraryCatalogApp/CalculatorApp.csproj LibraryCatalogApp/LibraryCatalogApp.csproj
+
+git mv CalculatorLibrary.Tests LibraryCatalog.Tests
+git mv LibraryCatalog.Tests/CalculatorLibrary.Tests.csproj LibraryCatalog.Tests/LibraryCatalog.Tests.csproj
+git mv LibraryCatalog.Tests/CalculatorTests.cs LibraryCatalog.Tests/BookTests.cs
+git mv LibraryCatalog.Tests/CalculatorCliTests.cs LibraryCatalog.Tests/LibraryCatalogCliTests.cs
+</code></pre>
+<p>(<code>git mv CalculatorApp CalculatorApp.old &amp;&amp; git mv ... LibraryCatalogApp</code> works around Windows'
+case-insensitive filesystem when only the app-vs-library naming differs; a plain <code>git mv A B</code> is
+usually enough when the names genuinely differ, as above.)</p>
+<p><strong>2. Update the solution file.</strong> Open <code>CalculatorLibrary.sln</code> in a text editor (or <code>dotnet sln</code>) and
+replace the three project names/paths, then rename the file itself:</p>
+<pre><code class="lang-bash">git mv CalculatorLibrary.sln LibraryCatalog.sln
+</code></pre>
+<pre><code class="lang-bash">dotnet sln LibraryCatalog.sln remove LibraryCatalog/LibraryCatalog.csproj 2&gt;/dev/null || true
+dotnet sln LibraryCatalog.sln add LibraryCatalog/LibraryCatalog.csproj LibraryCatalogApp/LibraryCatalogApp.csproj LibraryCatalog.Tests/LibraryCatalog.Tests.csproj
+</code></pre>
+<p>(Simplest in practice: delete the <code>.sln</code> and regenerate it with <code>dotnet new sln -n LibraryCatalog</code>
+followed by three <code>dotnet sln add</code> calls -- faster than hand-editing the GUIDs.)</p>
+<p><strong>3. Rename the namespace everywhere.</strong> Every <code>.cs</code> file in this template wraps its content in
+<code>namespace CalculatorLibrary { ... }</code> / <code>namespace CalculatorApp { ... }</code> /
+<code>namespace CalculatorLibrary.Tests { ... }</code>. Do a project-wide find-and-replace
+(<code>CalculatorLibrary</code> -&gt; <code>LibraryCatalog</code>, <code>CalculatorApp</code> -&gt; <code>LibraryCatalogApp</code>) across <code>*.cs</code>
+files, and set <code>&lt;RootNamespace&gt;</code> in each <code>.csproj</code> to match.</p>
+<p><strong>4. Replace the sample class.</strong> <code>Book.cs</code> (renamed from <code>Calculator.cs</code>) becomes your first real
+class -- delete the arithmetic methods, add your own, and give every public member the same kind of
+XML doc comment (<code>&lt;summary&gt;</code>, <code>&lt;param&gt;</code>, <code>&lt;returns&gt;</code>) the sample used, so Doxygen and DocFX keep
+working.</p>
+<p><strong>5. Keep parsing in the library.</strong> <code>LibraryCatalogCli.cs</code> (renamed from <code>CalculatorCli.cs</code>) is the
+pattern to keep: a static class with a <code>Run(string[] args)</code> method that parses and executes, returning
+a string, throwing <code>ArgumentException</code> with a clear message on bad input. <code>Program.cs</code> stays a thin
+shell that calls it and prints the result -- this is what makes the parsing logic unit-testable
+without starting the app as a process, and keeps <code>Program.cs</code> itself free of logic worth testing.</p>
+<p><strong>6. Write tests first.</strong> For every new public method: one normal-case test, one boundary-case test
+(empty input, zero, the smallest/largest value that makes sense for your domain), one invalid-input
+test. <code>CalculatorTests.cs</code>/<code>CalculatorCliTests.cs</code> show the shape (<code>[Theory]</code> + <code>[InlineData]</code> for
+normal/boundary cases, <code>Assert.Throws&lt;T&gt;</code> for invalid input).</p>
+<p><strong>7. Update the docs.</strong></p>
+<ul>
+<li><code>Doxyfile</code>: <code>PROJECT_NAME</code>, <code>PROJECT_BRIEF</code>, and the <code>INPUT</code> list (folder names changed).</li>
+<li><code>docfx.json</code>: the <code>metadata[0].src[0].src</code> path (<code>LibraryCatalog</code> instead of <code>CalculatorLibrary</code>).</li>
+<li><code>toc.yml</code> / <code>docs/toc.yml</code>: page titles that still say &quot;Calculator&quot;.</li>
+<li><code>README.md</code>: your project's real description, for GitHub's own repository page.</li>
+<li><code>docs/home.md</code>: the same description for the site's actual landing page (<code>7-build-app</code> copies it
+to <code>index.md</code> right before the DocFX build — see <a href="embed-html-in-site.en.html">Showing a report inside your site</a>).</li>
+</ul>
+<p><strong>8. Rebuild and check.</strong></p>
+<pre><code class="lang-batch">7-build-app.bat
+9-open-site.bat
+</code></pre>
+<p>Confirm: the build has 0 warnings, all your tests pass, the API reference under <code>site/api/</code> lists
+your classes (not <code>Calculator</code>), and coverage is where you expect it.</p>
+<h2 id="what-keep-coverage-means-in-practice">What &quot;keep coverage&quot; means in practice</h2>
+<p>Do not let the sample's 100% line coverage quietly drop to 60% because you added code without tests.
+Run <code>7-build-app</code> after each new class and check <code>docs/coveragereport/index.html</code>
+(<a href="reports-explained.en.html">Which report is which?</a>) before you move on to the next one -- it is much
+easier to write the missing test right away than to reconstruct intent for ten untested methods later.</p>
+<h2 id="next">Next</h2>
+<p><a href="daily-workflow.en.html">Daily workflow</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/from-topic-to-project.en.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

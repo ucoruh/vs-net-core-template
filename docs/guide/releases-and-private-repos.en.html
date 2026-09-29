@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Releases &amp; private repositories | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Releases &amp; private repositories | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/releases-and-private-repos.en.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="releases--private-repositories">Releases &amp; private repositories</h1>
+
+<p>Your course repository should be <strong>private</strong>, and most students are on the free <strong>GitHub Free</strong>
+plan. This page explains what that does and does not let you do, and how <code>10-release</code> works around
+the one thing it does not: private <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+<h2 id="what-works-on-github-free-with-a-private-repository">What works on GitHub Free with a private repository</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Free (private repo)</th>
+<th>Pro / Team / Student Pack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.github.com/repositories/releasing-projects-on-github">Releases</a> (tags + binary assets, up to 2 GiB/file, up to 1000 assets)</td>
+<td><strong>Yes</strong> -- visible only to collaborators</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://docs.github.com/pages">GitHub Pages</a> (a public-ish website URL for the repo)</td>
+<td><strong>No</strong> for a private repo</td>
+<td><strong>Yes</strong></td>
+</tr>
+<tr>
+<td>GitHub Actions minutes</td>
+<td>2,000 min/month, 500 MB artifact storage</td>
+<td>3,000 min/month, 1 GB artifact storage</td>
+</tr>
+</tbody>
+</table>
+<p>(Figures per GitHub's own documentation as of this writing; check
+<a href="https://github.com/pricing">GitHub's pricing page</a> for the current numbers.)</p>
+<p>Because Pages does not work on a private Free repository, <strong>this template never <em>requires</em> Pages</strong>.
+<code>9-open-site</code> serves and opens the site from your own disk (over a small local HTTP server -- see
+<a href="embed-html-in-site.en.html">Showing a report inside your site</a>), and <code>10-release</code>/<code>release.yml</code> ship
+the whole built site inside every release as <code>site.zip</code> -- that is how your instructor (or anyone
+with repo access) views it without Pages. On a <strong>public</strong> repository (this template's own
+<code>ucoruh/vs-net-core-template</code>, for example), Pages works normally and needs none of this -- see
+&quot;The Pages deploy workflow&quot; below.</p>
+<h2 id="the-pages-deploy-workflow">The Pages deploy workflow</h2>
+<p><code>.github/workflows/pages.yml</code> rebuilds the full site and publishes it to the <code>gh-pages</code> branch on
+every push to <code>main</code> (and by hand, <code>workflow_dispatch</code>). It checks
+<code>github.event.repository.private</code> first:</p>
+<ul>
+<li><strong>Public repository:</strong> deploys normally. The live site ends up at
+<code>https://&lt;you&gt;.github.io/&lt;your-repo&gt;/</code>.</li>
+<li><strong>Private repository:</strong> the deploy step is <strong>skipped</strong>, with an explanation both as a <code>::notice</code>
+annotation on the run and in the run's job summary -- <em>unless</em> the repository variable
+<code>PAGES_ON_PRIVATE</code> is set to <code>true</code>. Set it under <strong>Settings -&gt; Secrets and variables -&gt; Actions -&gt;
+Variables</strong> once you have GitHub Pro (or the Student Developer Pack) <em>and</em> have turned Pages on
+under <strong>Settings -&gt; Pages</strong> -- then the next push deploys normally.</li>
+</ul>
+<p>Either way, <code>release.yml</code> (below) always attaches <code>site.zip</code>, so the site reaches your instructor
+regardless of whether Pages is enabled.</p>
+<h2 id="get-the-github-student-developer-pack-optional-gives-you-pro">Get the GitHub Student Developer Pack (optional, gives you Pro)</h2>
+<p>If you want Pages anyway (e.g. for a portfolio piece later), apply for the
+<a href="https://education.github.com/pack">GitHub Student Developer Pack</a> with your university e-mail.
+Approval can take anywhere from minutes to a few days depending on how GitHub verifies your
+enrollment (an alumni/student ID photo is sometimes requested) -- do not depend on it arriving
+before a deadline. Once approved, GitHub Pro is applied to your account automatically, and you can
+enable Pages under the repository's <strong>Settings -&gt; Pages</strong> even while it stays private.</p>
+<h2 id="add-your-instructor-as-a-collaborator">Add your instructor as a collaborator</h2>
+<p>Private releases and a private repo's contents are invisible to anyone without access. Add your
+instructor so your work can be graded:</p>
+<p><strong>Settings -&gt; Collaborators -&gt; Add people</strong>, add the account named in your course's project guide
+(e.g. the instructor's GitHub username), and they must accept the invitation for access to take
+effect.</p>
+<h2 id="install-and-log-in-to-the-github-cli-gh">Install and log in to the GitHub CLI (<code>gh</code>)</h2>
+<p><code>10-release</code> uses <a href="https://cli.github.com/"><code>gh</code></a>, not the web UI, so a release can be published
+from a terminal without opening a browser every time.</p>
+<pre><code class="lang-bash"># Windows
+winget install GitHub.cli
+# Linux/WSL
+sudo apt-get install gh   # or see https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+
+gh auth login
+</code></pre>
+<p><code>gh auth login</code> walks you through browser-based or token-based authentication; choose
+<code>github.com</code>, HTTPS, and &quot;Login with a web browser&quot; unless you know you need something else.
+Verify:</p>
+<pre><code class="lang-bash">gh auth status
+</code></pre>
+<p>expected output looks like:</p>
+<pre><code>github.com
+  ✓ Logged in to github.com account &lt;your-username&gt; (keyring)
+  ✓ Git operations for github.com configured to use https protocol.
+  ✓ Token: gho_************************************
+</code></pre>
+<h2 id="using-10-release">Using <code>10-release</code></h2>
+<pre><code class="lang-batch">10-release.bat --dry-run
+10-release.bat v1.0.0 --dry-run
+10-release.bat v1.0.0
+</code></pre>
+<p>on Linux/WSL: <code>./10-release.sh --dry-run</code>, etc. <code>--dry-run</code> builds and packages everything -- runs
+<code>7-build-app</code>, publishes self-contained binaries for Linux/macOS/Windows, packs every report (both
+families -- see <a href="reports-explained.en.html">Which report is which?</a>), the Doxygen output and the
+whole DocFX site as <code>release/site.zip</code> -- then <strong>prints</strong> the exact <code>gh release create</code> command and
+the full asset list instead of running it. Nothing is published. Drop <code>--dry-run</code> once you are
+happy with what it printed.</p>
+<p>Without an explicit version argument, the script reads the <code>VERSION</code> file (a single line like
+<code>0.1.0</code>) at the repository root; bump that file for your next release. The script refuses to
+publish a real release from a dirty working tree (uncommitted changes) -- a release should always
+correspond to one exact, committed state of the code (<code>--dry-run</code> skips this check so you can
+rehearse packaging mid-work).</p>
+<p>What lands in <code>release/site.zip</code>: the entire built site, self-contained -- unzip it anywhere and
+open <code>index.html</code>; every report and API reference link inside it is a relative link that works
+without a web server.</p>
+<h2 id="optional-the-actions-release-workflow">Optional: the Actions release workflow</h2>
+<p><code>.github/workflows/release.yml</code> is an alternative way to do the same publish from CI instead of your
+own machine, triggered by pushing a <code>v*</code> tag or by hand (<code>workflow_dispatch</code>) -- useful if you would
+rather not run <code>10-release</code> locally, at the cost of Actions minutes (a full build + publish +
+package run typically costs a few minutes of your monthly quota; the day-to-day <code>ci.yml</code> workflow
+does <strong>not</strong> run this on every push, only on request/tag, precisely to not eat into that budget).
+It packages the same asset set as <code>10-release</code> (see the table above) plus a <code>source.zip</code> source
+archive, and writes release notes that link to the live site and list every asset. On a private
+repository it adds a <code>::notice</code>/step-summary reminder to add your instructor as a collaborator (see
+above) -- releases themselves are <strong>not</strong> skipped on private (unlike the Pages deploy). Prefer
+<code>10-release</code> locally when you are not sure how many minutes you have left.</p>
+<h2 id="troubleshooting-releases">Troubleshooting releases</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gh release create</code> fails with <code>HTTP 404</code></td>
+<td>Wrong repo detected, or you are not a collaborator on a private repo you do not own</td>
+<td>Run it from inside the cloned repo folder; confirm <code>gh repo view</code> shows the right repository</td>
+</tr>
+<tr>
+<td><code>gh release create</code> fails with <code>HTTP 403</code></td>
+<td>Not authenticated, or token missing the <code>repo</code> scope</td>
+<td><code>gh auth login</code> again; for a fine-grained PAT, make sure it has <em>Contents: Read and write</em> on this repo</td>
+</tr>
+<tr>
+<td><code>gh: not logged in</code> even after <code>gh auth login</code></td>
+<td>Logged into a different <code>gh</code> host/account than expected</td>
+<td><code>gh auth status</code> to see which account is active; <code>gh auth switch</code> if you have more than one</td>
+</tr>
+<tr>
+<td>Upload fails with an asset-too-large message</td>
+<td>A single asset over GitHub's 2 GiB limit</td>
+<td>Should not happen with this template's assets; if it does, check <code>publish/</code> was not accidentally left un-trimmed (e.g. debug symbols)</td>
+</tr>
+<tr>
+<td>Instructor says they cannot see the release</td>
+<td>Not added as a collaborator yet, or invitation not accepted</td>
+<td>See &quot;Add your instructor as a collaborator&quot; above</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next">Next</h2>
+<p>If a script itself failed rather than <code>gh</code>, see <a href="troubleshooting.en.html">Troubleshooting</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/releases-and-private-repos.en.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

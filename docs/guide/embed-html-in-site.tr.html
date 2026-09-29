@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Sitenizin i&#231;inde bir raporu g&#246;stermek | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Sitenizin i&#231;inde bir raporu g&#246;stermek | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/embed-html-in-site.tr.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sitenizin-içinde-bir-raporu-göstermek">Sitenizin içinde bir raporu göstermek</h1>
+
+<p>Bu şablonun ürettiği her rapor (birim testleri, her iki kapsam ailesi, her iki dokümantasyon-kapsamı
+ailesi, Doxygen) DocFX sitesinin <strong>içinde</strong>, düzenli ve duyarlı (responsive) bir <code>&lt;iframe&gt;</code> içinde
+gösterildiği kendi sayfasına sahiptir — sadece ham bir HTML dosyasına düz bir bağlantı değil. Bu
+sayfa bunun nasıl çalıştığını anlatır; böylece kendi eklediğiniz <strong>yeni</strong> bir rapor için (bir linter,
+bir statik analiz aracı, HTML üreten herhangi bir şey) kendi sayfanızı ekleyebilirsiniz.</p>
+<h2 id="üç-parça">Üç parça</h2>
+<ol>
+<li><strong>Raporun kendisi</strong> — <code>7-build-app</code>'in <code>docs/&lt;bir-şey&gt;/</code> altında ürettiği bir HTML dosyası (veya
+klasörü) (ör. <code>docs/coveragereport/index.html</code>). Bunu siz yazmazsınız.</li>
+<li><strong><code>docfx.json</code> içinde bir resource eşlemesi</strong> — bu klasörü üretilen sitenin içine,
+<code>site/docs/reports/...</code> altına kopyalar. Şablonun kendi ürettiği her rapor için zaten mevcuttur;
+yalnızca kendi eklediğiniz bir rapor ailesi için yenisini eklemeniz gerekir.</li>
+<li><strong>Bir görüntüleyici sayfa</strong> — <code>docs/report-pages/</code> altında, <code>&lt;iframe&gt;</code>'i, araç çubuğu
+düğmelerini ve açıklayıcı metni içeren küçük bir Markdown dosyası. <code>docs/toc.yml</code>'nin &quot;Reports&quot;
+bölümü ham rapor dosyasına değil, buraya bağlanır.</li>
+</ol>
+<h2 id="kopyala-yapıştır-örneği">Kopyala-yapıştır örneği</h2>
+<p>Yeni bir rapor için sayfa eklemek (örneğin <code>docs/mytool/index.html</code>'e yazılan hayali bir <code>mytool</code>
+HTML raporu için):</p>
+<p><strong>1. <code>docfx.json</code>'ın onu kopyaladığından emin olun.</strong> Mevcut girişlerin yanına, rapor klasörünün
+<code>site/docs/reports/</code> altına inmesini sağlayan bir <code>resource</code> girişi ekleyin:</p>
+<pre><code class="lang-json">{ &quot;files&quot;: [ &quot;mytool/**&quot; ], &quot;src&quot;: &quot;docs&quot;, &quot;dest&quot;: &quot;docs/reports&quot; }
+</code></pre>
+<p><strong>2. <code>docs/report-pages/mytool.md</code> dosyasını oluşturun:</strong></p>
+<pre><code class="lang-markdown"># My Tool Report
+
+Bu raporun ne gösterdiğini ve ne zaman bakılması gerektiğini anlatan tek cümle.
+
+&lt;div class=&quot;report-toolbar&quot;&gt;
+  &lt;a href=&quot;../reports/mytool/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Yeni sekmede aç ↗&lt;/a&gt;
+  &lt;a href=&quot;../reports/mytool/mytool-report.zip&quot; download&gt;İndir (zip)&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;report-frame-wrap&quot;&gt;
+  &lt;iframe class=&quot;report-frame&quot; src=&quot;../reports/mytool/index.html&quot; title=&quot;My Tool Report&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;report-fallback&quot;&gt;Yukarıdaki çerçeve boş kalırsa, doğrudan açın:
+&lt;a href=&quot;../reports/mytool/index.html&quot;&gt;docs/reports/mytool/index.html&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+<p><code>../reports/...</code> yolları, bu sayfanın derlemeden sonra ineceği <code>docs/report-pages/mytool.html</code>
+dosyasına görelidir — <code>report-pages/</code> klasöründen bir <code>../</code> ile çıkıp, 1. adımdaki resource
+eşlemesinin raporu koyduğu <code>reports/mytool/...</code> klasörüne girer. Dört CSS sınıfı da
+(<code>report-toolbar</code>, <code>report-frame-wrap</code>, <code>report-frame</code>, <code>report-fallback</code>)
+<code>templates/rteu/public/main.css</code>'ten gelir (özel bir DocFX şablon katmanı, bkz. <code>docfx.json</code>'ın
+<code>&quot;template&quot;</code> dizisi) — tam yükseklikte, duyarlı bir çerçeve; <code>loading=&quot;lazy&quot;</code> sayesinde ekrana
+gelene kadar yüklenmez.</p>
+<p><strong>3. İsteğe bağlı: bir &quot;İndir (zip)&quot; düğmesi.</strong> <code>7-build-app</code>, her raporun kendi klasörünü olduğu
+yerde ziplediği için (<code>7-build-app.bat</code>/<code>.sh</code>'nin 7. adımı) zip dosyası <code>index.html</code>'in hemen
+yanına düşer ve aynı resource eşlemesi tarafından otomatik olarak alınır. Derleme betiğinizin zip
+adımına bir satır daha ekleyin, örnek:</p>
+<pre><code class="lang-batch">powershell -NoProfile -Command &quot;Compress-Archive -Path 'docs\mytool\*' -DestinationPath 'docs\mytool\mytool-report.zip' -Force&quot;
+</code></pre>
+<p>Bunu atlarsanız, sayfanızdan &quot;İndir (zip)&quot; satırını kaldırmanız yeterli.</p>
+<p><strong>4. <code>docs/toc.yml</code>'de bağlayın</strong>, mevcut <code>Reports</code> bölümünün altına:</p>
+<pre><code class="lang-yaml">- name: Reports
+  items:
+    - name: My Tool Report
+      href: report-pages/mytool.md
+</code></pre>
+<p><strong>5. Üst düzey görünürlüğü hak ediyorsa ana sayfaya bir kart ekleyin</strong> (<code>docs/home.md</code>, &quot;Every
+report, one click away&quot; ızgarası) — mevcut <code>&lt;a class=&quot;rteu-card&quot;&gt;</code> bloklarından birini kopyalayın.</p>
+<h2 id="yerelde-test-etme">Yerelde test etme</h2>
+<p><code>7-build-app.bat</code>/<code>.sh</code>'yi çalıştırın, ardından <strong><code>9-open-site.bat</code>/<code>.sh</code></strong>'yi — <code>site/index.html</code>'e
+çift tıklamak yerine. <code>9-open-site</code>, üretilen <code>site/</code> klasörünü küçük bir yerel HTTP sunucusu
+üzerinden sunar (<code>py -3.12 -m http.server</code> / <code>python3 -m http.server</code>) ve URL'yi yazdırır
+(varsayılan <code>http://localhost:8080/</code>); tarayıcınızda o URL'yi açın. Bu adım önemlidir: aşağıdaki
+&quot;file:// çerçeveyi engeller&quot; satırına bakın.</p>
+<h2 id="sık-karşılaşılan-sorunlar">Sık karşılaşılan sorunlar</h2>
+<table>
+<thead>
+<tr>
+<th>Belirti</th>
+<th>Sebep</th>
+<th>Çözüm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Çerçeve boş, ama &quot;Yeni sekmede aç&quot; sorunsuz çalışıyor</td>
+<td><code>site/index.html</code>'i <code>9-open-site</code>'nin yerel sunucusu yerine doğrudan (<code>file://...</code>) açtınız. Birçok tarayıcı, bir güvenlik önlemi olarak bir <code>file://</code> sayfasından <code>&lt;iframe&gt;</code> (ve DocFX'in kendi arama indeksini) yüklemeyi reddeder — bu, bu şablona özgü bir durum değildir.</td>
+<td><code>9-open-site.bat</code>/<code>.sh</code>'yi kullanın ve yazdırılan <code>http://localhost:8080/</code> URL'sini açın, ya da <code>dotnet docfx serve site</code>.</td>
+</tr>
+<tr>
+<td>Çerçeve GitHub Pages'te de boş, tarayıcı konsolunda <code>X-Frame-Options</code> veya <code>frame-ancestors</code> geçen bir hata var</td>
+<td>Çerçevelenen sayfa, çerçevelenmeyi reddeden bir başlık gönderdi. Bu şablonun kendi ürettiği hiçbir sayfa bunu yapmaz (statik HTML'dir, böyle bir başlığı yoktur) — bu yalnızca <code>&lt;iframe&gt;</code>'i bu deponun kendi ürettiği bir sayfa yerine <em>harici</em> bir siteye yönlendirirseniz olur.</td>
+<td>Yalnızca bu deponun kendi ürettiği ve <code>site/</code> içinde barındırdığı sayfaları çerçeveleyin; harici araçları çerçevelemek yerine onlara bağlantı verin.</td>
+</tr>
+<tr>
+<td><code>7-build-app</code>'ten sonra <code>docs/&lt;raporunuz&gt;/index.html</code> açıkça var olduğu halde, yeni sayfa çerçeve içinde 404 veriyor</td>
+<td><code>docfx.json</code>'da o klasör için <code>resource</code> eşlemesi yok — DocFX yalnızca kendisine söylenen dosyaları kopyalar.</td>
+<td>Yukarıdaki 1. adımdaki <code>{ &quot;files&quot;: [ &quot;&lt;klasör&gt;/**&quot; ], &quot;src&quot;: &quot;docs&quot;, &quot;dest&quot;: &quot;docs/reports&quot; }</code> girişini ekleyip yeniden derleyin.</td>
+</tr>
+<tr>
+<td>Çerçeve <em>yanlış</em> içeriği gösteriyor, ya da neredeyse doğru görünen bir yol için 404 veriyor</td>
+<td>Göreli yolda bir kayma — <code>docs/report-pages/*.md</code> dosyaları, <code>docs/*.md</code> kılavuz sayfalarına göre bir klasör seviyesi daha derindir, bu yüzden <code>reports/...</code> değil <code>../reports/...</code> gerekir (<code>docs/guide/</code> altındaki bir <em>kılavuz</em> sayfası da tesadüfen aynı <code>../reports/...</code>'a ihtiyaç duyar — körü körüne kopyalamayın, gerçek klasör derinliğini sayın).</td>
+<td><code>.md</code> dosyasının kendi yolundan <code>docs/reports/...</code>'a kadar klasör seviyelerini sayın; çalışan bir sayfayla (<code>docs/report-pages/unit-tests.md</code>) karşılaştırın.</td>
+</tr>
+<tr>
+<td><code>docfx build</code>, <code>reports/...</code> altındaki bir yol için <code>warning InvalidFileLink</code> yazdırıyor</td>
+<td>Beklenen/zararsız — DocFX'in bağlantı doğrulayıcısı resource dosyalarını değil, yalnızca içerik belgelerini izler. Bu şablonun kendi derlemesinde doğrulanmıştır; bkz. <a href="troubleshooting.tr.html">Sorun giderme</a>.</td>
+<td>Üretilen sayfayı açtığınızda dosya gerçekten çözülüyorsa görmezden gelin; yalnızca bağlantı gerçekten çalışmıyorsa araştırın.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sırada">Sırada</h2>
+<p>Her raporun ne gösterdiği için <a href="reports-explained.tr.html">Hangi rapor hangisi?</a>, ya da başka bir şey
+başarısız olduysa <a href="troubleshooting.tr.html">Sorun giderme</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/embed-html-in-site.tr.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

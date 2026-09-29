@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>G&#252;nl&#252;k iş akışı | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="G&#252;nl&#252;k iş akışı | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/daily-workflow.tr.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="günlük-iş-akışı">Günlük iş akışı</h1>
+
+<h2 id="tüm-scriptler-tek-tabloda">Tüm scriptler, tek tabloda</h2>
+<table>
+<thead>
+<tr>
+<th>Script</th>
+<th>Ne yapar</th>
+<th>Ne zaman çalıştırılır</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1-pre-commit</code></td>
+<td>Git kancası (hook): her commit'ten önce eklenen (staged) <code>.cs</code>/<code>.c</code>/<code>.cpp</code>/<code>.h</code>/<code>.java</code> dosyalarını astyle ile biçimlendirir</td>
+<td>bir kez <code>.git/hooks/pre-commit</code>'e kopyalayın (aşağıda), sonra otomatik çalışır</td>
+</tr>
+<tr>
+<td><code>2-create-git-ignore</code></td>
+<td><code>.gitignore</code>'ın toptal.com tabanını yeniden üretir, bu projenin kendi eklerini korur</td>
+<td>nadiren, yalnızca henüz göz ardı (ignore) kuralınız olmayan bir dil gerektiğinde</td>
+</tr>
+<tr>
+<td><code>3-install-package-manager</code></td>
+<td>Chocolatey/Scoop kurar (Windows) ya da <code>apt</code>'ı tazeler (WSL)</td>
+<td>makine başına bir kez</td>
+</tr>
+<tr>
+<td><code>4-install-dotnet-sdk</code></td>
+<td><code>global.json</code>'da sabitlenen .NET SDK'sını kullanıcı bazlı kurar</td>
+<td>makine başına bir kez</td>
+</tr>
+<tr>
+<td><code>4-install-astyle</code> / <code>4-install-coverxygen</code> / <code>4-install-lcov</code></td>
+<td>Biçimlendirici, belge-kapsama ve lcov araçlarını kurar</td>
+<td>makine başına bir kez</td>
+</tr>
+<tr>
+<td><code>5-format-code</code></td>
+<td>Üç C# proje klasörü üzerinde astyle çalıştırır</td>
+<td>commit'ten önce, ya da git kancasına bırakın</td>
+</tr>
+<tr>
+<td><code>6-install-docfx-and-report-tools</code></td>
+<td>Doxygen/Graphviz kurar, sabitlenmiş yerel <code>dotnet tool</code> bildirimini (manifest) geri yükler (ReportGenerator, DocFX)</td>
+<td>makine başına bir kez, <code>.config/dotnet-tools.json</code> değiştiğinde tekrar</td>
+</tr>
+<tr>
+<td><code>7-build-app</code></td>
+<td>Geri yükleme (restore), derleme, kapsamayla test, Doxygen, her iki kod-kapsama rapor ailesi, her iki belge-kapsama rapor ailesi, DocFX sitesi</td>
+<td>ne zaman taze rapor istiyorsanız</td>
+</tr>
+<tr>
+<td><code>8-run-app</code></td>
+<td>Örnek uygulamayı çalıştırır (verilen argümanları iletir); girdi (input) beklemez, asla bloklamaz</td>
+<td>uygulamanın kendisini denemek için</td>
+</tr>
+<tr>
+<td><code>9-open-site</code></td>
+<td><code>site/</code>'i yerel bir HTTP sunucusu üzerinden sunar ve açar (böylece rapor <code>&lt;iframe&gt;</code>'leri yüklenir -- bkz. <a href="embed-html-in-site.tr.html">Sitenizin içinde bir raporu göstermek</a>)</td>
+<td><code>7-build-app</code>'ten sonra</td>
+</tr>
+<tr>
+<td><code>10-release</code></td>
+<td>İkilileri (binaries) + her raporu + siteyi <code>site.zip</code> olarak paketler, <code>gh</code> ile bir GitHub Release yayınlar</td>
+<td>bir sürümü teslim etmeye hazır olduğunuzda (bkz. <a href="releases-and-private-repos.tr.html">Sürümler ve özel depolar</a>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pre-commit-kancasını-bir-kez-kurun">Pre-commit kancasını bir kez kurun</h2>
+<pre><code class="lang-bash">cp 1-pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit   # WSL/macOS; Windows'ta zararsız, etkisiz
+</code></pre>
+<p>Bundan sonra her <code>git commit</code>, eklediğiniz <code>.cs</code> dosyalarını <code>astyle-options.txt</code>'deki kurallarla
+otomatik biçimlendirir; <code>.gitignore</code>, <code>README.md</code> veya <code>Doxyfile</code> eksikse commit'i reddeder.</p>
+<h2 id="dal-branch-commit-push-ci">Dal (branch), commit, push, CI</h2>
+<ol>
+<li><code>git checkout -b feature/&lt;kisa-ad&gt;</code> -- doğrudan <code>main</code>'e commit atmayın.</li>
+<li>Önce testi, sonra kodu yazın, ardından <code>7-build-app.bat</code>/<code>.sh</code>'i çalıştırıp
+<code>docs/coveragereport/index.html</code>'in düşmediğini kontrol edin.</li>
+<li>Küçük, mantıklı adımlarla, açık bir mesajla commit atın (emir kipi: &quot;Add X&quot;, &quot;Added X&quot; veya
+&quot;Stuff&quot; değil).</li>
+<li><code>git push -u origin feature/&lt;kisa-ad&gt;</code>, <code>main</code>'e bir çekme isteği (pull request) açın.</li>
+<li>GitHub Actions (<code>.github/workflows/ci.yml</code>) hem Windows hem Ubuntu'da otomatik olarak geri
+yükler, derler ve test eder; ayrıca bütün siteyi bir kez (Ubuntu'da) derleyip indirilebilir bir
+derleme artefaktı olarak yükler (PR'ın kontrollerinde / koşunun özet sayfasında görünür) --
+birleştirmeden (merge) önce yeşil olmasını bekleyin. Her push'ta bir sürüm yayınlamaz ya da
+Pages dağıtmaz; bkz. aşağısı ve <a href="releases-and-private-repos.tr.html">Sürümler ve özel depolar</a>.</li>
+<li>PR incelendikten (varsa bir takım arkadaşınız tarafından) ve CI yeşil olduktan sonra birleştirin.
+<code>main</code>'e birleştirildikten sonra <code>.github/workflows/pages.yml</code> siteyi yeniden derleyip otomatik
+olarak <code>gh-pages</code> dalına yayınlar (özel bir depoda <code>PAGES_ON_PRIVATE</code> olmadan bir açıklamayla
+atlanır -- bkz. <a href="releases-and-private-repos.tr.html">Sürümler ve özel depolar</a>).</li>
+</ol>
+<h2 id="her-şey-nereye-gider">Her şey nereye gider</h2>
+<p><code>docs/</code> ve <code>site/</code> altındaki her şey <code>7-build-app</code> tarafından üretilir ve commit <strong>edilmez</strong> (bkz.
+<code>.gitignore</code>) -- sitenin ana sayfasının (<code>docs/home.md</code>) gösterdiği ve bir derleme çalıştırılmadan
+GitHub'da/Pages'te görünmesi için commit edilmeye değer olan <code>assets/</code> altındaki küçük SVG rozetler
+(hem kod hem belge kapsaması) dışında.</p>
+<table>
+<thead>
+<tr>
+<th>Ne</th>
+<th>Yol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bütün site</td>
+<td><code>site/index.html</code> (çift tıklamak yerine <code>9-open-site</code> ile açın)</td>
+</tr>
+<tr>
+<td>Her bir rapor, kendi <code>&lt;iframe&gt;</code> sayfasında</td>
+<td>bkz. <a href="embed-html-in-site.tr.html">Sitenizin içinde bir raporu göstermek</a> ve <a href="reports-explained.tr.html">Hangi rapor hangisi?</a></td>
+</tr>
+<tr>
+<td>Canlı site (<code>main</code>'e push'tan sonra, Pages etkinse)</td>
+<td><code>https://&lt;sizin&gt;.github.io/&lt;deponuz&gt;/</code></td>
+</tr>
+<tr>
+<td>Sürüm paketleri</td>
+<td><code>release/</code> (<code>10-release</code>'den, o da commit edilmez)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sırada">Sırada</h2>
+<p><a href="releases-and-private-repos.tr.html">Sürümler ve özel depolar</a>, ya da bir şey başarısız olduysa
+<a href="troubleshooting.tr.html">Sorun giderme</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/daily-workflow.tr.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

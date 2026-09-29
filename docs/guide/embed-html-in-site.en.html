@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Showing a report inside your site | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Showing a report inside your site | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/embed-html-in-site.en.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="showing-a-report-inside-your-site">Showing a report inside your site</h1>
+
+<p>Every report this template produces (unit tests, both coverage families, both documentation-coverage
+families, Doxygen) gets its own page <strong>inside</strong> the DocFX site that shows the report in a styled,
+responsive <code>&lt;iframe&gt;</code> — not just a bare link out to a raw HTML file. This page explains how that
+works, so you can add a page for a <strong>new</strong> report you introduce yourself (a linter, a static
+analyzer, anything else that produces HTML).</p>
+<h2 id="the-three-pieces">The three pieces</h2>
+<ol>
+<li><strong>The report itself</strong> — an HTML file (or folder) <code>7-build-app</code> generates under <code>docs/&lt;something&gt;/</code>
+(e.g. <code>docs/coveragereport/index.html</code>). Not written by you.</li>
+<li><strong>A resource mapping in <code>docfx.json</code></strong> that copies that folder into the built site, under
+<code>site/docs/reports/...</code>. Already present for every report this template ships; you only need to
+add one for a report family you introduce yourself.</li>
+<li><strong>A viewer page</strong> — a small Markdown file under <code>docs/report-pages/</code>, containing the <code>&lt;iframe&gt;</code>,
+the toolbar buttons and the explanatory text. This is what <code>docs/toc.yml</code>'s &quot;Reports&quot; section
+links to, not the raw report file.</li>
+</ol>
+<h2 id="copy-paste-snippet">Copy-paste snippet</h2>
+<p>To add a page for a new report (say, a fictional <code>mytool</code> HTML report written to
+<code>docs/mytool/index.html</code>):</p>
+<p><strong>1. Make sure <code>docfx.json</code> copies it.</strong> Add a <code>resource</code> entry (next to the existing ones) so the
+report folder lands under <code>site/docs/reports/</code>:</p>
+<pre><code class="lang-json">{ &quot;files&quot;: [ &quot;mytool/**&quot; ], &quot;src&quot;: &quot;docs&quot;, &quot;dest&quot;: &quot;docs/reports&quot; }
+</code></pre>
+<p><strong>2. Create <code>docs/report-pages/mytool.md</code>:</strong></p>
+<pre><code class="lang-markdown"># My Tool Report
+
+One sentence explaining what this report shows and when to look at it.
+
+&lt;div class=&quot;report-toolbar&quot;&gt;
+  &lt;a href=&quot;../reports/mytool/index.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Open in a new tab ↗&lt;/a&gt;
+  &lt;a href=&quot;../reports/mytool/mytool-report.zip&quot; download&gt;Download (zip)&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;report-frame-wrap&quot;&gt;
+  &lt;iframe class=&quot;report-frame&quot; src=&quot;../reports/mytool/index.html&quot; title=&quot;My Tool Report&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;report-fallback&quot;&gt;If the frame above stays blank, open it directly:
+&lt;a href=&quot;../reports/mytool/index.html&quot;&gt;docs/reports/mytool/index.html&lt;/a&gt;.&lt;/p&gt;
+</code></pre>
+<p>The <code>../reports/...</code> paths are relative to <code>docs/report-pages/mytool.html</code> (where this page lands
+after the build) — one <code>../</code> back out of <code>report-pages/</code>, then into <code>reports/mytool/...</code>, which is
+where step 1's resource mapping put the report. The four CSS classes (<code>report-toolbar</code>,
+<code>report-frame-wrap</code>, <code>report-frame</code>, <code>report-fallback</code>) come from <code>templates/rteu/public/main.css</code>
+(a custom DocFX template overlay, see <code>docfx.json</code>'s <code>&quot;template&quot;</code> array) — a full-height, responsive
+frame with <code>loading=&quot;lazy&quot;</code> so it does not fetch until scrolled into view.</p>
+<p><strong>3. Optional: a &quot;Download (zip)&quot; button.</strong> <code>7-build-app</code> zips each report's own folder in place
+(step 7 of <code>7-build-app.bat</code>/<code>.sh</code>) so the zip lands right next to <code>index.html</code> and is picked up by
+the same resource mapping automatically. Add one more line to your build script's zip step, e.g.:</p>
+<pre><code class="lang-batch">powershell -NoProfile -Command &quot;Compress-Archive -Path 'docs\mytool\*' -DestinationPath 'docs\mytool\mytool-report.zip' -Force&quot;
+</code></pre>
+<p>If you skip this, just remove the &quot;Download (zip)&quot; line from your page.</p>
+<p><strong>4. Link it from <code>docs/toc.yml</code></strong>, under the existing <code>Reports</code> section:</p>
+<pre><code class="lang-yaml">- name: Reports
+  items:
+    - name: My Tool Report
+      href: report-pages/mytool.md
+</code></pre>
+<p><strong>5. Add a card to the landing page</strong> (<code>docs/home.md</code>, the &quot;Every report, one click away&quot; grid) if
+it deserves top-level visibility — copy one of the existing <code>&lt;a class=&quot;rteu-card&quot;&gt;</code> blocks.</p>
+<h2 id="testing-it-locally">Testing it locally</h2>
+<p>Run <code>7-build-app.bat</code>/<code>.sh</code>, then <strong><code>9-open-site.bat</code>/<code>.sh</code></strong> — not a double-click on
+<code>site/index.html</code>. <code>9-open-site</code> serves the built <code>site/</code> folder over a small local HTTP server
+(<code>py -3.12 -m http.server</code> / <code>python3 -m http.server</code>) and prints the URL
+(<code>http://localhost:8080/</code> by default); open that URL in your browser. This step matters: see
+&quot;file:// blocks the frame&quot; below.</p>
+<h2 id="common-problems">Common problems</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The frame is blank, but &quot;Open in a new tab&quot; works fine</td>
+<td>You opened <code>site/index.html</code> directly (<code>file://...</code>) instead of through <code>9-open-site</code>'s local server. Many browsers refuse to load an <code>&lt;iframe&gt;</code> (and DocFX's own search index) from a <code>file://</code> page as a security restriction — this has nothing to do with this template specifically.</td>
+<td>Use <code>9-open-site.bat</code>/<code>.sh</code> and open the printed <code>http://localhost:8080/</code> URL, or <code>dotnet docfx serve site</code>.</td>
+</tr>
+<tr>
+<td>The frame is blank on GitHub Pages too, with a browser console error mentioning <code>X-Frame-Options</code> or <code>frame-ancestors</code></td>
+<td>The framed page sent a header refusing to be framed. None of this template's own generated pages do this (they are static HTML with no such header) — this only happens if you point an <code>&lt;iframe&gt;</code> at an <em>external</em> site instead of a page this repository ships.</td>
+<td>Only frame pages this repository itself generates and ships inside <code>site/</code>; link out to external tools instead of framing them.</td>
+</tr>
+<tr>
+<td>A brand-new page 404s inside the frame, even though <code>docs/&lt;yourreport&gt;/index.html</code> clearly exists after <code>7-build-app</code></td>
+<td>No <code>resource</code> mapping for that folder in <code>docfx.json</code> — DocFX only copies files it is told to.</td>
+<td>Add the <code>{ &quot;files&quot;: [ &quot;&lt;folder&gt;/**&quot; ], &quot;src&quot;: &quot;docs&quot;, &quot;dest&quot;: &quot;docs/reports&quot; }</code> entry (step 1 above), then rebuild.</td>
+</tr>
+<tr>
+<td>The frame shows the <em>wrong</em> content, or a 404 for a path that looks almost right</td>
+<td>An off-by-one in the relative path — <code>docs/report-pages/*.md</code> files are one folder level deeper than <code>docs/*.md</code> guide pages, so they need <code>../reports/...</code>, not <code>reports/...</code> (a <em>guide</em> page under <code>docs/guide/</code> also happens to need <code>../reports/...</code>, by coincidence — check the actual folder depth, do not copy-paste blindly).</td>
+<td>Count folder levels from the <code>.md</code> file's own path to <code>docs/reports/...</code>; compare against a working page like <code>docs/report-pages/unit-tests.md</code>.</td>
+</tr>
+<tr>
+<td><code>docfx build</code> prints <code>warning InvalidFileLink</code> for a path under <code>reports/...</code></td>
+<td>Expected/benign — DocFX's link validator does not track resource files (only content documents). Confirmed in this template's own build; see <a href="troubleshooting.en.html">Troubleshooting</a>.</td>
+<td>Ignore it if the file actually resolves once you open the built page; only investigate if the link genuinely does not work.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next">Next</h2>
+<p><a href="reports-explained.en.html">Which report is which?</a> for what each shipped report shows, or
+<a href="troubleshooting.en.html">Troubleshooting</a> if something else failed.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/embed-html-in-site.en.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

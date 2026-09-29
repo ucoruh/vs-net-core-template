@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>S&#252;r&#252;mler ve &#246;zel depolar | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="S&#252;r&#252;mler ve &#246;zel depolar | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/releases-and-private-repos.tr.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="sürümler-ve-özel-depolar">Sürümler ve özel depolar</h1>
+
+<p>Ders deponuz <strong>özel (private)</strong> olmalı ve çoğu öğrenci ücretsiz <strong>GitHub Free</strong> planındadır. Bu
+sayfa bunun neye izin verip neye izin vermediğini ve <code>10-release</code>'in izin vermediği tek şeyi --
+özel <a href="https://pages.github.com/">GitHub Pages</a>'i -- nasıl aştığını anlatır.</p>
+<h2 id="özel-bir-depoda-github-freede-ne-çalışır">Özel bir depoda GitHub Free'de ne çalışır</h2>
+<table>
+<thead>
+<tr>
+<th>Özellik</th>
+<th>Free (özel depo)</th>
+<th>Pro / Team / Student Pack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://docs.github.com/repositories/releasing-projects-on-github">Releases</a> (etiket + ikili varlıklar (binary assets), dosya başına 2 GiB'a, 1000 varlığa kadar)</td>
+<td><strong>Evet</strong> -- yalnızca işbirlikçilere (collaborator) görünür</td>
+<td>Evet</td>
+</tr>
+<tr>
+<td><a href="https://docs.github.com/pages">GitHub Pages</a> (deponun herkese açığa yakın bir web sitesi adresi)</td>
+<td>Özel depoda <strong>Hayır</strong></td>
+<td><strong>Evet</strong></td>
+</tr>
+<tr>
+<td>GitHub Actions dakikaları</td>
+<td>ayda 2.000 dk, 500 MB artefakt depolama</td>
+<td>ayda 3.000 dk, 1 GB artefakt depolama</td>
+</tr>
+</tbody>
+</table>
+<p>(Bu yazı yazılırken GitHub'ın kendi belgelerine göre; güncel sayılar için
+<a href="https://github.com/pricing">GitHub'ın fiyatlandırma sayfasına</a> bakın.)</p>
+<p>Pages, özel bir Free depoda çalışmadığı için <strong>bu şablon Pages'i asla zorunlu kılmaz</strong>. <code>9-open-site</code>
+siteyi kendi diskinizden küçük bir yerel HTTP sunucusu üzerinden sunar ve açar (bkz.
+<a href="embed-html-in-site.tr.html">Sitenizin içinde bir raporu göstermek</a>), <code>10-release</code>/<code>release.yml</code> ise
+üretilen bütün siteyi her sürümün içine <code>site.zip</code> olarak paketler -- ders sorumlusunun (veya
+depoya erişimi olan herkesin) Pages olmadan görmesini sağlayan yöntem budur. <strong>Herkese açık
+(public)</strong> bir depoda (ör. bu şablonun kendi <code>ucoruh/vs-net-core-template</code>'i) Pages normal şekilde
+çalışır ve bunların hiçbirine ihtiyaç duymaz -- bkz. aşağıdaki &quot;Pages dağıtım iş akışı&quot;.</p>
+<h2 id="pages-dağıtım-iş-akışı">Pages dağıtım iş akışı</h2>
+<p><code>.github/workflows/pages.yml</code>, <code>main</code>'e her push'ta (ve elle, <code>workflow_dispatch</code> ile) bütün siteyi
+yeniden derleyip <code>gh-pages</code> dalına yayınlar. Önce <code>github.event.repository.private</code>'ı kontrol eder:</p>
+<ul>
+<li><strong>Herkese açık depo:</strong> normal şekilde dağıtır. Canlı site
+<code>https://&lt;siz&gt;.github.io/&lt;deponuz&gt;/</code> adresinde olur.</li>
+<li><strong>Özel depo:</strong> dağıtım adımı <strong>atlanır</strong>, koşunun hem <code>::notice</code> uyarısında hem de iş özetinde
+(job summary) bir açıklamayla birlikte -- <em>meğer ki</em> <code>PAGES_ON_PRIVATE</code> depo değişkeni <code>true</code>
+olarak ayarlanmış olsun. GitHub Pro'ya (ya da Student Developer Pack'e) sahip olduğunuzda <em>ve</em>
+<strong>Settings -&gt; Pages</strong> altından Pages'i açtığınızda, bunu <strong>Settings -&gt; Secrets and variables -&gt;
+Actions -&gt; Variables</strong> altından ayarlayın -- sonraki push normal şekilde dağıtır.</li>
+</ul>
+<p>Her iki durumda da <code>release.yml</code> (aşağıda) her zaman <code>site.zip</code>'i ekler, böylece Pages etkin olsun
+olmasın site ders sorumlusuna ulaşır.</p>
+<h2 id="github-student-developer-pack-alın-isteğe-bağlı-pro-verir">GitHub Student Developer Pack alın (isteğe bağlı, Pro verir)</h2>
+<p>Yine de Pages istiyorsanız (ör. ileride bir portföy parçası için), üniversite e-postanızla
+<a href="https://education.github.com/pack">GitHub Student Developer Pack</a>'e başvurun. Onay, GitHub
+kaydınızı nasıl doğruladığına bağlı olarak dakikalar ile birkaç gün arasında sürebilir (bazen bir
+öğrenci/mezun kimliği fotoğrafı istenir) -- bir teslim tarihinden önce geleceğine güvenmeyin.
+Onaylandığında GitHub Pro hesabınıza otomatik uygulanır ve depo özel kalırken bile
+<strong>Settings -&gt; Pages</strong> altından Pages'i etkinleştirebilirsiniz.</p>
+<h2 id="ders-sorumlusunu-işbirlikçi-olarak-ekleyin">Ders sorumlusunu işbirlikçi olarak ekleyin</h2>
+<p>Özel bir sürüm ve özel bir deponun içeriği, erişimi olmayan kimseye görünmez. Çalışmanızın
+değerlendirilebilmesi için ders sorumlusunu ekleyin:</p>
+<p><strong>Settings -&gt; Collaborators -&gt; Add people</strong>, dersinizin proje rehberinde belirtilen hesabı ekleyin
+(ör. ders sorumlusunun GitHub kullanıcı adı); erişimin etkili olması için davetin kabul edilmesi
+gerekir.</p>
+<h2 id="github-cliyi-gh-kurun-ve-giriş-yapın">GitHub CLI'yi (<code>gh</code>) kurun ve giriş yapın</h2>
+<p><code>10-release</code>, her seferinde tarayıcı açmadan terminalden bir sürüm yayınlanabilsin diye web
+arayüzü yerine <a href="https://cli.github.com/"><code>gh</code></a> kullanır.</p>
+<pre><code class="lang-bash"># Windows
+winget install GitHub.cli
+# Linux/WSL
+sudo apt-get install gh   # ya da bkz. https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+
+gh auth login
+</code></pre>
+<p><code>gh auth login</code> sizi tarayıcı tabanlı veya token tabanlı kimlik doğrulamadan geçirir; başka bir şey
+gerektiğini bilmiyorsanız <code>github.com</code>, HTTPS ve &quot;Login with a web browser&quot; seçin. Doğrulayın:</p>
+<pre><code class="lang-bash">gh auth status
+</code></pre>
+<p>beklenen çıktı şuna benzer:</p>
+<pre><code>github.com
+  ✓ Logged in to github.com account &lt;kullanıcı-adınız&gt; (keyring)
+  ✓ Git operations for github.com configured to use https protocol.
+  ✓ Token: gho_************************************
+</code></pre>
+<h2 id="10-releasei-kullanma"><code>10-release</code>'i kullanma</h2>
+<pre><code class="lang-batch">10-release.bat --dry-run
+10-release.bat v1.0.0 --dry-run
+10-release.bat v1.0.0
+</code></pre>
+<p>Linux/WSL'de: <code>./10-release.sh --dry-run</code> vb. <code>--dry-run</code>, her şeyi derler ve paketler --
+<code>7-build-app</code>'i çalıştırır, Linux/macOS/Windows için kendi kendine yeten (self-contained) ikilileri
+yayınlar, her raporu ^(her iki aile -- bkz. <a href="reports-explained.tr.html">Hangi rapor hangisi?</a>^),
+Doxygen çıktısını ve bütün DocFX sitesini <code>release/site.zip</code> olarak paketler -- sonra bunu
+çalıştırmak yerine tam <code>gh release create</code> komutunu ve bütün varlık listesini <strong>yazdırır</strong>. Hiçbir
+şey yayınlanmaz. Yazdırılandan memnun kaldığınızda <code>--dry-run</code>'ı kaldırın.</p>
+<p>Açık bir sürüm argümanı verilmezse script, depo kökündeki <code>VERSION</code> dosyasını (<code>0.1.0</code> gibi tek
+satırlık) okur; bir sonraki sürümünüz için bu dosyayı güncelleyin. Script, kirli (uncommitted
+değişiklikli) bir çalışma ağacından gerçek bir sürüm yayınlamayı reddeder -- bir sürüm her zaman
+kodun tek, kesin, commit'lenmiş bir durumuna karşılık gelmelidir (<code>--dry-run</code> bu kontrolü atlar,
+böylece çalışma sırasında paketlemeyi prova edebilirsiniz).</p>
+<p><code>release/site.zip</code>'in içinde ne var: bütün üretilmiş site, kendi kendine yeten -- herhangi bir
+yere açın (unzip) ve <code>index.html</code>'i açın; içindeki her rapor ve API referans bağlantısı, bir web
+sunucusu olmadan çalışan göreli bir bağlantıdır.</p>
+<h2 id="İsteğe-bağlı-actions-sürüm-iş-akışı">İsteğe bağlı: Actions sürüm iş akışı</h2>
+<p><code>.github/workflows/release.yml</code>, aynı yayınlamayı kendi makineniz yerine CI'dan yapmanın alternatif
+bir yolu -- bir <code>v*</code> etiketi push ederek ya da elle (<code>workflow_dispatch</code>) tetiklenir -- <code>10-release</code>'i
+yerelde çalıştırmak istemiyorsanız işinize yarar, bedeli Actions dakikalarıdır (tam bir derleme +
+yayınlama + paketleme koşusu genelde aylık kotanızdan birkaç dakika harcar; günlük <code>ci.yml</code> iş akışı
+bunu tam da bu bütçeyi yemesin diye her push'ta <strong>değil</strong>, yalnızca istek/etiket üzerine çalıştırır).
+Yukarıdaki tabloyla aynı varlık kümesini artı bir <code>source.zip</code> kaynak arşivini paketler ve canlı
+siteye bağlanan, her varlığı listeleyen sürüm notları yazar. Özel bir depoda, ders sorumlusunu
+işbirlikçi olarak eklemenizi hatırlatan bir <code>::notice</code>/iş özeti ekler (yukarı bakın) -- sürümlerin
+kendisi Pages dağıtımının aksine özel depoda <strong>atlanmaz</strong>. Kaç dakikanız kaldığından emin değilseniz
+yerelde <code>10-release</code>'i tercih edin.</p>
+<h2 id="sürüm-sorun-giderme">Sürüm sorun giderme</h2>
+<table>
+<thead>
+<tr>
+<th>Belirti</th>
+<th>Neden</th>
+<th>Çözüm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gh release create</code>, <code>HTTP 404</code> ile başarısız</td>
+<td>Yanlış depo algılandı, ya da sahibi olmadığınız özel bir depoda işbirlikçi değilsiniz</td>
+<td>Klonlanan depo klasörünün içinden çalıştırın; <code>gh repo view</code>'ın doğru depoyu gösterdiğini doğrulayın</td>
+</tr>
+<tr>
+<td><code>gh release create</code>, <code>HTTP 403</code> ile başarısız</td>
+<td>Kimlik doğrulanmamış, ya da token'da <code>repo</code> kapsamı eksik</td>
+<td>Tekrar <code>gh auth login</code>; ince taneli (fine-grained) bir PAT için bu depoda <em>Contents: Read and write</em> iznine sahip olduğundan emin olun</td>
+</tr>
+<tr>
+<td><code>gh auth login</code>'den sonra bile <code>gh: not logged in</code></td>
+<td>Beklenenden farklı bir <code>gh</code> host/hesabına giriş yapılmış</td>
+<td>Hangi hesabın etkin olduğunu görmek için <code>gh auth status</code>; birden fazla hesabınız varsa <code>gh auth switch</code></td>
+</tr>
+<tr>
+<td>Yükleme, varlık çok büyük mesajıyla başarısız</td>
+<td>Tek bir varlık GitHub'ın 2 GiB sınırını aşıyor</td>
+<td>Bu şablonun varlıklarıyla olmamalı; olursa <code>publish/</code>'in kazayla budanmadan bırakılmadığını (ör. hata ayıklama sembolleri) kontrol edin</td>
+</tr>
+<tr>
+<td>Ders sorumlusu sürümü göremediğini söylüyor</td>
+<td>Henüz işbirlikçi olarak eklenmedi, ya da davet kabul edilmedi</td>
+<td>Yukarıdaki &quot;Ders sorumlusunu işbirlikçi olarak ekleyin&quot; bölümüne bakın</td>
+</tr>
+</tbody>
+</table>
+<h2 id="sırada">Sırada</h2>
+<p>Sorun <code>gh</code> değil de bir scriptin kendisiyse bkz. <a href="troubleshooting.tr.html">Sorun giderme</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/releases-and-private-repos.tr.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

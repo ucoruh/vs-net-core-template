@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Her şeyi kurma | Calculator Application with Library — .NET Core Template </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Her şeyi kurma | Calculator Application with Library — .NET Core Template ">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/install.tr.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../assets/rteu_logo.jpg" alt="vs-net-core-template">
+            vs-net-core-template
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="her-şeyi-kurma">Her şeyi kurma</h1>
+
+<p>İlk derlemeden önce bu araçlara ihtiyacınız var. Her satırda işe yaradığını kanıtlayan komut ve bu
+kılavuz yazılırken gerçekten çalıştırılıp yakalanan çıktı var (sizde sürüm numaraları farklı
+olabilir -- komut hata vermediği sürece sorun değil).</p>
+<h2 id="windows">Windows</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Araç</th>
+<th>Kurulum</th>
+<th>Doğrulama</th>
+<th>Örnek çıktı</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Git</td>
+<td><a href="https://git-scm.com/">git-scm.com</a> veya <code>winget install Git.Git</code></td>
+<td><code>git --version</code></td>
+<td><code>git version 2.52.0.windows.1</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>GitHub CLI (<code>gh</code>)</td>
+<td><code>winget install GitHub.cli</code> (<code>10-release</code> için gerekli)</td>
+<td><code>gh --version</code></td>
+<td><code>gh version 2.90.0</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Chocolatey + Scoop</td>
+<td><code>3-install-package-manager.bat</code></td>
+<td><code>where choco</code></td>
+<td><code>%ProgramData%\Chocolatey</code> altında bir yol</td>
+</tr>
+<tr>
+<td>4</td>
+<td>.NET SDK (<code>global.json</code>'da sabitlendi)</td>
+<td><code>4-install-dotnet-sdk.bat</code> (kullanıcı bazlı, yönetici gerekmez)</td>
+<td><code>dotnet-env.bat &amp;&amp; dotnet --version</code></td>
+<td><code>10.0.401</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Astyle (kod biçimlendirici)</td>
+<td><code>4-install-astyle.bat</code></td>
+<td><code>astyle --version</code></td>
+<td><code>Artistic Style Version 3.6.2</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Python 3</td>
+<td>çoğu makinede zaten var, yoksa <code>choco install python -y</code></td>
+<td><code>py -3.12 --version</code></td>
+<td><code>Python 3.12.6</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>coverxygen (Python paketi)</td>
+<td><code>4-install-coverxygen.bat</code></td>
+<td><code>py -3.12 -m coverxygen --help</code></td>
+<td>hatasız kullanım metni</td>
+</tr>
+<tr>
+<td>8</td>
+<td>lcov (<code>genhtml</code>)</td>
+<td><code>4-install-lcov.bat</code></td>
+<td><code>genhtml --version</code></td>
+<td><code>genhtml: LCOV version 1.15...</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Doxygen + Graphviz, ReportGenerator + DocFX</td>
+<td><code>6-install-docfx-and-report-tools.bat</code></td>
+<td><code>doxygen --version</code>, <code>dot -V</code>, <code>dotnet tool restore</code></td>
+<td><code>1.9.7</code>, <code>dot - graphviz version 9.0.0</code>, <code>Restore was successful.</code></td>
+</tr>
+</tbody>
+</table>
+<p>Bu sırayla çalıştırın (<code>3</code>, <code>4</code>/<code>5</code>/<code>6</code>'dan önce; <code>4</code>, <code>dotnet</code> çağıran her şeyden önce):</p>
+<pre><code class="lang-batch">3-install-package-manager.bat
+4-install-dotnet-sdk.bat
+4-install-astyle.bat
+4-install-coverxygen.bat
+4-install-lcov.bat
+6-install-docfx-and-report-tools.bat
+</code></pre>
+<p>Her script yeniden çalıştırılabilir (idempotent): istediğiniz zaman tekrar çalıştırın, yalnızca
+eksik olanı kurar.</p>
+<blockquote>
+<p><strong>Neden makinenizde zaten olan şeyin yanına, kullanıcı bazlı, sabitlenmiş bir .NET SDK'sı daha?</strong>
+Birçok laboratuvar/ortak bilgisayarda makine genelinde yalnızca eski bir SDK kurulu olur (ör.
+&quot;Program Files&quot; içinde sadece .NET 9) ve bunu değiştirecek yönetici hakkınız olmayabilir.
+<code>4-install-dotnet-sdk.bat</code>, <code>global.json</code>'daki tam SDK sürümünü kendi kullanıcı profilinize
+(<code>%LocalAppData%\Microsoft\dotnet</code>) kurar -- diğer bütün scriptler önce <code>dotnet-env.bat</code>'i
+<code>call</code> eder, bu da makine genelindeki SDK yerine sessizce bu kullanıcı bazlı SDK'yı tercih eder.
+PATH'e elle dokunmanız hiç gerekmez.</p>
+</blockquote>
+<h2 id="linux--wsl">Linux / WSL</h2>
+<p>Aynı araçlar, <code>apt</code> tabanlı kurulum, aynı script numaraları <code>.sh</code> uzantısıyla:</p>
+<pre><code class="lang-bash">chmod +x *.sh   # bir kez, klonladıktan sonra: git, bir zip indirmesinde çalıştırma bitini korumaz
+./3-install-package-manager.sh
+./4-install-dotnet-sdk.sh
+./4-install-astyle.sh
+./4-install-coverxygen.sh
+./4-install-lcov.sh
+./6-install-docfx-and-report-tools.sh
+</code></pre>
+<p>Aynı şekilde doğrulayın, yalnızca <code>py -3.12</code> yerine (WSL <code>python3</code> kullanır):</p>
+<pre><code class="lang-bash">. ./dotnet-env.sh &amp;&amp; dotnet --version   # 10.0.401
+astyle --version                        # Artistic Style Version 3.6.2 (veya dağıtımınızın sürümü)
+python3 -m coverxygen --help
+genhtml --version
+doxygen --version
+</code></pre>
+<blockquote>
+<p><strong>WSL ile Google Drive bir arada yürümez.</strong> Klonunuz bir Windows Google Drive klasöründeyse
+(<code>/mnt/g/My Drive/...</code>), WSL buraya güvenilir biçimde erişemez (Google Drive, <code>G:</code> bağlantısı
+(mount) üzerinden bile gerçek bir yol değil, sanal/bulut bir dosya sistemidir) -- önce depoyu
+normal bir Linux yoluna kopyalayın (ör. <code>cp -r &quot;/mnt/g/My Drive/.../vs-net-core-template&quot; ~/vs-net-core-template</code>) ve her <code>.sh</code> scriptini oradan çalıştırın. Bkz.
+<a href="troubleshooting.tr.html">Sorun giderme</a>.</p>
+</blockquote>
+<h2 id="İsteğe-bağlı-bir-ide">İsteğe bağlı: bir IDE</h2>
+<p>Visual Studio 2022+ (herhangi bir sürüm, &quot;.NET masaüstü geliştirme&quot; iş yükü) veya
+<a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit">C# Dev Kit</a>
+eklentili VS Code, ikisi de çalışır; numaralı scriptleri çalıştırmak için hiçbiri zorunlu değildir.</p>
+<h2 id="sırada">Sırada</h2>
+<p><a href="use-the-template.tr.html">Şablonu kullanma</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ucoruh/vs-net-core-template/blob/main/docs/guide/install.tr.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Built with DocFX from CalculatorLibrary's XML doc comments. See docs/guide/reports-explained.en.md for what every report means.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
