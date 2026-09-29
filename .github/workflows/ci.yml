@@ -1,315 +1,62 @@
-name: .NET Core Release with Test Coverage Control
+name: Build and Test
+
+# Lean by design: restore, build, run the sample's unit tests with coverage, on both Windows and
+# Ubuntu, on every push and PR. Nothing here publishes binaries, builds the DocFX site, or creates
+# a release -- that is release.yml (manual/tag-triggered), or the local 10-release script. See
+# docs/guide/releases-and-private-repos.en.md for the Actions-minutes trade-off.
 
 on:
   push:
-    #branches:
-    #  - main
-    tags:
-      - 'v*'
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  coverage:
-    name: Check Unit Test Coverage %100
-    runs-on: windows-latest
-    permissions:
-        contents: write
-        issues: read
-        checks: write
-        pull-requests: write
+  build-and-test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-latest, ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Checkout Source Code from Github
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: ./CalculatorLibrary.Tests
-
-      - name: Install coverlet.msbuild
-        run: dotnet add package coverlet.msbuild
-        working-directory: ./CalculatorLibrary.Tests
-
-      #- name: Build
-      #  run: dotnet build --configuration Release
-      #  working-directory: ./CalculatorLibrary.Tests
-
-      - name: Test with Coverage
-        run: dotnet test --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory:./TestResults --logger:trx
-        working-directory: ./CalculatorLibrary.Tests
-
-      - name: Check Test Coverage
-        run: |
-            $ErrorActionPreference = 'Stop'
-            $coverageThreshold = 100.00
-            $coverageReportPath = Get-ChildItem -Recurse -Filter 'coverage.cobertura.xml' | Select-Object -ExpandProperty FullName
-            $lines = Get-Content $coverageReportPath
-            $xmlContent = $lines -join "`n"
-            $coverageXmlList = $xmlContent -split "<\?xml"
-            $totalLines = 0
-            $coveredLines = 0
-            foreach ($coverageXmlString in $coverageXmlList) {
-                if ($coverageXmlString.Trim() -ne '') {
-                    $coverageXmlString = "<?xml" + $coverageXmlString
-                    [xml]$coverageXml = $coverageXmlString
-                    $lineRate = $coverageXml.SelectSingleNode("//coverage").GetAttribute("line-rate")
-                    $coverage = [float]$lineRate * 100.00
-                    if ($coverage -lt $coverageThreshold) {
-                        Write-Host "Current test coverage is below the threshold of $coverageThreshold%."
-                        Write-Host "Current test coverage: $coverage%."
-                        exit 1
-                    }
-                }
-            }
-        shell: powershell
-  build:
-    name: .NET Core Doxygen + Test +  Release (Windows/Linux/MacOS)
-    needs: coverage
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: read
-      checks: write
-      pull-requests: write
-    steps:
-      - name: Checkout Source Code from Github
-        uses: actions/checkout@v3
-        
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
-        
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup .NET (version pinned in global.json)
+        uses: actions/setup-dotnet@v4
         with:
-          python-version: 3.x
-                
-      - name: Install Doxygen
-        run: sudo apt-get install doxygen -y
-        shell: bash
-        
-      - name: Install LCOV
-        run: sudo apt-get install lcov
-        shell: bash
-        
-      - name: Install coverxygen
-        run: pip3 install coverxygen
-        shell: bash
-        
-      - name: Install libxml2-utils
-        run: sudo apt-get install -y libxml2-utils
-        shell: bash
-        
-      - name: Install Report Generator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-        shell: bash
-        
-      - name: Install mkdocs (material theme configured in yaml)
-        run: pip install mkdocs-material
-        shell: bash
+          global-json-file: global.json
 
-      - name: Generate Folders
-        run: |
-            currentDir=$(pwd)
-            mkdir -p $currentDir/docs/assets
-            mkdir -p $currentDir/docs/coverxygen
-            mkdir -p $currentDir/docs/doxygen
-            mkdir -p $currentDir/docs/coveragereport
+      - name: Restore
+        run: dotnet restore CalculatorLibrary.sln
 
-      - name: Generate doxygen documentation
-        run: doxygen Doxyfile
-        shell: bash
-        
-      - name: Restore dependencies
-        run: dotnet restore
-        working-directory: ./CalculatorLibrary.Tests
+      - name: Build (Release; warnings are errors, see Directory.Build.props)
+        run: dotnet build CalculatorLibrary.sln --configuration Release --no-restore
 
-      - name: Install coverlet.msbuild
-        run: dotnet add package coverlet.msbuild --version 3.1.0
-        working-directory: ./CalculatorLibrary.Tests
+      - name: Test with coverage
+        run: >
+          dotnet test CalculatorLibrary.Tests/CalculatorLibrary.Tests.csproj
+          --no-build --configuration Release --verbosity normal
+          --collect:"XPlat Code Coverage" --settings CalculatorLibrary.Tests/coverlet.runsettings
+          --results-directory TestResults
+          --logger "trx;LogFileName=test-results.trx"
 
-      - name: Build
-        run: dotnet build --configuration Release
-        working-directory: ./CalculatorLibrary.Tests
-
-      - name: Test with Coverage
-        run: dotnet test --no-build --configuration Release --verbosity normal --collect:"XPlat Code Coverage" --results-directory:./TestResults --logger:trx
-        working-directory: ./CalculatorLibrary.Tests
-
-      - name: Generate Coverage Report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:docs/coveragereport" -reporttypes:Html
-        
-      - name: Generate Coverage Report
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:assets" -reporttypes:Badges
-        
-      - name: Copy Folders
-        run: |
-            cp README.md "docs/index.md"
-            cp -r ./assets/ ./docs
-        shell: bash
-        
-      - name: Run Coverxygen
-        run: |
-          currentDir=$(pwd)
-          mkdir -p $currentDir/docs/coverxygen
-          python -m coverxygen --xml-dir $currentDir/docs/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/docs/coverxygen/lcov.info --prefix $currentDir/
-        shell: bash
-      
-      - name: Run genhtml
-        run: genhtml docs/coverxygen/lcov.info --legend --title "Documentation Coverage Report" -o docs/coverxygen
-        shell: bash
-        
-      - name: Code Coverage Report
+      - name: Coverage summary in the job summary
+        if: always() && matrix.os == 'ubuntu-latest'
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: CalculatorLibrary.Tests/**/coverage.cobertura.xml
-          badge: true
-          fail_below_min: true
+          filename: TestResults/**/coverage.cobertura.xml
+          badge: false
           format: markdown
-          hide_branch_rate: false
-          hide_complexity: true
-          indicators: true
           output: both
-          thresholds: '60 80'
-       
-      - name: Build mkdocs site
-        run: mkdocs build
+
+      - name: Add coverage summary to job summary
+        if: always() && matrix.os == 'ubuntu-latest'
         shell: bash
-
-      - name: Upload Code Coverage Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: code-coverage-results
-          path: code-coverage-results.md
-        
-      - name: Build/Publish  for Linux
-        run: dotnet publish -c Release -r linux-x64 --self-contained true -o publish/linux
-
-      - name: Build/Publish  for macOS
-        run: dotnet publish -c Release -r osx-x64 --self-contained true -o publish/macos
-
-      - name: Build/Publish  for Windows
-        run: dotnet publish -c Release -r win-x64 --self-contained true -o publish/windows
-
-      - name: Get Commit Summary
-        id: commit_summary
-        run: echo "::set-output name=summary::$(git log --format=%B -n 10 ${{ github.sha }})"
-
-      - name: Create Release
-        id: create_common_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this release:
-            ${{ steps.commit_summary.outputs.summary }}
-            
-            Dr. Ugur CORUH
-          draft: false
-          prerelease: false
-        
-      - name: Compress Linux binaries
-        run: tar -czvf linux-binaries.tar.gz -C publish/linux .
-
-      - name: Compress macOS binaries
-        run: tar -czvf macos-binaries.tar.gz -C publish/macos .
-
-      - name: Compress Windows binaries
-        run: tar -czvf windows-binaries.tar.gz -C publish/windows .
-        
-      - name: Compress Document Coverage Report
-        run: tar -czvf doc-coverage-report.tar.gz -C docs/coverxygen .
-        
-      - name: Compress Test Coverage Report
-        run: tar -czvf test-coverage-report.tar.gz -C docs/coveragereport .
-        
-      - name: Compress Doxygen Output (HTML/XML/Latex/RTF)
-        run: tar -czvf doxygen-documents.tar.gz -C docs/doxygen .
-        
-      - name: Upload Linux release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./linux-binaries.tar.gz
-          asset_name: linux-binaries.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-
-      - name: Upload macOS release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./macos-binaries.tar.gz
-          asset_name: macos-binaries.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-
-      - name: Upload Windows release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./windows-binaries.tar.gz
-          asset_name: windows-binaries.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-        
-      - name: Upload Test Converage HTML Report to release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./test-coverage-report.tar.gz
-          asset_name: test-coverage-report.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          
-      - name: Upload Document Converage HTML Report to release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./doc-coverage-report.tar.gz
-          asset_name: doc-coverage-report.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          
-      - name: Upload Doxygen Output to release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./doxygen-documents.tar.gz
-          asset_name: doxygen-documents.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-
-
-      - name: Set Cache ID
-        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-        shell: bash
-
-      - uses: actions/cache@v3
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
-      - run: pip install mkdocs-material 
-      - run: mkdocs gh-deploy --force
-
-
-      # https://github.com/peaceiris/actions-gh-pages
-      #- name: Deploy
-      #  uses: peaceiris/actions-gh-pages@v3
-      #  with:
-      #    github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-      #    publish_dir: ./site
+        run: |
+          if [ -f code-coverage-results.md ]; then
+            cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
+          fi

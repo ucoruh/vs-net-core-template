@@ -1,0 +1,108 @@
+name: Release (manual)
+
+# Alternative to running 10-release.bat/.sh locally: builds everything, packages binaries + every
+# report (both families) + the whole site as site.zip, and publishes a GitHub Release with the
+# same `gh` CLI the local script uses. Triggered by hand (workflow_dispatch) or by pushing a "v*"
+# tag -- never on an ordinary push, to avoid spending Actions minutes on every commit.
+#
+# Minute cost: a full run (restore, build, test, Doxygen, DocFX site, 3 self-contained publishes)
+# typically takes several minutes of your monthly Actions quota (2,000 min/month on GitHub Free).
+# Prefer 10-release.bat/.sh locally if you are unsure how many minutes you have left -- see
+# docs/guide/releases-and-private-repos.en.md.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version, e.g. v1.2.0 (leave empty to use the VERSION file)'
+        required: false
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET (version pinned in global.json)
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install coverxygen
+        shell: cmd
+        run: python -m pip install coverxygen
+
+      - name: Install Doxygen, Graphviz and lcov
+        shell: cmd
+        run: choco install doxygen.install graphviz lcov -y
+
+      - name: Restore local dotnet tools (ReportGenerator, DocFX)
+        shell: cmd
+        run: dotnet tool restore
+
+      - name: Determine release tag
+        id: version
+        shell: bash
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            tag="${{ github.event.inputs.version }}"
+          elif [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            tag="${GITHUB_REF#refs/tags/}"
+          else
+            tag="v$(cat VERSION)"
+          fi
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+      - name: Build, test, generate reports and the site
+        shell: cmd
+        run: |
+          call 7-build-app.bat
+          if errorlevel 1 exit /b 1
+
+      - name: Publish self-contained binaries
+        shell: cmd
+        run: |
+          call dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r linux-x64 --self-contained true -o publish\linux
+          if errorlevel 1 exit /b 1
+          call dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r osx-x64 --self-contained true -o publish\macos
+          if errorlevel 1 exit /b 1
+          call dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r win-x64 --self-contained true -o publish\windows
+          if errorlevel 1 exit /b 1
+
+      - name: Package release assets
+        shell: cmd
+        run: |
+          if not exist release mkdir release
+          tar -czf release\linux-binaries.tar.gz -C publish\linux .
+          tar -czf release\macos-binaries.tar.gz -C publish\macos .
+          tar -czf release\windows-binaries.tar.gz -C publish\windows .
+          tar -czf release\unit-test-results.tar.gz -C docs\testresults .
+          tar -czf release\code-coverage-reportgenerator.tar.gz -C docs\coveragereport .
+          if exist docs\coverage-genhtml tar -czf release\code-coverage-genhtml.tar.gz -C docs\coverage-genhtml .
+          if exist docs\coverxygen tar -czf release\doc-coverage-genhtml.tar.gz -C docs\coverxygen .
+          if exist docs\doccoverage-reportgenerator tar -czf release\doc-coverage-reportgenerator.tar.gz -C docs\doccoverage-reportgenerator .
+          tar -czf release\doxygen-api-docs.tar.gz -C docs\doxygen\html .
+          powershell -NoProfile -Command "Compress-Archive -Path 'site\*' -DestinationPath 'release\site.zip' -Force"
+
+      - name: Publish GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" release/* \
+            --title "${{ steps.version.outputs.tag }}" \
+            --notes "Built by the release.yml GitHub Actions workflow. See docs/guide/reports-explained.en.md for what each packaged report is."
