@@ -85,9 +85,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen graphviz lcov zip
       - name: 7-build-all-linux (build, tests, reports, API docs, app, release assets)
+        shell: bash
         run: |
           chmod +x *.sh scripts/*.sh
-          ./7-build-all-linux.sh --no-site
+          ./7-build-all-linux.sh --no-site 2>&1 | tee build-all.log
+      - name: Show the end of the build log as an annotation (visible without logging in)
+        if: failure()
+        shell: bash
+        run: |
+          t="$(tail -n 30 build-all.log | sed ':a;N;$!ba;s/
+/%0A/g')"
+          echo "::error title=7-build-all-linux failed (last 30 lines)::$t"
       - uses: actions/upload-artifact@v7
         with:
           name: platform-linux
