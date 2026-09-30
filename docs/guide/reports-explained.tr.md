@@ -1,62 +1,52 @@
 # Hangi rapor hangisi?
 
-`7-build-app` her raporu **iki kez** üretir: bir kez modern, ekosistem-bağımsız
-[ReportGenerator](https://reportgenerator.io/) aracıyla, bir kez de C/C++ ve Linux dünyasından
-gelen herkesin bildiği eski/yerli (native) araçla. İkisi de aynı veriyi farklı bir görünümle sunar --
-amaç da tam olarak bu karşılaştırma: gerçek iş ortamında ikisiyle de karşılaşacaksınız.
+`7-build-all` **her raporu iki kez** üretir: modern, ekosistemler arası araçla (ReportGenerator) ve daha eski / yerel
+araçla; böylece aynı sayıları iki biçimde görürsünüz. Ve bunları **platform başına** üretir: bir kez Windows'ta, bir
+kez Linux/WSL'de, ayrı tutulur (farklı olabilirler).
 
-| # | Rapor | Araç | Aile | Nerede |
-|---|-------|------|------|--------|
-| 1 | Birim testi (unit test) sonuçları | VSTest'in yerleşik HTML günlükleyicisi (logger) | yerli | `docs/testresults/test-results.html` (+ Visual Studio'nun okuduğu ham XML: `test-results.trx`) |
-| 2 | Kod kapsama (code coverage) | [ReportGenerator](https://reportgenerator.io/) (coverlet'in Cobertura çıktısını okur) | ReportGenerator | `docs/coveragereport/index.html` |
-| 3 | Kod kapsama | `genhtml` (coverlet'in lcov çıktısını okur) | yerli (lcov, Linux/C++ dünyasının varsayılanı) | `docs/coverage-genhtml/index.html` |
-| 4 | Belge kapsama (documentation coverage) | `genhtml` (coverxygen'in lcov çıktısını okur) | yerli | `docs/coverxygen/index.html` |
-| 5 | Belge kapsama | ReportGenerator (aynı lcov dosyasını okur) | ReportGenerator | `docs/doccoverage-reportgenerator/index.html` |
-| 6 | API belgeleri, ekosistem-bağımsız | [Doxygen](https://www.doxygen.nl/) | yerli (C/C++ ve Java şablonlarıyla aynı araç) | `docs/doxygen/html/index.html` |
-| 7 | API referansı, C#'a özgü | [DocFX](https://dotnet.github.io/docfx/) metadata adımı | ekosistem-yerli | `site/api/` |
-| 8 | Bütün site | DocFX build | -- | `site/index.html` (`9-open-site` ile açın) |
+| # | Rapor | Modern aile | Yerel / eski aile | Klasör (`reports/<platform>/...`) |
+|---|---|---|---|---|
+| 1 | Birim testleri | - | `dotnet test` TRX + VSTest HTML günlükçüsü | `tests-trx/` |
+| 2 | Kod kapsaması | ReportGenerator (cobertura) | - | `coverage-reportgenerator/` |
+| 3 | Kod kapsaması | - | lcov `genhtml` (coverlet'in lcov çıktısı) | `coverage-lcov/` |
+| 4 | Dokümantasyon kapsaması | ReportGenerator (coverxygen lcov) | - | `doccoverage-reportgenerator/` |
+| 5 | Dokümantasyon kapsaması | - | lcov `genhtml` (aynı lcov dosyası) | `doccoverage-lcov/` |
+| 6 | API dokümanı | - | Doxygen (üç şablonda aynı araç) | `api-doxygen/` |
+| 7 | API dokümanı | DocFX (C# yerel) | - | `api-docfx/` (ayrıca `site-native/`) |
+| 8 | Ana site | MkDocs Material | - | `site/` |
 
-## Her biri ne anlatıyor?
+Sitede 1-6 numaralılar çerçevede gösterilir; 7 numara kendi başına eksiksiz bir sitedir ve bağlantıyla (yeni sekmede)
+açılır. Bkz. [Sitenizin içinde HTML raporu göstermek](embed-html-in-site.tr.md).
 
-**Birim testi sonuçları (yerli, #1).** Süreleriyle birlikte düz bir geçti/kaldı listesi -- bir CI
-panosunun genelde önce bağlantı verdiği rapor budur. Bir test kaldığında terminale bakmadan tam
-doğrulama (assertion) mesajını görmek için `test-results.html` dosyasını açın.
+## Her birini nasıl okumalı
 
-**Kod kapsama -- ReportGenerator (#2).** Kırmızı/sarı/yeşil kenar çubuğuyla dosya ve satır bazında
-kapsama, derlemeler arası eğilim grafiği (`report_history/` altında tutulur, bkz. `.gitignore`) ve
-README'nin gösterdiği küçük SVG rozetler (`assets/`). Günlük kullanım için bunu tercih edin.
+**Birim test sonuçları (#1).** Süreli geçti/kaldı listesi. Bir test kaldığında, terminale dokunmadan tam doğrulama
+mesajını görmek için açın.
 
-**Kod kapsama -- genhtml (#3).** Aynı sayılar, lcov'un klasik dizin-ağacı görünümüyle. Daha önce bir
-C/C++ projesinde `lcov`/`gcov` kullandıysanız bu size tanıdık gelecek; bir C++ projesinin üreteceği
-`coverage.info` dosyasının aynısından üretilir, sadece gcov yerine coverlet yazmıştır.
+**Kod kapsaması, ReportGenerator (#2).** Dosya ve satır bazında kapsama, kırmızı/yeşil kenar, derlemeler arası eğilim
+grafiği (geçmiş `report_history/<platform>/` içinde) ve `docs/assets/` altındaki küçük SVG rozetler. Günlük iş için
+bunu kullanın.
 
-**Belge kapsama (#4, #5).** "Kod ne kadar *test edildi*" değil, "genel (public) API'nin ne kadarında
-XML belge yorumu (`/// <summary>...`) var" sorusunun cevabı. [coverxygen](https://github.com/psycofdj/coverxygen)
-Doxygen'in XML çıktısını, kod kapsamanın da kullandığı lcov biçimine çevirir, böylece aynı iki araçla
-görüntülenebilir. Bu şablonun örneğinde belge kapsama bilerek %100 değildir: `Program` sınıfı ve
-`README.md`'nin anlatı metni Doxygen tarzı API yorumu taşımak zorunda değildir, bu yüzden
-"belgesiz" sayılırlar -- bu bir hata değil, beklenen durumdur.
+**Kod kapsaması, lcov (#3).** Aynı sayılar, lcov'un klasik dizin ağacı görünümünde; bir C++ projesinin ürettiği
+`coverage.info` ile aynı dosyadan, yalnızca gcov yerine coverlet yazmış.
 
-**Doxygen (#6).** `/// <summary>`, `<param>`, `<returns>` ve `<exception>` C# XML belge yorumlarını,
-bir C veya C++ projesindeki `\brief`/`\param` yorumlarını işlediği gibi işler. Üç şablonun (C, Java,
-C#) da aynı şekilde ürettiği tek rapor budur; C#'ın kendine ait, daha bu dile uygun bir aracı (#7)
-olsa da bu yüzden faydalıdır.
+**Dokümantasyon kapsaması (#4, #5).** "Kodun ne kadarı test edildi" değil, "genel API'nin ne kadarında XML doküman
+yorumu (`/// <summary>`) var". [coverxygen](https://github.com/psycofdj/coverxygen) Doxygen'in XML çıktısını kod
+kapsamasının kullandığı lcov biçimine çevirir, böylece iki araçtan biri de çizebilir. Örnekte kasıtlı olarak %100 değildir.
 
-**DocFX API referansı (#7).** Doğrudan derlenmiş assembly'nin XML belge dosyasından
-(`CalculatorLibrary.xml`, `CalculatorLibrary.csproj` içindeki
-`<GenerateDocumentationFile>true</GenerateDocumentationFile>` ile üretilir) üretilir -- profesyonel
-bir .NET projesinin gerçekte yayınladığı budur (aynı yöntemle üretilen
-[Microsoft'un kendi API belgeleriyle](https://learn.microsoft.com/dotnet/api/) karşılaştırın). C#
-generic'lerini, nullable işaretlerini ve kalıtımı Doxygen'den daha iyi anlar.
+**Doxygen (#6).** C# XML doküman yorumlarını, C veya C++'taki `\brief`/`\param` yorumlarını çizdiği gibi çizer: her
+şablonun aynı biçimde ürettiği tek API dokümanı.
 
-**Site (#8).** Yukarıdakilerin hepsi, artı şu an okuduğunuz kılavuzlar, tek yerden bağlantılı --
-ana sayfası bir kart ızgarasıdır (kaynak: `docs/home.md`), ve yukarıdaki her rapor, çıplak bir
-bağlantı yerine sitenin içinde, düzenli bir `<iframe>` içinde gösterildiği kendi sayfasına sahiptir
-(kaynak: `docs/report-pages/*.md`; bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)).
-Ne zaman ne çalıştırılır için bkz. [Günlük iş akışı](daily-workflow.tr.md).
+**DocFX (#7).** Derlemenin XML doküman dosyasından üretilir; profesyonel bir .NET projesinin yayınladığı budur.
+Generic'leri, nullable ek açıklamalarını ve kalıtımı Doxygen'den iyi anlar.
 
-## Neden tek bir araç seçilmiyor?
+## Neden platform başına?
 
-Çünkü işte seçme şansınız olmayacak. Bazı takımlar ReportGenerator'da karar kılar, bazıları C/C++
-hattının hep kullandığı aracı kullanmaya devam eder, belge araçları ise daha da tutarsızdır. Aynı
-sayıları ilk günden iki farklı görünümde görmek, ilerde hiçbirinin sürpriz olmaması demektir.
+Kapsama ve test sonuçları Windows ile Linux arasında farklılaşabilir (yol işleme, satır sonları, platforma özgü kod,
+farklı araç sürümleri). Her klasör ve dosya adında platformu tutmak, bir platformun diğerinin üzerine sessizce yazması
+yerine farkı görünür kılar.
+
+## Neden tek bir araç seçmiyoruz?
+
+Çünkü iş hayatında seçme şansınız olmayacak. Aynı sayıları ilk günden iki biçimde görmek, hiçbir stilin sonradan
+sürpriz olmamasını sağlar.

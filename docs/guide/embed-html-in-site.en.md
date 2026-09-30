@@ -1,102 +1,69 @@
-# Showing a report inside your site
+# Showing an HTML report inside your site
 
-Every report this template produces (unit tests, both coverage families, both documentation-coverage
-families, Doxygen) gets its own page **inside** the DocFX site that shows the report in a styled,
-responsive `<iframe>` — not just a bare link out to a raw HTML file. This page explains how that
-works, so you can add a page for a **new** report you introduce yourself (a linter, a static
-analyzer, anything else that produces HTML).
+The main site is built with **MkDocs Material**. Every report that is **standalone HTML** gets its own page in
+the site that shows it in a styled, full-height `<iframe>`; the *Reports* and *API docs* menus list those pages.
 
-## The three pieces
+## The rule: frame only standalone HTML
 
-1. **The report itself** — an HTML file (or folder) `7-build-app` generates under `docs/<something>/`
-   (e.g. `docs/coveragereport/index.html`). Not written by you.
-2. **A resource mapping in `docfx.json`** that copies that folder into the built site, under
-   `site/docs/reports/...`. Already present for every report this template ships; you only need to
-   add one for a report family you introduce yourself.
-3. **A viewer page** — a small Markdown file under `docs/report-pages/`, containing the `<iframe>`,
-   the toolbar buttons and the explanatory text. This is what `docs/toc.yml`'s "Reports" section
-   links to, not the raw report file.
+| Frame it (standalone HTML made *outside* the site generator) | Link it, never frame it (carries its own site navigation) |
+|---|---|
+| ReportGenerator, lcov `genhtml`, VSTest/TRX HTML, Doxygen (and JaCoCo, Javadoc, OpenCppCoverage, junit2html in the sibling templates) | **DocFX** pages (and, in the Java template, every Maven site page: Surefire-report, Checkstyle, PMD, CPD, SpotBugs, JXR) |
 
-## Copy-paste snippet
+A DocFX (or Maven site) page has its own header, menu and search. Framing it puts *a site inside a site* — two
+menus, two scrollbars, double navigation. So it is built on its own, published under `native/` on the site
+(`site-native/` locally) and **linked** from the MkDocs menu so it opens as its own site in a new tab.
 
-To add a page for a new report (say, a fictional `mytool` HTML report written to
-`docs/mytool/index.html`):
+Right and wrong:
 
-**1. Make sure `docfx.json` copies it.** Add a `resource` entry (next to the existing ones) so the
-report folder lands under `site/docs/reports/`:
+```html
+<!-- RIGHT: a standalone report, framed (docs/reports/windows/coverage-lcov.md) -->
+<iframe class="report-frame" src="report/index.html" title="Coverage" loading="lazy"></iframe>
 
-```json
-{ "files": [ "mytool/**" ], "src": "docs", "dest": "docs/reports" }
+<!-- RIGHT: a site with its own navigation, linked to open on its own (docs/reports/windows/api-docfx.md) -->
+<a class="md-button" href="../../../native/windows/index.html" target="_blank" rel="noopener">Open the DocFX site</a>
+
+<!-- WRONG: DocFX framed - the site shows a site -->
+<iframe src="../../../native/windows/index.html"></iframe>
 ```
 
-**2. Create `docs/report-pages/mytool.md`:**
+## How the pieces fit
 
-```markdown
-# My Tool Report
+1. The report is written by `7-build-all-<platform>` to `reports/<platform>/<kind>-<tool>/` (not committed).
+2. `scripts/site_tools.py assemble-site` copies it into the built site as
+   `site/reports/<platform>/<kind>-<tool>/report/` (and a `report.zip` next to it for the Download button).
+3. The page `docs/reports/<platform>/<kind>-<tool>.md` becomes `site/reports/<platform>/<kind>-<tool>/` and frames
+   `report/index.html` with a **relative** path — so it works on GitHub Pages under `/<repo>/…` and locally.
+4. `mkdocs.yml` lists the page in `nav:` under *Reports*.
 
-One sentence explaining what this report shows and when to look at it.
+## Add your own report page (5 steps)
 
-<div class="report-toolbar">
-  <a href="../reports/mytool/index.html" target="_blank" rel="noopener">Open in a new tab ↗</a>
-  <a href="../reports/mytool/mytool-report.zip" download>Download (zip)</a>
-</div>
+Example: a report your own tool writes to `reports/windows/mytool/index.html`.
 
-<div class="report-frame-wrap">
-  <iframe class="report-frame" src="../reports/mytool/index.html" title="My Tool Report" loading="lazy"></iframe>
-</div>
+1. **Make the build produce it.** In `7-build-all-windows.bat` (and the `.sh`), write the report to
+   `reports\%PLATFORM_TOKEN%\mytool\`.
+2. **Register the folder** in `scripts/site_tools.py`, in the `REPORTS` dictionary, e.g.
+   `"mytool": ("report-mytool", "My tool report", "What it shows.")`. That gets it zipped into the release
+   (`calculator-<version>-windows-report-mytool.zip`) and copied into the site.
+3. **Create the page** `docs/reports/windows/mytool.md` (copy `coverage-lcov.md` and change the title, text and the
+   two `report/index.html` paths — keep them relative).
+4. **Add it to `nav:`** in `mkdocs.yml`:
 
-<p class="report-fallback">If the frame above stays blank, open it directly:
-<a href="../reports/mytool/index.html">docs/reports/mytool/index.html</a>.</p>
-```
+    ```yaml
+    - Reports:
+        - Windows:
+            - 'My tool': reports/windows/mytool.md
+    ```
 
-The `../reports/...` paths are relative to `docs/report-pages/mytool.html` (where this page lands
-after the build) — one `../` back out of `report-pages/`, then into `reports/mytool/...`, which is
-where step 1's resource mapping put the report. The four CSS classes (`report-toolbar`,
-`report-frame-wrap`, `report-frame`, `report-fallback`) come from `templates/rteu/public/main.css`
-(a custom DocFX template overlay, see `docfx.json`'s `"template"` array) — a full-height, responsive
-frame with `loading="lazy"` so it does not fetch until scrolled into view.
-
-**3. Optional: a "Download (zip)" button.** `7-build-app` zips each report's own folder in place
-(step 7 of `7-build-app.bat`/`.sh`) so the zip lands right next to `index.html` and is picked up by
-the same resource mapping automatically. Add one more line to your build script's zip step, e.g.:
-
-```batch
-powershell -NoProfile -Command "Compress-Archive -Path 'docs\mytool\*' -DestinationPath 'docs\mytool\mytool-report.zip' -Force"
-```
-
-If you skip this, just remove the "Download (zip)" line from your page.
-
-**4. Link it from `docs/toc.yml`**, under the existing `Reports` section:
-
-```yaml
-- name: Reports
-  items:
-    - name: My Tool Report
-      href: report-pages/mytool.md
-```
-
-**5. Add a card to the landing page** (`docs/home.md`, the "Every report, one click away" grid) if
-it deserves top-level visibility — copy one of the existing `<a class="rteu-card">` blocks.
-
-## Testing it locally
-
-Run `7-build-app.bat`/`.sh`, then **`9-open-site.bat`/`.sh`** — not a double-click on
-`site/index.html`. `9-open-site` serves the built `site/` folder over a small local HTTP server
-(`py -3.12 -m http.server` / `python3 -m http.server`) and prints the URL
-(`http://localhost:8080/` by default); open that URL in your browser. This step matters: see
-"file:// blocks the frame" below.
+5. **Test locally:** `7-build-all-windows.bat`, then `9-open-site-windows.bat`, open the page. The build runs a link
+   check over the finished site and fails on a broken link in your pages.
 
 ## Common problems
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| The frame is blank, but "Open in a new tab" works fine | You opened `site/index.html` directly (`file://...`) instead of through `9-open-site`'s local server. Many browsers refuse to load an `<iframe>` (and DocFX's own search index) from a `file://` page as a security restriction — this has nothing to do with this template specifically. | Use `9-open-site.bat`/`.sh` and open the printed `http://localhost:8080/` URL, or `dotnet docfx serve site`. |
-| The frame is blank on GitHub Pages too, with a browser console error mentioning `X-Frame-Options` or `frame-ancestors` | The framed page sent a header refusing to be framed. None of this template's own generated pages do this (they are static HTML with no such header) — this only happens if you point an `<iframe>` at an *external* site instead of a page this repository ships. | Only frame pages this repository itself generates and ships inside `site/`; link out to external tools instead of framing them. |
-| A brand-new page 404s inside the frame, even though `docs/<yourreport>/index.html` clearly exists after `7-build-app` | No `resource` mapping for that folder in `docfx.json` — DocFX only copies files it is told to. | Add the `{ "files": [ "<folder>/**" ], "src": "docs", "dest": "docs/reports" }` entry (step 1 above), then rebuild. |
-| The frame shows the *wrong* content, or a 404 for a path that looks almost right | An off-by-one in the relative path — `docs/report-pages/*.md` files are one folder level deeper than `docs/*.md` guide pages, so they need `../reports/...`, not `reports/...` (a *guide* page under `docs/guide/` also happens to need `../reports/...`, by coincidence — check the actual folder depth, do not copy-paste blindly). | Count folder levels from the `.md` file's own path to `docs/reports/...`; compare against a working page like `docs/report-pages/unit-tests.md`. |
-| `docfx build` prints `warning InvalidFileLink` for a path under `reports/...` | Expected/benign — DocFX's link validator does not track resource files (only content documents). Confirmed in this template's own build; see [Troubleshooting](troubleshooting.en.md). | Ignore it if the file actually resolves once you open the built page; only investigate if the link genuinely does not work. |
-
-## Next
-
-[Which report is which?](reports-explained.en.md) for what each shipped report shows, or
-[Troubleshooting](troubleshooting.en.md) if something else failed.
+| The frame is blank but *Open in a new tab* works | You opened `site/index.html` by double-click (`file://`); browsers block frames of `file://` pages | Use `9-open-site-<platform>` (serves `http://localhost:8080/`) |
+| The frame shows a "not built on this machine" note | The other platform's report was not built here | Build on that platform, or download the release (CI builds both) |
+| 404 inside the frame | Wrong relative path, or the folder was not copied (missing in `REPORTS`) | Page URL is `reports/<platform>/<kind>/`, so the path is `report/…`; check `site/reports/…/report/` exists |
+| `check-links` reports a broken link | A link in a page points to something that does not exist | Fix the path it prints (relative to that HTML file) |
+| Framed page refuses to load on a real website | The report's server sends `X-Frame-Options: DENY` | Link it in a new tab instead; GitHub Pages does not send it, so this only affects other hosts |
+| A DocFX/Maven page inside a frame shows two menus | You framed a site that has its own navigation | Do not frame it; link it (see the rule above) |

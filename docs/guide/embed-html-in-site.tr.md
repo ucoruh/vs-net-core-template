@@ -1,104 +1,69 @@
-# Sitenizin içinde bir raporu göstermek
+# Sitenizin içinde HTML raporu göstermek
 
-Bu şablonun ürettiği her rapor (birim testleri, her iki kapsam ailesi, her iki dokümantasyon-kapsamı
-ailesi, Doxygen) DocFX sitesinin **içinde**, düzenli ve duyarlı (responsive) bir `<iframe>` içinde
-gösterildiği kendi sayfasına sahiptir — sadece ham bir HTML dosyasına düz bir bağlantı değil. Bu
-sayfa bunun nasıl çalıştığını anlatır; böylece kendi eklediğiniz **yeni** bir rapor için (bir linter,
-bir statik analiz aracı, HTML üreten herhangi bir şey) kendi sayfanızı ekleyebilirsiniz.
+Ana site **MkDocs Material** ile üretilir. **Bağımsız (standalone) HTML** olan her rapor, sitede kendi sayfasında
+stilli, tam yükseklikte bir `<iframe>` içinde gösterilir; *Reports* ve *API docs* menüleri bu sayfaları listeler.
 
-## Üç parça
+## Kural: yalnızca bağımsız HTML çerçevelenir
 
-1. **Raporun kendisi** — `7-build-app`'in `docs/<bir-şey>/` altında ürettiği bir HTML dosyası (veya
-   klasörü) (ör. `docs/coveragereport/index.html`). Bunu siz yazmazsınız.
-2. **`docfx.json` içinde bir resource eşlemesi** — bu klasörü üretilen sitenin içine,
-   `site/docs/reports/...` altına kopyalar. Şablonun kendi ürettiği her rapor için zaten mevcuttur;
-   yalnızca kendi eklediğiniz bir rapor ailesi için yenisini eklemeniz gerekir.
-3. **Bir görüntüleyici sayfa** — `docs/report-pages/` altında, `<iframe>`'i, araç çubuğu
-   düğmelerini ve açıklayıcı metni içeren küçük bir Markdown dosyası. `docs/toc.yml`'nin "Reports"
-   bölümü ham rapor dosyasına değil, buraya bağlanır.
+| Çerçevele (site üreticisinin *dışında* üretilmiş bağımsız HTML) | Yalnızca bağlantı ver, asla çerçeveleme (kendi site gezinmesi vardır) |
+|---|---|
+| ReportGenerator, lcov `genhtml`, VSTest/TRX HTML, Doxygen (kardeş şablonlarda JaCoCo, Javadoc, OpenCppCoverage, junit2html) | **DocFX** sayfaları (Java şablonunda tüm Maven site sayfaları: Surefire-report, Checkstyle, PMD, CPD, SpotBugs, JXR) |
 
-## Kopyala-yapıştır örneği
+Bir DocFX (veya Maven site) sayfasının kendi başlığı, menüsü ve araması vardır. Onu çerçevelemek *site içinde site*
+oluşturur: iki menü, iki kaydırma çubuğu, çift gezinme. Bu yüzden ayrı üretilir, sitede `native/` altında (yerelde
+`site-native/`) yayınlanır ve MkDocs menüsünden **bağlantı** verilir; yeni sekmede kendi sitesi olarak açılır.
 
-Yeni bir rapor için sayfa eklemek (örneğin `docs/mytool/index.html`'e yazılan hayali bir `mytool`
-HTML raporu için):
+Doğru ve yanlış:
 
-**1. `docfx.json`'ın onu kopyaladığından emin olun.** Mevcut girişlerin yanına, rapor klasörünün
-`site/docs/reports/` altına inmesini sağlayan bir `resource` girişi ekleyin:
+```html
+<!-- DOĞRU: bağımsız rapor, çerçeveli (docs/reports/windows/coverage-lcov.md) -->
+<iframe class="report-frame" src="report/index.html" title="Coverage" loading="lazy"></iframe>
 
-```json
-{ "files": [ "mytool/**" ], "src": "docs", "dest": "docs/reports" }
+<!-- DOĞRU: kendi gezinmesi olan site, kendi başına açılacak şekilde bağlantı (docs/reports/windows/api-docfx.md) -->
+<a class="md-button" href="../../../native/windows/index.html" target="_blank" rel="noopener">DocFX sitesini aç</a>
+
+<!-- YANLIŞ: DocFX çerçevelenmiş, site sitenin içinde site gösteriyor -->
+<iframe src="../../../native/windows/index.html"></iframe>
 ```
 
-**2. `docs/report-pages/mytool.md` dosyasını oluşturun:**
+## Parçalar nasıl birleşir
 
-```markdown
-# My Tool Report
+1. Rapor `7-build-all-<platform>` ile `reports/<platform>/<tür>-<araç>/` altına yazılır (commit'lenmez).
+2. `scripts/site_tools.py assemble-site` onu üretilen siteye `site/reports/<platform>/<tür>-<araç>/report/` olarak
+   kopyalar (yanına İndir düğmesi için `report.zip`).
+3. `docs/reports/<platform>/<tür>-<araç>.md` sayfası `site/reports/<platform>/<tür>-<araç>/` olur ve **göreli** bir
+   yolla `report/index.html`'i çerçeveler; böylece hem GitHub Pages'te (`/<repo>/…`) hem yerelde çalışır.
+4. `mkdocs.yml` içindeki `nav:` sayfayı *Reports* altında listeler.
 
-Bu raporun ne gösterdiğini ve ne zaman bakılması gerektiğini anlatan tek cümle.
+## Kendi rapor sayfanızı ekleyin (5 adım)
 
-<div class="report-toolbar">
-  <a href="../reports/mytool/index.html" target="_blank" rel="noopener">Yeni sekmede aç ↗</a>
-  <a href="../reports/mytool/mytool-report.zip" download>İndir (zip)</a>
-</div>
+Örnek: kendi aracınızın `reports/windows/mytool/index.html`'e yazdığı rapor.
 
-<div class="report-frame-wrap">
-  <iframe class="report-frame" src="../reports/mytool/index.html" title="My Tool Report" loading="lazy"></iframe>
-</div>
+1. **Derlemenin üretmesini sağlayın.** `7-build-all-windows.bat` (ve `.sh`) içinde raporu
+   `reports\%PLATFORM_TOKEN%\mytool\` altına yazdırın.
+2. **Klasörü kaydedin**: `scripts/site_tools.py` içindeki `REPORTS` sözlüğüne, örn.
+   `"mytool": ("report-mytool", "My tool report", "Ne gösterdiği.")`. Böylece sürüme
+   (`calculator-<sürüm>-windows-report-mytool.zip`) zip'lenir ve siteye kopyalanır.
+3. **Sayfayı oluşturun**: `docs/reports/windows/mytool.md` (`coverage-lcov.md`'yi kopyalayıp başlığı, metni ve iki
+   `report/index.html` yolunu değiştirin; yolları göreli tutun).
+4. **`mkdocs.yml`'deki `nav:`'a ekleyin**:
 
-<p class="report-fallback">Yukarıdaki çerçeve boş kalırsa, doğrudan açın:
-<a href="../reports/mytool/index.html">docs/reports/mytool/index.html</a>.</p>
-```
+    ```yaml
+    - Reports:
+        - Windows:
+            - 'My tool': reports/windows/mytool.md
+    ```
 
-`../reports/...` yolları, bu sayfanın derlemeden sonra ineceği `docs/report-pages/mytool.html`
-dosyasına görelidir — `report-pages/` klasöründen bir `../` ile çıkıp, 1. adımdaki resource
-eşlemesinin raporu koyduğu `reports/mytool/...` klasörüne girer. Dört CSS sınıfı da
-(`report-toolbar`, `report-frame-wrap`, `report-frame`, `report-fallback`)
-`templates/rteu/public/main.css`'ten gelir (özel bir DocFX şablon katmanı, bkz. `docfx.json`'ın
-`"template"` dizisi) — tam yükseklikte, duyarlı bir çerçeve; `loading="lazy"` sayesinde ekrana
-gelene kadar yüklenmez.
+5. **Yerelde deneyin:** `7-build-all-windows.bat`, sonra `9-open-site-windows.bat`, sayfayı açın. Derleme, bitmiş site
+   üzerinde bir bağlantı denetimi çalıştırır ve sayfalarınızdaki kırık bağlantıda hata verir.
 
-**3. İsteğe bağlı: bir "İndir (zip)" düğmesi.** `7-build-app`, her raporun kendi klasörünü olduğu
-yerde ziplediği için (`7-build-app.bat`/`.sh`'nin 7. adımı) zip dosyası `index.html`'in hemen
-yanına düşer ve aynı resource eşlemesi tarafından otomatik olarak alınır. Derleme betiğinizin zip
-adımına bir satır daha ekleyin, örnek:
+## Sık sorunlar
 
-```batch
-powershell -NoProfile -Command "Compress-Archive -Path 'docs\mytool\*' -DestinationPath 'docs\mytool\mytool-report.zip' -Force"
-```
-
-Bunu atlarsanız, sayfanızdan "İndir (zip)" satırını kaldırmanız yeterli.
-
-**4. `docs/toc.yml`'de bağlayın**, mevcut `Reports` bölümünün altına:
-
-```yaml
-- name: Reports
-  items:
-    - name: My Tool Report
-      href: report-pages/mytool.md
-```
-
-**5. Üst düzey görünürlüğü hak ediyorsa ana sayfaya bir kart ekleyin** (`docs/home.md`, "Every
-report, one click away" ızgarası) — mevcut `<a class="rteu-card">` bloklarından birini kopyalayın.
-
-## Yerelde test etme
-
-`7-build-app.bat`/`.sh`'yi çalıştırın, ardından **`9-open-site.bat`/`.sh`**'yi — `site/index.html`'e
-çift tıklamak yerine. `9-open-site`, üretilen `site/` klasörünü küçük bir yerel HTTP sunucusu
-üzerinden sunar (`py -3.12 -m http.server` / `python3 -m http.server`) ve URL'yi yazdırır
-(varsayılan `http://localhost:8080/`); tarayıcınızda o URL'yi açın. Bu adım önemlidir: aşağıdaki
-"file:// çerçeveyi engeller" satırına bakın.
-
-## Sık karşılaşılan sorunlar
-
-| Belirti | Sebep | Çözüm |
+| Belirti | Neden | Çözüm |
 |---|---|---|
-| Çerçeve boş, ama "Yeni sekmede aç" sorunsuz çalışıyor | `site/index.html`'i `9-open-site`'nin yerel sunucusu yerine doğrudan (`file://...`) açtınız. Birçok tarayıcı, bir güvenlik önlemi olarak bir `file://` sayfasından `<iframe>` (ve DocFX'in kendi arama indeksini) yüklemeyi reddeder — bu, bu şablona özgü bir durum değildir. | `9-open-site.bat`/`.sh`'yi kullanın ve yazdırılan `http://localhost:8080/` URL'sini açın, ya da `dotnet docfx serve site`. |
-| Çerçeve GitHub Pages'te de boş, tarayıcı konsolunda `X-Frame-Options` veya `frame-ancestors` geçen bir hata var | Çerçevelenen sayfa, çerçevelenmeyi reddeden bir başlık gönderdi. Bu şablonun kendi ürettiği hiçbir sayfa bunu yapmaz (statik HTML'dir, böyle bir başlığı yoktur) — bu yalnızca `<iframe>`'i bu deponun kendi ürettiği bir sayfa yerine *harici* bir siteye yönlendirirseniz olur. | Yalnızca bu deponun kendi ürettiği ve `site/` içinde barındırdığı sayfaları çerçeveleyin; harici araçları çerçevelemek yerine onlara bağlantı verin. |
-| `7-build-app`'ten sonra `docs/<raporunuz>/index.html` açıkça var olduğu halde, yeni sayfa çerçeve içinde 404 veriyor | `docfx.json`'da o klasör için `resource` eşlemesi yok — DocFX yalnızca kendisine söylenen dosyaları kopyalar. | Yukarıdaki 1. adımdaki `{ "files": [ "<klasör>/**" ], "src": "docs", "dest": "docs/reports" }` girişini ekleyip yeniden derleyin. |
-| Çerçeve *yanlış* içeriği gösteriyor, ya da neredeyse doğru görünen bir yol için 404 veriyor | Göreli yolda bir kayma — `docs/report-pages/*.md` dosyaları, `docs/*.md` kılavuz sayfalarına göre bir klasör seviyesi daha derindir, bu yüzden `reports/...` değil `../reports/...` gerekir (`docs/guide/` altındaki bir *kılavuz* sayfası da tesadüfen aynı `../reports/...`'a ihtiyaç duyar — körü körüne kopyalamayın, gerçek klasör derinliğini sayın). | `.md` dosyasının kendi yolundan `docs/reports/...`'a kadar klasör seviyelerini sayın; çalışan bir sayfayla (`docs/report-pages/unit-tests.md`) karşılaştırın. |
-| `docfx build`, `reports/...` altındaki bir yol için `warning InvalidFileLink` yazdırıyor | Beklenen/zararsız — DocFX'in bağlantı doğrulayıcısı resource dosyalarını değil, yalnızca içerik belgelerini izler. Bu şablonun kendi derlemesinde doğrulanmıştır; bkz. [Sorun giderme](troubleshooting.tr.md). | Üretilen sayfayı açtığınızda dosya gerçekten çözülüyorsa görmezden gelin; yalnızca bağlantı gerçekten çalışmıyorsa araştırın. |
-
-## Sırada
-
-Her raporun ne gösterdiği için [Hangi rapor hangisi?](reports-explained.tr.md), ya da başka bir şey
-başarısız olduysa [Sorun giderme](troubleshooting.tr.md).
+| Çerçeve boş ama *Open in a new tab* çalışıyor | `site/index.html`'e çift tıkladınız (`file://`); tarayıcılar `file://` sayfalarının çerçevelerini engeller | `9-open-site-<platform>` kullanın (`http://localhost:8080/`) |
+| Çerçevede "bu makinede üretilmedi" notu | Diğer platformun raporu burada üretilmedi | O platformda derleyin veya sürümü indirin (CI ikisini de üretir) |
+| Çerçevede 404 | Yanlış göreli yol ya da klasör kopyalanmadı (`REPORTS`'ta yok) | Sayfa adresi `reports/<platform>/<tür>/` olduğundan yol `report/…`'dir; `site/reports/…/report/` var mı bakın |
+| `check-links` kırık bağlantı bildiriyor | Bir sayfa var olmayan bir şeye bağlanıyor | Yazdırdığı yolu düzeltin (o HTML dosyasına göre göreli) |
+| Gerçek bir web sitesinde çerçeveli sayfa yüklenmiyor | Sunucu `X-Frame-Options: DENY` gönderiyor | Yeni sekmede bağlantı verin; GitHub Pages bunu göndermez, yalnızca başka barındırıcıları etkiler |
+| Çerçevedeki DocFX/Maven sayfasında iki menü var | Kendi gezinmesi olan bir siteyi çerçevelediniz | Çerçevelemeyin, bağlantı verin (yukarıdaki kural) |

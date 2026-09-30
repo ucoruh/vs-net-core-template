@@ -1,81 +1,71 @@
 # Her şeyi kurma
 
-İlk derlemeden önce bu araçlara ihtiyacınız var. Her satırda işe yaradığını kanıtlayan komut ve bu
-kılavuz yazılırken gerçekten çalıştırılıp yakalanan çıktı var (sizde sürüm numaraları farklı
-olabilir -- komut hata vermediği sürece sorun değil).
+İlk derlemeden önce bu araçlara ihtiyacınız var. **Tek bir betik hepsini kurar**: `4-install-tools-windows.bat`
+veya `./4-install-tools-linux.sh`. Her aracın çalıştığını kanıtlayan bir komutu vardır (sürüm numaraları sizde
+biraz farklı olabilir; komut hata vermediği sürece sorun yok).
 
 ## Windows
 
-| # | Araç | Kurulum | Doğrulama | Örnek çıktı |
-|---|------|---------|-----------|-------------|
-| 1 | Git | [git-scm.com](https://git-scm.com/) veya `winget install Git.Git` | `git --version` | `git version 2.52.0.windows.1` |
-| 2 | GitHub CLI (`gh`) | `winget install GitHub.cli` (`10-release` için gerekli) | `gh --version` | `gh version 2.90.0` |
-| 3 | Chocolatey + Scoop | `3-install-package-manager.bat` | `where choco` | `%ProgramData%\Chocolatey` altında bir yol |
-| 4 | .NET SDK (`global.json`'da sabitlendi) | `4-install-dotnet-sdk.bat` (kullanıcı bazlı, yönetici gerekmez) | `dotnet-env.bat && dotnet --version` | `10.0.401` |
-| 5 | Astyle (kod biçimlendirici) | `4-install-astyle.bat` | `astyle --version` | `Artistic Style Version 3.6.2` |
-| 6 | Python 3 | çoğu makinede zaten var, yoksa `choco install python -y` | `py -3.12 --version` | `Python 3.12.6` |
-| 7 | coverxygen (Python paketi) | `4-install-coverxygen.bat` | `py -3.12 -m coverxygen --help` | hatasız kullanım metni |
-| 8 | lcov (`genhtml`) | `4-install-lcov.bat` | `genhtml --version` | `genhtml: LCOV version 1.15...` |
-| 9 | Doxygen + Graphviz, ReportGenerator + DocFX | `6-install-docfx-and-report-tools.bat` | `doxygen --version`, `dot -V`, `dotnet tool restore` | `1.9.7`, `dot - graphviz version 9.0.0`, `Restore was successful.` |
+1. **Git**'i ([git-scm.com](https://git-scm.com/) veya `winget install Git.Git`) ve **GitHub CLI**'yi
+   (`winget install GitHub.cli`, yalnızca `10-release` için gerekir) kurun. Sonra yeni bir terminal açın.
+2. Paket yöneticisini bir kez kurun (terminali **Yönetici olarak** açın):
 
-Bu sırayla çalıştırın (`3`, `4`/`5`/`6`'dan önce; `4`, `dotnet` çağıran her şeyden önce):
+    ```batch
+    3-install-package-manager-windows.bat
+    ```
 
-```batch
-3-install-package-manager.bat
-4-install-dotnet-sdk.bat
-4-install-astyle.bat
-4-install-coverxygen.bat
-4-install-lcov.bat
-6-install-docfx-and-report-tools.bat
-```
+3. Geri kalan her şeyi kurun (.NET SDK için yönetici gerekmez; Chocolatey kurulumları isteyebilir):
 
-Her script yeniden çalıştırılabilir (idempotent): istediğiniz zaman tekrar çalıştırın, yalnızca
-eksik olanı kurar.
+    ```batch
+    4-install-tools-windows.bat
+    ```
 
-> **Neden makinenizde zaten olan şeyin yanına, kullanıcı bazlı, sabitlenmiş bir .NET SDK'sı daha?**
-> Birçok laboratuvar/ortak bilgisayarda makine genelinde yalnızca eski bir SDK kurulu olur (ör.
-> "Program Files" içinde sadece .NET 9) ve bunu değiştirecek yönetici hakkınız olmayabilir.
-> `4-install-dotnet-sdk.bat`, `global.json`'daki tam SDK sürümünü kendi kullanıcı profilinize
-> (`%LocalAppData%\Microsoft\dotnet`) kurar -- diğer bütün scriptler önce `dotnet-env.bat`'i
-> `call` eder, bu da makine genelindeki SDK yerine sessizce bu kullanıcı bazlı SDK'yı tercih eder.
-> PATH'e elle dokunmanız hiç gerekmez.
+    Şunları kurar: `global.json`'da sabitlenmiş .NET SDK (kullanıcı başına), Doxygen, Graphviz, lcov (`genhtml`) ve
+    Windows'a özgü bir Perl, astyle, yerel dotnet araçları (ReportGenerator, DocFX) ve `requirements.txt`'teki Python
+    araçları (MkDocs Material, coverxygen). Yeniden çalıştırmak güvenlidir: yalnızca eksik olanı kurar.
+
+| Araç | Doğrulama | Örnek çıktı |
+|------|-----------|--------------|
+| Git | `git --version` | `git version 2.52.0.windows.1` |
+| .NET SDK | `scripts\dotnet-env-windows.bat && dotnet --version` | `10.0.401` |
+| Python + MkDocs | `py -3.12 -m mkdocs --version` | `mkdocs, version 1.6.1 ...` |
+| coverxygen | `py -3.12 -m coverxygen --help` | kullanım metni, hata yok |
+| Doxygen | `doxygen --version` | `1.9.x` veya daha yeni |
+| lcov | `genhtml --version` | `genhtml: LCOV version 1.x/2.x` |
+| ReportGenerator, DocFX | `dotnet tool restore` | `Restore was successful.` |
+| astyle | `astyle --version` | `Artistic Style Version 3.x` |
+
+> **Neden sabitlenmiş, kullanıcı başına bir .NET SDK?** Laboratuvar bilgisayarlarında çoğu zaman makine genelinde
+> yalnızca eski bir SDK vardır ve yönetici hakkınız olmayabilir. `4-install-tools-windows.bat`, `global.json`'daki
+> tam SDK'yı `%LocalAppData%\Microsoft\dotnet` altına kurar; her betik önce `scripts\dotnet-env-windows.bat`'ı
+> yükler ve onu tercih eder. PATH'i elle düzenlemeniz gerekmez.
 
 ## Linux / WSL
 
-Aynı araçlar, `apt` tabanlı kurulum, aynı script numaraları `.sh` uzantısıyla:
+Burada WSL **Linux'tur**: aynı `*-linux.sh` betikleri, Linux ikilileri, her dosya adında `linux`.
 
 ```bash
-chmod +x *.sh   # bir kez, klonladıktan sonra: git, bir zip indirmesinde çalıştırma bitini korumaz
-./3-install-package-manager.sh
-./4-install-dotnet-sdk.sh
-./4-install-astyle.sh
-./4-install-coverxygen.sh
-./4-install-lcov.sh
-./6-install-docfx-and-report-tools.sh
+chmod +x *.sh scripts/*.sh        # klonladıktan sonra bir kez (zip indirmek çalıştırma iznini kaybettirir)
+./4-install-tools-linux.sh        # apt paketleri (bir kez sudo ister), kullanıcı başına .NET SDK, dotnet ve pip araçları
 ```
 
-Aynı şekilde doğrulayın, yalnızca `py -3.12` yerine (WSL `python3` kullanır):
+Doğrulama:
 
 ```bash
-. ./dotnet-env.sh && dotnet --version   # 10.0.401
-astyle --version                        # Artistic Style Version 3.6.2 (veya dağıtımınızın sürümü)
+. scripts/dotnet-env-linux.sh && dotnet --version   # 10.0.401
+python3 -m mkdocs --version
 python3 -m coverxygen --help
 genhtml --version
 doxygen --version
 ```
 
-> **WSL ile Google Drive bir arada yürümez.** Klonunuz bir Windows Google Drive klasöründeyse
-> (`/mnt/g/My Drive/...`), WSL buraya güvenilir biçimde erişemez (Google Drive, `G:` bağlantısı
-> (mount) üzerinden bile gerçek bir yol değil, sanal/bulut bir dosya sistemidir) -- önce depoyu
-> normal bir Linux yoluna kopyalayın (ör. `cp -r "/mnt/g/My Drive/.../vs-net-core-template"
-> ~/vs-net-core-template`) ve her `.sh` scriptini oradan çalıştırın. Bkz.
-> [Sorun giderme](troubleshooting.tr.md).
+> **WSL ve Google Drive birlikte çalışmaz.** Depoyu `/mnt/g/My Drive/...` altında değil, normal bir Linux yoluna
+> (`~/work/...`) klonlayın. Bkz. [Sorun giderme](troubleshooting.tr.md).
 
 ## İsteğe bağlı: bir IDE
 
-Visual Studio 2022+ (herhangi bir sürüm, ".NET masaüstü geliştirme" iş yükü) veya
-[C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
-eklentili VS Code, ikisi de çalışır; numaralı scriptleri çalıştırmak için hiçbiri zorunlu değildir.
+Visual Studio 2022+ (".NET masaüstü geliştirme" iş yükü) veya C# Dev Kit ile VS Code. Betikleri çalıştırmak için
+ikisi de gerekmez.
 
 ## Sırada
 

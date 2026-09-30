@@ -1,64 +1,61 @@
 # Günlük iş akışı
 
-## Tüm scriptler, tek tabloda
+## Betikler: aynı numara = aynı iş, platform sonek olarak
 
-| Script | Ne yapar | Ne zaman çalıştırılır |
-|--------|----------|------------------------|
-| `1-pre-commit` | Git kancası (hook): her commit'ten önce eklenen (staged) `.cs`/`.c`/`.cpp`/`.h`/`.java` dosyalarını astyle ile biçimlendirir | bir kez `.git/hooks/pre-commit`'e kopyalayın (aşağıda), sonra otomatik çalışır |
-| `2-create-git-ignore` | `.gitignore`'ın toptal.com tabanını yeniden üretir, bu projenin kendi eklerini korur | nadiren, yalnızca henüz göz ardı (ignore) kuralınız olmayan bir dil gerektiğinde |
-| `3-install-package-manager` | Chocolatey/Scoop kurar (Windows) ya da `apt`'ı tazeler (WSL) | makine başına bir kez |
-| `4-install-dotnet-sdk` | `global.json`'da sabitlenen .NET SDK'sını kullanıcı bazlı kurar | makine başına bir kez |
-| `4-install-astyle` / `4-install-coverxygen` / `4-install-lcov` | Biçimlendirici, belge-kapsama ve lcov araçlarını kurar | makine başına bir kez |
-| `5-format-code` | Üç C# proje klasörü üzerinde astyle çalıştırır | commit'ten önce, ya da git kancasına bırakın |
-| `6-install-docfx-and-report-tools` | Doxygen/Graphviz kurar, sabitlenmiş yerel `dotnet tool` bildirimini (manifest) geri yükler (ReportGenerator, DocFX) | makine başına bir kez, `.config/dotnet-tools.json` değiştiğinde tekrar |
-| `7-build-app` | Geri yükleme (restore), derleme, kapsamayla test, Doxygen, her iki kod-kapsama rapor ailesi, her iki belge-kapsama rapor ailesi, DocFX sitesi | ne zaman taze rapor istiyorsanız |
-| `8-run-app` | Örnek uygulamayı çalıştırır (verilen argümanları iletir); girdi (input) beklemez, asla bloklamaz | uygulamanın kendisini denemek için |
-| `9-open-site` | `site/`'i yerel bir HTTP sunucusu üzerinden sunar ve açar (böylece rapor `<iframe>`'leri yüklenir -- bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)) | `7-build-app`'ten sonra |
-| `10-release` | İkilileri (binaries) + her raporu + siteyi `site.zip` olarak paketler, `gh` ile bir GitHub Release yayınlar | bir sürümü teslim etmeye hazır olduğunuzda (bkz. [Sürümler ve özel depolar](releases-and-private-repos.tr.md)) |
+Her betik `NN-ad-windows.bat` ve `NN-ad-linux.sh` olarak vardır (yerel Linux ve WSL ikisi de `linux`). Yardımcılar
+`scripts/` altındadır. Proje adı ve sürüm **`project.env`** dosyasından gelir.
 
-## Pre-commit kancasını bir kez kurun
+| Betik | Ne yapar | Ne zaman |
+|---|---|---|
+| `1-configure-git-hooks` | pre-commit kancasını (astyle) kurar | klon başına bir kez |
+| `2-create-gitignore` | `.gitignore`'u yeniler, projeye özel bölümü korur | nadiren |
+| `3-install-package-manager` (yalnız Windows) | Chocolatey + Scoop | makine başına bir kez |
+| `4-install-tools` | .NET SDK, Doxygen, lcov, astyle, dotnet araçları, MkDocs Material, coverxygen | makine başına bir kez |
+| `5-format-code` | üç C# projesinde astyle | commit öncesi (veya kanca yapsın) |
+| `6-build-and-test` | **hızlı**: derleme (Debug) + birim testleri | her değişiklikten sonra |
+| `7-build-all` | derleme, kapsamalı testler, her rapor (iki aile), Doxygen + DocFX, uygulama, site, `release/` | push öncesi ve sunum için |
+| `8-run-app` | örnek uygulamayı çalıştırır (`add 2 3`) | denemek için |
+| `9-open-site` | `site/`'ı `http://localhost:8080/`'de sunar ve açar | siteye bakmak için |
+| `10-release` | her şeyi üretir ve `gh` ile GitHub Release yayınlar (önce `--dry-run`) | teslimde |
+| `11-clean` | üretilen her klasörü siler | bir şey eskimiş görünürse |
 
-```bash
-cp 1-pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit   # WSL/macOS; Windows'ta zararsız, etkisiz
-```
+### Eski ad → yeni ad
 
-Bundan sonra her `git commit`, eklediğiniz `.cs` dosyalarını `astyle-options.txt`'deki kurallarla
-otomatik biçimlendirir; `.gitignore`, `README.md` veya `Doxyfile` eksikse commit'i reddeder.
+| Eski | Yeni |
+|---|---|
+| `1-pre-commit` | `scripts/hooks/pre-commit` (`1-configure-git-hooks-*` kurar) |
+| `2-create-git-ignore.bat/.sh` | `2-create-gitignore-windows.bat` / `-linux.sh` |
+| `3-install-package-manager.bat` | `3-install-package-manager-windows.bat` (`.sh` kaldırıldı: apt, `4-install-tools-linux.sh` içinde) |
+| `4-install-dotnet-sdk`, `4-install-astyle`, `4-install-coverxygen`, `4-install-lcov`, `6-install-docfx-and-report-tools` | hepsi `4-install-tools-windows.bat` / `-linux.sh` içinde (SDK ve pip kısımları `scripts/` yardımcıları) |
+| `5-format-code.bat/.sh` | `5-format-code-windows.bat` / `-linux.sh` |
+| *(yeni)* | `6-build-and-test-windows.bat` / `-linux.sh` |
+| `7-build-app.bat/.sh` | `7-build-all-windows.bat` / `-linux.sh` |
+| `8-run-app.bat/.sh` | `8-run-app-windows.bat` / `-linux.sh` |
+| `9-open-site.bat/.sh` | `9-open-site-windows.bat` / `-linux.sh` |
+| `10-release.bat/.sh` | `10-release-windows.bat` / `-linux.sh` |
+| *(yeni)* | `11-clean-windows.bat` / `-linux.sh` |
+| `dotnet-env.bat/.sh` | `scripts/dotnet-env-windows.bat` / `-linux.sh` |
+| `VERSION` | `project.env` içinde `VERSION=` |
+| `docs/testresults`, `docs/coveragereport`, `docs/doxygen`, … | `reports/<platform>/<tür>-<araç>/` |
+| `docfx.json`, `toc.yml` (DocFX ana sayfaydı) | `docfx/` (DocFX artık `native/` altında API referansı); ana site MkDocs (`mkdocs.yml`) |
+| `pages.yml`, `release.yml` | tek boru hattı, `ci.yml` |
 
-## Dal (branch), commit, push, CI
+## Sıradan bir gün
 
-1. `git checkout -b feature/<kisa-ad>` -- doğrudan `main`'e commit atmayın.
-2. Önce testi, sonra kodu yazın, ardından `7-build-app.bat`/`.sh`'i çalıştırıp
-   `docs/coveragereport/index.html`'in düşmediğini kontrol edin.
-3. Küçük, mantıklı adımlarla, açık bir mesajla commit atın (emir kipi: "Add X", "Added X" veya
-   "Stuff" değil).
-4. `git push -u origin feature/<kisa-ad>`, `main`'e bir çekme isteği (pull request) açın.
-5. GitHub Actions (`.github/workflows/ci.yml`) hem Windows hem Ubuntu'da otomatik olarak geri
-   yükler, derler ve test eder; ayrıca bütün siteyi bir kez (Ubuntu'da) derleyip indirilebilir bir
-   derleme artefaktı olarak yükler (PR'ın kontrollerinde / koşunun özet sayfasında görünür) --
-   birleştirmeden (merge) önce yeşil olmasını bekleyin. Her push'ta bir sürüm yayınlamaz ya da
-   Pages dağıtmaz; bkz. aşağısı ve [Sürümler ve özel depolar](releases-and-private-repos.tr.md).
-6. PR incelendikten (varsa bir takım arkadaşınız tarafından) ve CI yeşil olduktan sonra birleştirin.
-   `main`'e birleştirildikten sonra `.github/workflows/pages.yml` siteyi yeniden derleyip otomatik
-   olarak `gh-pages` dalına yayınlar (özel bir depoda `PAGES_ON_PRIVATE` olmadan bir açıklamayla
-   atlanır -- bkz. [Sürümler ve özel depolar](releases-and-private-repos.tr.md)).
+1. `git checkout -b feature/my-change`
+2. Önce testi, sonra kodu yazın, ardından `6-build-and-test-<platform>` (saniyeler).
+3. Push öncesi `7-build-all-<platform>` çalıştırın ve kapsamanın düşmediğine bakın.
+4. `git commit`, `git push`, pull request açın; CI Windows, Linux ve macOS'ta derler.
 
-## Her şey nereye gider
+## Her şey nereye düşer (hepsi gitignore'da)
 
-`docs/` ve `site/` altındaki her şey `7-build-app` tarafından üretilir ve commit **edilmez** (bkz.
-`.gitignore`) -- sitenin ana sayfasının (`docs/home.md`) gösterdiği ve bir derleme çalıştırılmadan
-GitHub'da/Pages'te görünmesi için commit edilmeye değer olan `assets/` altındaki küçük SVG rozetler
-(hem kod hem belge kapsaması) dışında.
+| Klasör | İçerik |
+|---|---|
+| `build/<platform>-<config>/` | derleyici çıktısı (`dotnet --artifacts-path`); Windows ve WSL çakışmaz |
+| `publish/<platform>-<arch>/` | uygulama, kendi kendine yeten |
+| `reports/<platform>/<tür>-<araç>/` | `tests-trx`, `coverage-reportgenerator`, `coverage-lcov`, `doccoverage-reportgenerator`, `doccoverage-lcov`, `api-doxygen`, `api-docfx` |
+| `site/` | MkDocs sitesi (ana site): `9-open-site` |
+| `site-native/` | DocFX sitesi (`native/` altında yayınlanır) |
+| `release/` | her sürüm dosyası, GitHub'dakiyle aynı adlar, ayrıca `ASSETS.md` ve `SHA256SUMS.txt` |
 
-| Ne | Yol |
-|----|-----|
-| Bütün site | `site/index.html` (çift tıklamak yerine `9-open-site` ile açın) |
-| Her bir rapor, kendi `<iframe>` sayfasında | bkz. [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md) ve [Hangi rapor hangisi?](reports-explained.tr.md) |
-| Canlı site (`main`'e push'tan sonra, Pages etkinse) | `https://<sizin>.github.io/<deponuz>/` |
-| Sürüm paketleri | `release/` (`10-release`'den, o da commit edilmez) |
-
-## Sırada
-
-[Sürümler ve özel depolar](releases-and-private-repos.tr.md), ya da bir şey başarısız olduysa
-[Sorun giderme](troubleshooting.tr.md).
+Yalnızca `docs/assets/` altındaki küçük SVG rozetler commit'lenir (README ve site bunları gömer).

@@ -15,29 +15,28 @@ sayfa bunun neye izin verip neye izin vermediğini ve `10-release`'in izin verme
 (Bu yazı yazılırken GitHub'ın kendi belgelerine göre; güncel sayılar için
 [GitHub'ın fiyatlandırma sayfasına](https://github.com/pricing) bakın.)
 
-Pages, özel bir Free depoda çalışmadığı için **bu şablon Pages'i asla zorunlu kılmaz**. `9-open-site`
-siteyi kendi diskinizden küçük bir yerel HTTP sunucusu üzerinden sunar ve açar (bkz.
-[Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)), `10-release`/`release.yml` ise
-üretilen bütün siteyi her sürümün içine `site.zip` olarak paketler -- ders sorumlusunun (veya
+Pages, özel bir Free depoda çalışmadığı için **bu şablon Pages'i asla zorunlu kılmaz**. `7-build-all` + `9-open-site`
+siteyi kendi diskinizden sunar (bkz. [Projenizi GitHub Pages olmadan göstermek](showing-without-pages.tr.md)),
+`10-release` / CI ise üretilen bütün siteyi her sürümün içine `<proje>-<sürüm>-site.zip` olarak paketler -- ders sorumlusunun (veya
 depoya erişimi olan herkesin) Pages olmadan görmesini sağlayan yöntem budur. **Herkese açık
 (public)** bir depoda (ör. bu şablonun kendi `ucoruh/vs-net-core-template`'i) Pages normal şekilde
 çalışır ve bunların hiçbirine ihtiyaç duymaz -- bkz. aşağıdaki "Pages dağıtım iş akışı".
 
-## Pages dağıtım iş akışı
+## CI iş akışı ve Pages dağıtımı
 
-`.github/workflows/pages.yml`, `main`'e her push'ta (ve elle, `workflow_dispatch` ile) bütün siteyi
-yeniden derleyip `gh-pages` dalına yayınlar. Önce `github.event.repository.private`'ı kontrol eder:
+`.github/workflows/ci.yml` tek bir boru hattıdır: Windows ve Linux işleri derler, test eder, her raporu ve API
+dokümanını üretir (`7-build-all-<platform> --no-site`) ve platform başına artefakt yükler; macOS işi yalnızca
+uygulamayı derler; `site` işi iki platformu birleştirir, MkDocs ve DocFX sitelerini üretir, bağlantıları denetler ve
+siteyi yükler; `deploy-pages`, `main`'e push'ta (veya elle) `gh-pages` dalına yayınlar; `release` bir `v*` etiketinde
+çalışır. Önce `github.event.repository.private` denetlenir:
 
-- **Herkese açık depo:** normal şekilde dağıtır. Canlı site
-  `https://<siz>.github.io/<deponuz>/` adresinde olur.
-- **Özel depo:** dağıtım adımı **atlanır**, koşunun hem `::notice` uyarısında hem de iş özetinde
-  (job summary) bir açıklamayla birlikte -- *meğer ki* `PAGES_ON_PRIVATE` depo değişkeni `true`
-  olarak ayarlanmış olsun. GitHub Pro'ya (ya da Student Developer Pack'e) sahip olduğunuzda *ve*
-  **Settings -> Pages** altından Pages'i açtığınızda, bunu **Settings -> Secrets and variables ->
-  Actions -> Variables** altından ayarlayın -- sonraki push normal şekilde dağıtır.
+- **Herkese açık depo:** Pages normal dağıtılır: `https://<siz>.github.io/<deponuz>/`.
+- **Özel depo:** Pages adımı **atlanır** (`::notice` ve iş özeti nedenini söyler ve
+  [Projenizi GitHub Pages olmadan göstermek](showing-without-pages.tr.md) sayfasına yönlendirir); depo değişkeni
+  `PAGES_ON_PRIVATE` `true` ise atlanmaz (**Settings -> Secrets and variables -> Actions -> Variables**). Bunu GitHub Pro
+  (veya Student Developer Pack) sahibi olup **Settings -> Pages**'ten Pages'i açtıktan sonra ayarlarsınız.
 
-Her iki durumda da `release.yml` (aşağıda) her zaman `site.zip`'i ekler, böylece Pages etkin olsun
-olmasın site ders sorumlusuna ulaşır.
+Her iki durumda da **sürüm** siteyi `<proje>-<sürüm>-site.zip` olarak ekler; özel depolarda sürümler asla atlanmaz.
 
 ## GitHub Student Developer Pack alın (isteğe bağlı, Pro verir)
 
@@ -87,43 +86,45 @@ github.com
   ✓ Token: gho_************************************
 ```
 
+## Her sürüm dosyası (yerelde ve GitHub'da aynı adlar)
+
+```text
+<proje>-<sürüm>[-<platform>[-<arch>]]-<içerik>[-<araç>].<uzantı>      (sürüm "v" olmadan; project.env'den)
+```
+
+| Dosya | Ne |
+|---|---|
+| `calculator-2.1.0-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | uygulama, kendi kendine yeten (macOS: yalnız CI) |
+| `calculator-2.1.0-<platform>-report-tests.zip` | birim test sonuçları (TRX + HTML) |
+| `-report-coverage-reportgenerator.zip`, `-report-coverage-lcov.zip` | kod kapsaması, iki aile |
+| `-report-doccoverage-reportgenerator.zip`, `-report-doccoverage-lcov.zip` | dokümantasyon kapsaması, iki aile |
+| `-api-doxygen.zip`, `-api-docfx.zip` | API dokümanları (Doxygen; DocFX eksiksiz bir sitedir) |
+| `calculator-2.1.0-source.zip`, `-site.zip` | etiketteki kaynak; tüm MkDocs sitesi (iki platform) |
+| `ASSETS.md`, `SHA256SUMS.txt` | her dosyanın tablosu (platform, içerik, araç, site bağlantısı); sağlama toplamları |
+
+`<platform>` `windows` veya `linux`'tur (yerel Linux ve WSL ikisi de `linux`). Windows ikilileri ve tüm HTML için `.zip`;
+Linux/macOS ikilileri için `.tar.gz`. Yerelde `release/`, **bu platformun** dosyalarını ve tarafsız olanları içerir;
+eksik olanı `ASSETS.md` söyler; CI iki platformu da üretir.
+
 ## `10-release`'i kullanma
 
 ```batch
-10-release.bat --dry-run
-10-release.bat v1.0.0 --dry-run
-10-release.bat v1.0.0
+10-release-windows.bat --dry-run
+10-release-windows.bat
 ```
 
-Linux/WSL'de: `./10-release.sh --dry-run` vb. `--dry-run`, her şeyi derler ve paketler --
-`7-build-app`'i çalıştırır, Linux/macOS/Windows için kendi kendine yeten (self-contained) ikilileri
-yayınlar, her raporu ^(her iki aile -- bkz. [Hangi rapor hangisi?](reports-explained.tr.md)^),
-Doxygen çıktısını ve bütün DocFX sitesini `release/site.zip` olarak paketler -- sonra bunu
-çalıştırmak yerine tam `gh release create` komutunu ve bütün varlık listesini **yazdırır**. Hiçbir
-şey yayınlanmaz. Yazdırılandan memnun kaldığınızda `--dry-run`'ı kaldırın.
+Linux/WSL'de: `./10-release-linux.sh --dry-run` vb. Sürüm `project.env` içindeki `VERSION`'dır (etiket `v<VERSION>`):
+düzenleyin, commit'leyin, sonra yayınlayın. `--dry-run` her şeyi üretir (`7-build-all`), `release/`'i paketler, sonra
+çalıştırmak yerine tam `gh release create` komutunu ve dosya listesini **yazdırır**. Betik kirli bir çalışma
+ağacından gerçek sürümü reddeder; o etiketin sürümü zaten varsa (örn. CI oluşturduysa) yenisini yaratmak yerine
+`gh release upload --clobber` ile ona yükler.
 
-Açık bir sürüm argümanı verilmezse script, depo kökündeki `VERSION` dosyasını (`0.1.0` gibi tek
-satırlık) okur; bir sonraki sürümünüz için bu dosyayı güncelleyin. Script, kirli (uncommitted
-değişiklikli) bir çalışma ağacından gerçek bir sürüm yayınlamayı reddeder -- bir sürüm her zaman
-kodun tek, kesin, commit'lenmiş bir durumuna karşılık gelmelidir (`--dry-run` bu kontrolü atlar,
-böylece çalışma sırasında paketlemeyi prova edebilirsiniz).
+## İsteğe bağlı: CI sürümü
 
-`release/site.zip`'in içinde ne var: bütün üretilmiş site, kendi kendine yeten -- herhangi bir
-yere açın (unzip) ve `index.html`'i açın; içindeki her rapor ve API referans bağlantısı, bir web
-sunucusu olmadan çalışan göreli bir bağlantıdır.
-
-## İsteğe bağlı: Actions sürüm iş akışı
-
-`.github/workflows/release.yml`, aynı yayınlamayı kendi makineniz yerine CI'dan yapmanın alternatif
-bir yolu -- bir `v*` etiketi push ederek ya da elle (`workflow_dispatch`) tetiklenir -- `10-release`'i
-yerelde çalıştırmak istemiyorsanız işinize yarar, bedeli Actions dakikalarıdır (tam bir derleme +
-yayınlama + paketleme koşusu genelde aylık kotanızdan birkaç dakika harcar; günlük `ci.yml` iş akışı
-bunu tam da bu bütçeyi yemesin diye her push'ta **değil**, yalnızca istek/etiket üzerine çalıştırır).
-Yukarıdaki tabloyla aynı varlık kümesini artı bir `source.zip` kaynak arşivini paketler ve canlı
-siteye bağlanan, her varlığı listeleyen sürüm notları yazar. Özel bir depoda, ders sorumlusunu
-işbirlikçi olarak eklemenizi hatırlatan bir `::notice`/iş özeti ekler (yukarı bakın) -- sürümlerin
-kendisi Pages dağıtımının aksine özel depoda **atlanmaz**. Kaç dakikanız kaldığından emin değilseniz
-yerelde `10-release`'i tercih edin.
+Bir etiket gönderin (`git tag v2.1.0 && git push origin v2.1.0`); `ci.yml` iki platformu ve macOS'u derler, sonra
+yukarıdaki **her** dosyayı, canlı siteye ve her rapor sayfasına bağlanan notlarla GitHub Release'e ekler. Actions
+dakikası harcar (üç çalıştırıcıda tam bir çalışma birkaç dakikadır); kaç dakikanız kaldığından emin değilseniz yerelde
+`10-release` tercih edin (Free: özel depolarda ayda 2.000 dk).
 
 ## Sürüm sorun giderme
 

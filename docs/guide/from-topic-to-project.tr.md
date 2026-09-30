@@ -9,18 +9,21 @@ rehberinde sık görülen bir konu olan **"Kütüphane Yönetim Sistemi" (Librar
 - [ ] Kısa, PascalCase bir proje adı seçin (`LibraryCatalog`, "Kütüphane Yönetim Sistemi" değil).
 - [ ] Çözümü (solution), üç proje klasörünü ve `.csproj` dosyalarını yeniden adlandırın.
 - [ ] Her `.csproj`'daki kök ad alanını (`RootNamespace`) ve her `namespace` bloğunu yeniden adlandırın.
-- [ ] `Doxyfile`'ın `PROJECT_NAME`/`PROJECT_BRIEF`'ini, `docfx.json`'ın metadata `src`'ini ve
-      `toc.yml`/`docs/toc.yml` başlıklarını güncelleyin.
-- [ ] `README.md`'yi (GitHub'a bakan sayfa) **ve** `docs/home.md`'yi (derleme sırasında
+- [ ] **`project.env`** içinde `PROJECT_NAME` (küçük harf, örn. `librarycatalog`) ve `VERSION` değerlerini ayarlayın:
+      her betik, sürüm dosyası adları ve CI bunu okur. Aşağıdaki yeniden adlandırmalardan sonra `SOLUTION_FILE`,
+      `APP_PROJECT`, `TEST_PROJECT`, `LIBRARY_PROJECT` yollarını da güncelleyin.
+- [ ] `Doxyfile`'ın `PROJECT_NAME`/`PROJECT_BRIEF`'ini, `docfx/docfx.json`'ın metadata `src`'ini, `mkdocs.yml`
+      (`site_name`, `site_url`, `repo_url`) ve `docfx/index.md` başlıklarını güncelleyin.
+- [ ] `README.md`'yi (GitHub'a bakan sayfa) **ve** `docs/index.md`'yi (derleme sırasında
       `index.md`'ye kopyalanan sitenin ana sayfası -- bkz.
       [Hangi rapor hangisi?](reports-explained.tr.md)) kendi projenizin açıklamasıyla güncelleyin;
-      `docs/home.md`'deki kart ızgaraları rapor/kılavuzlara göreli yollarla bağlanır, başka bir
+      `docs/index.md`'deki kart ızgaraları rapor/kılavuzlara göreli yollarla bağlanır, başka bir
       değişiklik gerekmez.
 - [ ] Her yeni sınıf için **önce** testleri yazın; tıpkı `CalculatorCliTests.cs`'nin
       `CalculatorCli`'ye güvenmeden önce onu test etmesi gibi.
 - [ ] "Ayrıştırma (parsing) kütüphanede yaşar, `Program.cs`'de değil" şeklini koruyun (aşağıda),
       böylece kendi komut satırı işlemeniz de test edilebilir kalır.
-- [ ] Her yeniden adlandırma adımından sonra `7-build-app`'i çalıştırın -- bütün değişiklikleri
+- [ ] Her yeniden adlandırma adımından sonra `7-build-all`'i çalıştırın -- bütün değişiklikleri
       birikte yapıp sonunda "umarım çalışır" demeyin.
 
 ## Adım adım ("LibraryCatalog" örneği)
@@ -87,18 +90,18 @@ geçersiz girdi testi. `CalculatorTests.cs`/`CalculatorCliTests.cs` şekli göst
 **7. Belgeleri güncelleyin.**
 
 - `Doxyfile`: `PROJECT_NAME`, `PROJECT_BRIEF` ve `INPUT` listesi (klasör adları değişti).
-- `docfx.json`: `metadata[0].src[0].src` yolu (`CalculatorLibrary` yerine `LibraryCatalog`).
-- `toc.yml` / `docs/toc.yml`: hâlâ "Calculator" diyen sayfa başlıkları.
+- `docfx/docfx.json`: `metadata[0].src[0].src` yolu (`CalculatorLibrary` yerine `LibraryCatalog`).
+- `mkdocs.yml` ve `docfx/index.md`: hâlâ "Calculator" diyen başlıklar; `project.env`: ad, sürüm ve proje yolları.
 - `README.md`: projenizin gerçek açıklaması, GitHub'ın kendi depo sayfası için.
-- `docs/home.md`: sitenin gerçek ana sayfası için aynı açıklama (`7-build-app`, DocFX derlemesinden
+- `docs/index.md`: sitenin gerçek ana sayfası için aynı açıklama (`7-build-all`, DocFX derlemesinden
   hemen önce bunu `index.md`'ye kopyalar -- bkz.
   [Sitenizin içinde bir raporu göstermek](embed-html-in-site.tr.md)).
 
 **8. Yeniden derleyin ve kontrol edin.**
 
 ```batch
-7-build-app.bat
-9-open-site.bat
+7-build-all-windows.bat
+9-open-site-windows.bat
 ```
 
 Şunları doğrulayın: derleme 0 uyarıyla geçiyor, bütün testleriniz geçiyor, `site/api/` altındaki API
@@ -107,8 +110,8 @@ referansı sizin sınıflarınızı listeliyor (`Calculator` değil) ve kapsama 
 ## "Kapsamayı korumak" pratikte ne demek?
 
 Örneğin %100 satır kapsamasının, test yazmadan kod eklediğiniz için sessizce %60'a düşmesine izin
-vermeyin. Her yeni sınıftan sonra `7-build-app`'i çalıştırın ve bir sonrakine geçmeden önce
-`docs/coveragereport/index.html`'e bakın
+vermeyin. Her yeni sınıftan sonra `7-build-all`'i çalıştırın ve bir sonrakine geçmeden önce
+`reports/<platform>/coverage-reportgenerator/index.html`'e bakın
 ([Hangi rapor hangisi?](reports-explained.tr.md)) -- eksik testi hemen yazmak, sonradan on tane
 test edilmemiş metodun amacını yeniden hatırlamaya çalışmaktan çok daha kolaydır.
 

@@ -7,19 +7,22 @@ own topic's name throughout.
 ## Checklist
 
 - [ ] Pick a short PascalCase project name (`LibraryCatalog`, not `Library Management System`).
+- [ ] Set `PROJECT_NAME` (lower case, e.g. `librarycatalog`) and `VERSION` in **`project.env`** -- every script, the
+      release asset names and CI read it. Also update `SOLUTION_FILE`, `APP_PROJECT`, `TEST_PROJECT`, `LIBRARY_PROJECT` there
+      after the renames below.
 - [ ] Rename the solution, the three project folders and their `.csproj` files.
 - [ ] Rename the root namespace in each `.csproj` (`RootNamespace`) and every `namespace` block.
-- [ ] Update `Doxyfile`'s `PROJECT_NAME`/`PROJECT_BRIEF`, `docfx.json`'s metadata `src`, and the
-      titles in `toc.yml`/`docs/toc.yml`.
-- [ ] Update `README.md` (the GitHub-facing page) **and** `docs/home.md` (the site's landing page,
-      copied to `index.md` at build time — see [Which report is which?](reports-explained.en.md))
-      with your own project's description; the card grids in `docs/home.md` link to reports/guides
-      by relative path and do not need to change otherwise.
+- [ ] Update `Doxyfile`'s `PROJECT_NAME`/`PROJECT_BRIEF`, `docfx/docfx.json`'s metadata `src`, the
+      titles in `mkdocs.yml` (`site_name`, `site_url`, `repo_url`) and `docfx/index.md`; also the three project
+      names in `5-format-code-*` and `astyle` paths.
+- [ ] Update `README.md` (the GitHub-facing page) **and** `docs/index.md` (the site's landing page)
+      with your own project's description; its cards link to reports and guides by relative path and
+      do not need to change otherwise.
 - [ ] Write tests **first** for each new class, the same way `CalculatorCliTests.cs` tests
       `CalculatorCli` before you'd trust it.
 - [ ] Keep the "parsing lives in the library, not in `Program.cs`" shape (see below) so your own
       command-line handling stays testable.
-- [ ] Run `7-build-app` after every rename step -- do not batch every change together and hope.
+- [ ] Run `7-build-all` after every rename step -- do not batch every change together and hope.
 
 ## Step by step (the "LibraryCatalog" example)
 
@@ -84,26 +87,27 @@ normal/boundary cases, `Assert.Throws<T>` for invalid input).
 **7. Update the docs.**
 
 - `Doxyfile`: `PROJECT_NAME`, `PROJECT_BRIEF`, and the `INPUT` list (folder names changed).
-- `docfx.json`: the `metadata[0].src[0].src` path (`LibraryCatalog` instead of `CalculatorLibrary`).
-- `toc.yml` / `docs/toc.yml`: page titles that still say "Calculator".
+- `docfx/docfx.json`: the `metadata[0].src[0].src` path (`LibraryCatalog` instead of `CalculatorLibrary`).
+- `mkdocs.yml` and `docfx/index.md`: titles that still say "Calculator"; `project.env`: name, version and project paths.
 - `README.md`: your project's real description, for GitHub's own repository page.
-- `docs/home.md`: the same description for the site's actual landing page (`7-build-app` copies it
-  to `index.md` right before the DocFX build — see [Showing a report inside your site](embed-html-in-site.en.md)).
+- `docs/index.md`: the same description for the site's landing page (see
+  [Showing an HTML report inside your site](embed-html-in-site.en.md)).
 
 **8. Rebuild and check.**
 
 ```batch
-7-build-app.bat
-9-open-site.bat
+7-build-all-windows.bat
+9-open-site-windows.bat
 ```
 
-Confirm: the build has 0 warnings, all your tests pass, the API reference under `site/api/` lists
+Confirm: the build has 0 warnings, all your tests pass, the API reference under `site-native/<platform>/` (the DocFX site) lists
 your classes (not `Calculator`), and coverage is where you expect it.
 
 ## What "keep coverage" means in practice
 
 Do not let the sample's 100% line coverage quietly drop to 60% because you added code without tests.
-Run `7-build-app` after each new class and check `docs/coveragereport/index.html`
+Run `6-build-and-test` after each change, `7-build-all` after each new class, and check
+`reports/<platform>/coverage-reportgenerator/index.html`
 ([Which report is which?](reports-explained.en.md)) before you move on to the next one -- it is much
 easier to write the missing test right away than to reconstruct intent for ten untested methods later.
 

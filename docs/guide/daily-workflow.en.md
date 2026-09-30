@@ -1,64 +1,61 @@
 # Daily workflow
 
-## Every script, in one table
+## The scripts: same number = same job, platform as suffix
 
-| Script | What it does | Run it |
-|--------|---------------|--------|
-| `1-pre-commit` | Git hook: formats staged `.cs`/`.c`/`.cpp`/`.h`/`.java` with astyle before each commit | copy once to `.git/hooks/pre-commit` (below), then it runs automatically |
-| `2-create-git-ignore` | Regenerates `.gitignore`'s toptal.com base, keeps this project's own additions | rarely, only if you need a language you don't have ignores for yet |
-| `3-install-package-manager` | Installs Chocolatey/Scoop (Windows) or refreshes `apt` (WSL) | once per machine |
-| `4-install-dotnet-sdk` | Installs the `global.json`-pinned .NET SDK per-user | once per machine |
-| `4-install-astyle` / `4-install-coverxygen` / `4-install-lcov` | Install the formatter, doc-coverage and lcov tools | once per machine |
-| `5-format-code` | Runs astyle over the three C# project folders | before a commit, or let the git hook do it |
-| `6-install-docfx-and-report-tools` | Installs Doxygen/Graphviz, restores the pinned local `dotnet tool` manifest (ReportGenerator, DocFX) | once per machine, again after `.config/dotnet-tools.json` changes |
-| `7-build-app` | Restore, build, test with coverage, Doxygen, both coverage-report families, both doc-coverage-report families, DocFX site | every time you want fresh reports |
-| `8-run-app` | Runs the sample app (forwards any arguments); never blocks on input | to try the app itself |
-| `9-open-site` | Serves `site/` over a local HTTP server and opens it (so report `<iframe>`s load — see [Showing a report inside your site](embed-html-in-site.en.md)) | after `7-build-app` |
-| `10-release` | Packages binaries + every report + the site as `site.zip`, publishes a GitHub Release with `gh` | when you are ready to hand in a version (see [Releases & private repositories](releases-and-private-repos.en.md)) |
+Every script exists as `NN-name-windows.bat` and `NN-name-linux.sh` (native Linux and WSL are both `linux`).
+Helpers live in `scripts/`. The project name and version come from **`project.env`**.
 
-## Install the pre-commit hook once
+| Script | What it does | When |
+|---|---|---|
+| `1-configure-git-hooks` | installs the pre-commit hook (astyle) | once per clone |
+| `2-create-gitignore` | regenerates `.gitignore`, keeps this project's own section | rarely |
+| `3-install-package-manager` (Windows only) | Chocolatey + Scoop | once per machine |
+| `4-install-tools` | .NET SDK, Doxygen, lcov, astyle, dotnet tools, MkDocs Material, coverxygen | once per machine |
+| `5-format-code` | astyle over the three C# projects | before a commit (or let the hook do it) |
+| `6-build-and-test` | **fast**: build (Debug) + unit tests | after every change |
+| `7-build-all` | build, tests + coverage, every report (both families), Doxygen + DocFX, app, site, `release/` | before a push, and for the demo |
+| `8-run-app` | runs the sample app (`add 2 3`) | to try it |
+| `9-open-site` | serves `site/` on `http://localhost:8080/` and opens it | to look at the site |
+| `10-release` | builds and publishes a GitHub Release with `gh` (`--dry-run` first) | when you hand in |
+| `11-clean` | deletes every generated folder | when something looks stale |
 
-```bash
-cp 1-pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit   # WSL/macOS; harmless no-op on Windows
-```
+### Old name → new name
 
-From then on, every `git commit` auto-formats the `.cs` files you staged with the rules in
-`astyle-options.txt`, and refuses the commit if `.gitignore`, `README.md` or `Doxyfile` is missing.
+| Old | New |
+|---|---|
+| `1-pre-commit` | `scripts/hooks/pre-commit` (installed by `1-configure-git-hooks-*`) |
+| `2-create-git-ignore.bat/.sh` | `2-create-gitignore-windows.bat` / `-linux.sh` |
+| `3-install-package-manager.bat` | `3-install-package-manager-windows.bat` (`.sh` removed: apt is in `4-install-tools-linux.sh`) |
+| `4-install-dotnet-sdk`, `4-install-astyle`, `4-install-coverxygen`, `4-install-lcov`, `6-install-docfx-and-report-tools` | all in `4-install-tools-windows.bat` / `-linux.sh` (the SDK and pip parts are helpers in `scripts/`) |
+| `5-format-code.bat/.sh` | `5-format-code-windows.bat` / `-linux.sh` |
+| *(new)* | `6-build-and-test-windows.bat` / `-linux.sh` |
+| `7-build-app.bat/.sh` | `7-build-all-windows.bat` / `-linux.sh` |
+| `8-run-app.bat/.sh` | `8-run-app-windows.bat` / `-linux.sh` |
+| `9-open-site.bat/.sh` | `9-open-site-windows.bat` / `-linux.sh` |
+| `10-release.bat/.sh` | `10-release-windows.bat` / `-linux.sh` |
+| *(new)* | `11-clean-windows.bat` / `-linux.sh` |
+| `dotnet-env.bat/.sh` | `scripts/dotnet-env-windows.bat` / `-linux.sh` |
+| `VERSION` | `VERSION=` in `project.env` |
+| `docs/testresults`, `docs/coveragereport`, `docs/doxygen`, … | `reports/<platform>/<kind>-<tool>/` |
+| `docfx.json`, `toc.yml` (DocFX was the home page) | `docfx/` (DocFX is now the API reference under `native/`); MkDocs is the main site (`mkdocs.yml`) |
+| `pages.yml`, `release.yml` | one pipeline, `ci.yml` |
 
-## Branch, commit, push, CI
+## A normal day
 
-1. `git checkout -b feature/<short-name>` -- do not commit straight to `main`.
-2. Write the test first, then the code, then run `7-build-app.bat`/`.sh` and check
-   `docs/coveragereport/index.html` did not drop.
-3. Commit in small, logical steps with a clear message (imperative mood: "Add X", not "Added X" or
-   "Stuff").
-4. `git push -u origin feature/<short-name>`, open a pull request into `main`.
-5. GitHub Actions (`.github/workflows/ci.yml`) restores, builds and tests on both Windows and Ubuntu
-   automatically, and also builds the full site once (Ubuntu) and uploads it as a downloadable build
-   artifact (visible on the PR's checks / the run's summary page) -- wait for it to go green before
-   merging. It does **not** publish a release or deploy Pages on every push; see below and
-   [Releases & private repositories](releases-and-private-repos.en.md).
-6. Merge once the PR is reviewed (by a teammate, if you have one) and CI is green. Once merged into
-   `main`, `.github/workflows/pages.yml` rebuilds the site and publishes it to the `gh-pages` branch
-   automatically (skipped with an explanation on a private repository without
-   `PAGES_ON_PRIVATE` -- see [Releases & private repositories](releases-and-private-repos.en.md)).
+1. `git checkout -b feature/my-change`
+2. Write the test first, then the code, then `6-build-and-test-<platform>` (seconds).
+3. Before pushing: `7-build-all-<platform>` and check the coverage report did not drop.
+4. `git commit`, `git push`, open a pull request; CI builds Windows, Linux and macOS.
 
-## Where everything lands
+## Where everything lands (all gitignored)
 
-Everything under `docs/` and `site/` is generated by `7-build-app` and is **not** committed (see
-`.gitignore`) -- except the small SVG badges under `assets/` (both code-coverage and documentation-
-coverage), which the site's landing page (`docs/home.md`) embeds and which are worth committing so
-the badges render on GitHub/Pages without anyone running a build first.
+| Folder | Content |
+|---|---|
+| `build/<platform>-<config>/` | compiler output (`dotnet --artifacts-path`), so Windows and WSL never clash |
+| `publish/<platform>-<arch>/` | the app, self-contained |
+| `reports/<platform>/<kind>-<tool>/` | `tests-trx`, `coverage-reportgenerator`, `coverage-lcov`, `doccoverage-reportgenerator`, `doccoverage-lcov`, `api-doxygen`, `api-docfx` |
+| `site/` | the MkDocs site (the main site): `9-open-site` |
+| `site-native/` | the DocFX site (published under `native/`) |
+| `release/` | every release asset, same names as on GitHub, plus `ASSETS.md` and `SHA256SUMS.txt` |
 
-| What | Path |
-|------|------|
-| The whole site | `site/index.html` (open it via `9-open-site`, not by double-clicking) |
-| Every individual report, in its own `<iframe>` page | see [Showing a report inside your site](embed-html-in-site.en.md) and [Which report is which?](reports-explained.en.md) |
-| The live site (after a push to `main`, if Pages is enabled) | `https://<you>.github.io/<your-repo>/` |
-| Release packages | `release/` (from `10-release`, also not committed) |
-
-## Next
-
-[Releases & private repositories](releases-and-private-repos.en.md), or if something failed,
-[Troubleshooting](troubleshooting.en.md).
+Only the small SVG badges under `docs/assets/` are committed (the README and the site embed them).
