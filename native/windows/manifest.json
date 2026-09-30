@@ -1,0 +1,118 @@
+{
+  "docfx_version": "2.81.0+ba844df625370a6bd7c1ecab0d0ec4d1d9128ac4",
+  "source_base_path": "D:/a/vs-net-core-template/vs-net-core-template/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../docs/assets/favicon.png",
+      "output": {
+        "resource": {
+          "relative_path": "assets/favicon.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "../docs/assets/rteu_logo.jpg",
+      "output": {
+        "resource": {
+          "relative_path": "assets/rteu_logo.jpg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.Calculator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.Calculator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary.Calculator",
+      "Summary": "<p sourcefile=\"api/CalculatorLibrary.Calculator.yml\" sourcestartlinenumber=\"1\">Performs basic arithmetic operations on integers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.CalculatorCli.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.CalculatorCli.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary.CalculatorCli",
+      "Summary": "<p sourcefile=\"api/CalculatorLibrary.CalculatorCli.yml\" sourcestartlinenumber=\"1\">Parses and runs the calculator's command-line arguments.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CalculatorLibrary.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CalculatorLibrary.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "CalculatorLibrary",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

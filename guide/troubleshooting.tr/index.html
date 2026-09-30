@@ -1,0 +1,2235 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A complete C# / .NET course-project template: xUnit tests, every report in two families side by side (ReportGenerator and the native tools), Doxygen and DocFX API docs, per platform (Windows and Linux), one-command local and CI/CD release packaging.">
+      
+      
+        <meta name="author" content="Asst. Prof. Dr. Uğur CORUH">
+      
+      
+        <link rel="canonical" href="https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting.tr/">
+      
+      
+        <link rel="prev" href="../releases-and-private-repos.tr/">
+      
+      
+        <link rel="next" href="../../reports/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sorun giderme - Calculator (vs-net-core-template)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sorun-giderme" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Calculator (vs-net-core-template)" class="md-header__button md-logo" aria-label="Calculator (vs-net-core-template)" data-md-component="logo">
+      
+  <img src="../../assets/rteu_logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Calculator (vs-net-core-template)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sorun giderme
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ucoruh/vs-net-core-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../install.en/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Guide (EN)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../install.tr/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Kılavuz (TR)
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reports/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Reports
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  API docs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../downloads/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Downloads
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../developers/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Developers
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Calculator (vs-net-core-template)" class="md-nav__button md-logo" aria-label="Calculator (vs-net-core-template)" data-md-component="logo">
+      
+  <img src="../../assets/rteu_logo.jpg" alt="logo">
+
+    </a>
+    Calculator (vs-net-core-template)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ucoruh/vs-net-core-template" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guide (EN)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guide (EN)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install everything
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-the-template.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use this template
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../from-topic-to-project.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From topic to project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../daily-workflow.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Daily workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports-explained.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Which report is which?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../embed-html-in-site.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Showing an HTML report inside your site
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../showing-without-pages.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Showing your project without GitHub Pages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases-and-private-repos.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases & private repositories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting.en/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kılavuz (TR)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kılavuz (TR)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Her şeyi kurma
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-the-template.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Şablonu kullanma
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../from-topic-to-project.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Konudan projeye
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../daily-workflow.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Günlük iş akışı
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reports-explained.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hangi rapor hangisi?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../embed-html-in-site.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sitenizin içinde HTML raporu göstermek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../showing-without-pages.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projenizi GitHub Pages olmadan göstermek
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases-and-private-repos.tr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sürümler ve özel depolar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorun giderme
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorun giderme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hala-takldnz-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hâlâ takıldınız mı?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../reports/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reports
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reports
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/tests-trx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/coverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/coverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage - lcov
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/doccoverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doc coverage - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/doccoverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doc coverage - lcov
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/tests-trx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unit tests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/coverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/coverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Coverage - lcov
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/doccoverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doc coverage - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/doccoverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doc coverage - lcov
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../api/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API docs
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API docs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-doxygen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doxygen - Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-doxygen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doxygen - Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-docfx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DocFX - Windows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-docfx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DocFX - Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Downloads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../developers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Developers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hala-takldnz-m" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hâlâ takıldınız mı?
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/ucoruh/vs-net-core-template/edit/main/docs/guide/troubleshooting.tr.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="sorun-giderme">Sorun giderme<a class="headerlink" href="#sorun-giderme" title="Permanent link">&para;</a></h1>
+<p>Aşağıdaki her satır, bu şablon derlenirken gerçekten yaşanan bir şeydir -- tam mesaj (ya da <em>sessiz</em>
+bir başarısızlıksa, onun yerine ne göreceğiniz) ve depoya uygulanan veya sizin kendinizin
+uygulayacağı çözüm.</p>
+<table>
+<thead>
+<tr>
+<th>Belirti / mesaj</th>
+<th>Neden</th>
+<th>Çözüm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>net7.0</code> projesi derleniyor ama <code>.NET 7.0 is out of support</code> uyarıları var, ya da yalnızca ilgisiz eski bir çalışma zamanı (runtime) kurulu olduğu için çalışıyor</td>
+<td>Hedef çerçeve (target framework), .NET 7 desteği bittiğinden beri (Mayıs 2024) güncellenmemiş</td>
+<td>Bu şablonda düzeltildi: her <code>.csproj</code>, <code>Directory.Build.props</code> üzerinden <code>net10.0</code>'ı hedefliyor, <code>global.json</code>'da sabitlendi. Kendi çatalınızda (fork) görürseniz <code>4-install-tools</code>'yı yeniden çalıştırın ve <code>global.json</code>'ı kontrol edin.</td>
+</tr>
+<tr>
+<td><strong>Çözüm (solution)</strong> üzerinde <code>dotnet publish</code>, <code>warning NETSDK1194: The "--output" option isn't supported when building a solution...</code> yazdırır ve <code>CalculatorLibrary</code>, <code>CalculatorApp</code>, <code>CalculatorLibrary.Tests</code> çıktısını sessizce tek bir klasörde karıştırır</td>
+<td><code>-o</code> ile bir <code>.sln</code> yayınlamak her projenin çıktısını aynı dizinde birleştirir -- güncel SDK'larda kesin bir hata değil, bu yüzden ikililer tuhaf davranana kadar fark edilmesi kolay değil</td>
+<td><strong>Çözümü değil, uygulama projesini</strong> yayınlayın: <code>dotnet publish CalculatorApp\CalculatorApp.csproj -c Release -r win-x64 -o publish\windows</code> (<code>10-release</code>'in yaptığı tam olarak bu).</td>
+</tr>
+<tr>
+<td><code>reports/&lt;platform&gt;/_raw/doccoverage/lcov.info</code> oluşuyor ama <strong>0 bayt</strong>, hata yok, <code>genhtml</code>/ReportGenerator sonra "veri yok" gösteriyor</td>
+<td>coverxygen'in <code>--prefix</code>'i bir <em>filtre</em>dir (yalnızca bu yolun altındaki dosyaları tut) ve orijinal scriptte <code>%currentDir%</code> hiç ayarlanmamış -- filtre hiçbir şeyle eşleşmemiş</td>
+<td><code>7-build-all</code>, en başta <code>currentDir</code>/<code>currentDirFwd</code>'i ayarlar ve <code>--prefix "%currentDirFwd%/"</code> geçirir.</td>
+</tr>
+<tr>
+<td>Yukarıdaki satır, <code>currentDir</code> ayarlanacak şekilde düzeltildi ama Windows'ta <strong>hâlâ</strong> boş bir <code>lcov.info</code> üretiyor</td>
+<td>Doxygen, dosya yollarını içeride <strong>Windows'ta bile eğik çizgiyle (forward slash)</strong> kaydeder; <code>--prefix</code>, ters eğik çizgili (backslash) bir yolla karşılaştırılınca hiç eşleşmez</td>
+<td>Eğik çizgili bir prefix kullanın: <code>set "currentDirFwd=%currentDir:\=/%"</code>, sonra <code>--prefix "%currentDirFwd%/"</code> (<code>7-build-all.bat</code>'te zaten yapılıyor; yolların doğal olarak eğik çizgili olduğu Linux'ta ilgisiz).</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scriptinde <code>'genhtml' is not recognized as an internal or external command</code>, oysa <code>where genhtml</code> onu buluyor ve Git Bash'te doğrudan çalıştırmak işe yarıyor</td>
+<td>(Windows <code>lcov</code> Chocolatey paketinden) <code>genhtml</code>, <strong><code>.exe</code>/<code>.bat</code> uzantısı olmayan</strong> bir Perl scriptidir; <code>cmd.exe</code>, uzantısız bir dosyayı doğrudan çalıştıramaz (shebang'ı okuyan bir POSIX kabuğunun aksine)</td>
+<td>Onu çıplak <code>genhtml</code> olarak değil, <code>perl "&lt;genhtml-yolu&gt;"</code> olarak çağırın -- <code>7-build-all.bat</code>, yolu <code>where genhtml</code> ile çözer (yoksa varsayılan Chocolatey yoluna döner) ve her zaman perl üzerinden çalıştırır.</td>
+</tr>
+<tr>
+<td><code>pip install coverxygen</code> başarılı olmasına rağmen <code>python -m coverxygen</code>, <code>ModuleNotFoundError: No module named 'coverxygen'</code> ile başarısız oluyor ve belge kapsama raporu sessizce boş</td>
+<td>Birden fazla Python kurulu bir makinede, PATH'teki düz <code>python</code>, coverxygen hiç kurulmamış ilgisiz bir yorumlayıcıya (ör. bir vektör grafik düzenleyicinin kendi paketlediği python.exe, gerçek bir Python'dan PATH'te daha önce bulunan) çözülebilir</td>
+<td>Açık bir yorumlayıcı kullanın: <code>py -3.12 -m coverxygen ...</code> (<code>4-install-tools.bat</code>/<code>7-build-all.bat</code>'in yaptığı); WSL/Linux'ta açıkça <code>python3</code> kullanın.</td>
+</tr>
+<tr>
+<td><code>.gitignore</code>, <code>.csproj</code> ya da kapsama sayıları kod nedeni olmadan her derlemede değişiyor</td>
+<td>Eski script her derlemede <code>dotnet add package coverlet.msbuild</code> çalıştırıyordu, <code>CalculatorLibrary.Tests.csproj</code>'u mutasyona uğratıp her seferinde sabitlenmemiş bir sürümü yeniden çözüyordu</td>
+<td>Kaldırıldı: kapsama, <code>--collect:"XPlat Code Coverage"</code> ile (zaten referans verilen <code>coverlet.collector</code> paketinden VSTest toplayıcısı) toplanır -- <code>coverlet.msbuild</code> bu toplama yöntemi tarafından hiç kullanılmıyordu ve artık hiç referans verilmiyor. Paket sürümleri doğrudan <code>.csproj</code>'da sabitlenir; bir derleme scriptinden asla <code>dotnet add package</code> çalıştırmayın.</td>
+</tr>
+<tr>
+<td>Bir xUnit <code>[InlineData(new string[] { ... })]</code> üzerinde <code>error CS0182: An attribute argument must be a constant expression...</code></td>
+<td>Bir dizi değişmez değerini (array literal) doğrudan <code>[InlineData]</code>'ya geçiremezsiniz (özniteliğin kendi <code>params object[]</code>'i ile belirsiz)</td>
+<td>Bunun yerine statik bir <code>IEnumerable&lt;object[]&gt;</code> ile <code>[MemberData(nameof(SomeMethod))]</code> kullanın (bkz. <code>CalculatorCliTests.WrongArgumentCounts</code>).</td>
+</tr>
+<tr>
+<td><code>int.MinValue / -1 == int.MinValue</code> doğrulayan bir test, kod hiçbir <code>checked</code> bloğu kullanmamasına rağmen bir değer döndürmek yerine <code>System.OverflowException</code> fırlatıyor</td>
+<td>Bu bir bölme, pozitif bir <code>int</code> olarak temsil edilemez (büyüklüğü <code>int.MaxValue</code>'dan bir fazladır); .NET, <code>checked</code>/<code>unchecked</code> bağlamından bağımsız olarak burada her zaman <code>OverflowException</code> fırlatır</td>
+<td>Bir dönüş değeri yerine istisnayı test edin: <code>Assert.Throws&lt;OverflowException&gt;(() =&gt; calc.Divide(int.MinValue, -1))</code> (bkz. <code>CalculatorTests</code>). Bu, etrafından dolaşılacak bir hata değil, bilinmeye değer gerçek bir sınır durumudur.</td>
+</tr>
+<tr>
+<td>Etiket dosyada açıkça varken bir <code>.bat</code> scripti <code>The system cannot find the batch label specified - &lt;etiket&gt;</code> ile başarısız oluyor</td>
+<td>Dosyada <strong>Unix tarzı, yalnızca LF</strong> satır sonları var (ör. Windows dışı bir araçla düzenlendikten sonra); <code>cmd.exe</code>'nin <code>GOTO</code>/<code>CALL :etiket</code> araması, yalnızca-LF bir dosyada etiketi bulamayabilir</td>
+<td>CRLF'ye çevirin (ör. Git Bash'te: <code>sed -i 's/\r$//' dosya.bat &amp;&amp; sed -i 's/$/\r/' dosya.bat</code>, ya da bir düzenleyicide: "Satır sonlarıyla kaydet: CRLF"). Bu depodaki her <code>.bat</code> CRLF'dir; öyle kalsın.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scripti bir <code>if (...)</code>/<code>for (...)</code> bloğu içinde <code>&lt;bir kelime&gt; was unexpected at this time.</code> ile başarısız oluyor</td>
+<td>O blok içinde -- bir tırnaklı dizenin içinde olsa bile, bir yorum olarak olsa bile -- gerçek bir <code>(</code> veya <code>)</code> var ve bu, <code>cmd.exe</code>'nin blok sınırları için parantez eşleştirme taramasını karıştırıyor</td>
+<td>Bir parantezli blok içinde yaşayan hiçbir metinde gerçek parantez kullanmayın (<code>"genhtml (documentation coverage)"</code>i <code>"genhtml - documentation coverage"</code> olarak yeniden yazın vb.), ya da <strong>tırnak dışında</strong> <code>^(</code>/<code>^)</code> ile kaçış karakteri (escape) kullanın.</td>
+</tr>
+<tr>
+<td><code>cd /d "%~dp0"</code>'dan hemen sonra bile, dosya tam orada olmasına rağmen <code>'birsscript.bat' is not recognized as an internal or external command</code></td>
+<td>Makinede <code>NoDefaultCurrentDirectoryInExePath</code> ortam değişkeni ayarlı (yönetilen/laboratuvar bilgisayarlarında yaygın bir sertleştirme ayarı), bu da <code>cmd.exe</code>'nin çıplak dosya adları için örtük "geçerli dizini de ara" yedeğini devre dışı bırakır</td>
+<td>Kardeş scriptleri çıplak dosya adıyla değil, tam yolla çağırın: <code>call scripts/dotnet-env-windows.bat</code> değil, <code>call "%~dp0scripts/dotnet-env-windows.bat"</code> -- bu depodaki her script bunu zaten yapıyor.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> derleme adımı başarısız oluyor ama script mutlu bir şekilde bir sonraki adıma geçip yine de 0 koduyla çıkıyor</td>
+<td><code>call :etiket</code> ile ulaşılan bir alt yordam (subroutine) içindeki <code>exit /b 1</code>, yalnızca <em>o alt yordamı</em> bitirir (bir <code>return</code> gibi), bütün scripti değil -- çağıran, sonucu açıkça kontrol etmelidir</td>
+<td>Her zaman <code>call :check "adım adı" \|\| exit /b 1</code> olarak çağırın (ya da hemen ardından eşdeğer bir <code>if errorlevel 1 exit /b 1</code>), asla tek başına <code>call :check "..."</code> değil.</td>
+</tr>
+<tr>
+<td>Bir <code>if (...)</code>/<code>for (...)</code> bloğu içinde açıkça <code>set</code> edilmiş bir değişken, <strong>aynı blok içinde</strong>, hemen ardından boş (ya da eski) okunuyor</td>
+<td><code>cmd.exe</code>, <code>%degisken%</code>'i her çalıştırmada değil, blok <em>ayrıştırıldığında</em> bir kez değiştirir -- aynı değişkenin aynı paylaşılan blok içinde önce set edilip sonra okunması, sessizce blok başlamadan önceki değeri kullanır</td>
+<td>Ya <code>setlocal enabledelayedexpansion</code>'ı etkinleştirip o okuma için <code>!degisken!</code> kullanın, ya da (bu şablonun mümkün olduğunda tercih ettiği gibi) set ile okumayı ayrı, üst düzey ifadelere bölün, böylece okuma, set zaten çalıştıktan sonra kendi taze ayrıştırılmış satırında gerçekleşir.</td>
+</tr>
+<tr>
+<td>Bir <code>.bat</code> scriptindeki <code>robocopy</code> adımı, kopyalama açıkça işe yaramış olsa bile başarısız sayılıyor</td>
+<td><code>robocopy</code>'nin 0-7 çıkış kodlarının hepsi başarı/bilgilendirme niteliğindedir (1 = dosyalar kopyalandı, 2 = fazladan dosyalar, ...); yalnızca 8+ gerçek bir başarısızlıktır -- <code>robocopy</code>'den sonra düz bir <code>if errorlevel 1</code> sürekli yanlış tetiklenir</td>
+<td><code>robocopy</code> için özel olarak <code>if errorlevel 1</code> değil <code>if errorlevel 8</code> kontrol edin (<code>7-build-all.bat</code>'teki <code>:check_robocopy</code>'ye bakın).</td>
+</tr>
+<tr>
+<td><code>docfx build</code> sırasında <code>warning InvalidFileLink</code> / <code>Unable to find file "reports/....html"</code> yazdırılıyor</td>
+<td>Bunlar <strong>kaynak (resource)</strong> dosyalarını (kopyalanan rapor HTML klasörlerini) işaret ediyor; DocFX'in TOC bağlantı doğrulayıcısı, bağlantıları kontrol ettiği noktada yalnızca <em>içerik</em> belgelerini izler, kaynak dosyaları değil</td>
+<td>Zararsız: dosyalar yine de kopyalanır ve bağlantılar yine de çalışır (üretilen site açılarak doğrulandı). Bunun yerine gerçek içerik olması gereken bir <code>.md</code> dosyası için görürseniz <code>docfx.json</code>'ın <code>content</code> glob'larını/hariç tutmalarını (exclude) kontrol edin.</td>
+</tr>
+<tr>
+<td>Yepyeni bir <code>.git\refs\heads\desktop.ini</code> (veya benzeri) beliriyor ve <code>git branch</code>, <code>warning: ignoring broken ref refs/heads/desktop.ini</code> yazdırıyor</td>
+<td>Depo bir Google Drive senkronize klasörünün içinde yaşıyor ve Drive, kendi <code>desktop.ini</code> klasör-özelleştirme dosyasını <code>.git</code>'in içine yazıyor</td>
+<td>Zararsız; git bozuk referansı (ref) yok sayar. Bunu <code>.git</code>'i elle düzenleyerek "düzeltmeye" çalışmayın.</td>
+</tr>
+<tr>
+<td>Klon <code>/mnt/g/My Drive/...</code> altında yaşarken WSL depoyu göremiyor, ya da görüyor ama her dosya işlemi aşırı yavaş</td>
+<td>Google Drive for desktop sanal/bulut bir dosya sistemidir; <code>G:</code> sürücüsü üzerinden WSL'e bağlansa (mount) bile gerçek, tamamen POSIX-uyumlu bir dosya sistemi değildir</td>
+<td>Önce depoyu normal bir Linux yoluna kopyalayın (ör. <code>~/vs-net-core-template</code>) ve her <code>.sh</code> scriptini oradan çalıştırın -- bu şablonun kendi <code>.sh</code> scriptleri tam olarak böyle test edildi (bkz. <a href="../install.tr/">Her şeyi kurma</a>).</td>
+</tr>
+<tr>
+<td><code>choco install astyle</code>, bitirmek yerine bir <code>[Y/n]</code> onayı bekleyerek duruyor</td>
+<td>Bazı Chocolatey kurulum komutları, <code>-y</code> geçilmedikçe onay ister</td>
+<td>Düzeltildi: bu şablonun scriptlerindeki her <code>choco install</code>, <code>-y</code> geçiyor. Kendinizinkini eklerseniz aynısını yapın.</td>
+</tr>
+<tr>
+<td>Numaralı bir script afişini yazdırıyor ve sonra terminale kontrolü hiç geri vermeden öylece oturuyor</td>
+<td>Bir scriptin eski bir kopyası <code>pause</code> çağırıyordu (ya da başka türlü konsol girdisini bekliyordu)</td>
+<td>Bu şablondaki her script girdide bloklamaktan tamamen kaçınır (hiç <code>pause</code> yok). Örnek uygulama yalnızca kendi argümanlarını okur, konsolu asla okumaz, bkz. <a href="../from-topic-to-project.tr/">Konudan projeye</a>.</td>
+</tr>
+<tr>
+<td>Bir derleme adımı, özellikle antivirüs tanımlarını güncelledikten hemen sonra dosya-kilitli/"başka bir işlem tarafından kullanılıyor" hatasıyla başarısız oluyor</td>
+<td>Windows Defender (veya başka bir antivirüs), yeni yazılan <code>.dll</code>/<code>.exe</code> dosyalarını tararken kısa süreliğine kilitler, bir sonraki derleme adımıyla yarışır</td>
+<td>Scripti yeniden çalıştırın (genelde yeterli); sürekli oluyorsa antivirüs ayarlarınızda depo klasörüne ve <code>%LocalAppData%\Microsoft\dotnet</code>'e bir istisna ekleyin.</td>
+</tr>
+<tr>
+<td>Çok derin iç içe geçmiş bir klon konumunda, yol ile ilgili bir derleme hatası açıkça var olan bir dosyadan bahsediyor</td>
+<td>Windows'un klasik ~260 karakter yol sınırı, uzun bir Google Drive yolu artı <code>bin</code>/<code>obj</code> artı uzun bir RID/yapılandırma alt klasörüyle daha kolay tetiklenir</td>
+<td>Bir sürücü köküne daha yakın klonlayın, ya da Windows uzun yol (long-path) desteğini etkinleştirin (<code>git config --system core.longpaths true</code> artı Windows 10/11'in "Win32 uzun yollarını etkinleştir" ayarı).</td>
+</tr>
+<tr>
+<td><code>site/index.html</code>'i (veya bir raporu) bir <code>file://</code> yolu üzerinden açmak boş bir sayfa ya da kırık bağlantılar gösteriyor ama HTTP üzerinden sunulunca çalışıyor</td>
+<td>Nadir, ama bazı tarayıcılar <code>file://</code> sayfalarının bitişik JSON getirmesini kısıtlar (ör. DocFX'in arama indeksi)</td>
+<td>Bunun yerine yerelde sunun: <code>9-open-site.bat</code>/<code>.sh</code> (artık bunu otomatik yapıyor), <code>dotnet docfx serve site</code> (varsayılan <code>http://localhost:8080</code>), ya da herhangi bir statik dosya sunucusu.</td>
+</tr>
+<tr>
+<td>Bir rapor sayfasının <code>&lt;iframe&gt;</code>'i boş kalıyor, oysa aynı sayfadaki "Yeni sekmede aç" çalışıyor</td>
+<td>Site, <code>9-open-site</code>'nin yerel sunucusu yerine çıplak bir <code>file://</code> yolu üzerinden açıldı -- tam açıklama ve diğer bütün iframe sorunları için bkz. <a href="../embed-html-in-site.tr/">Sitenizin içinde bir raporu göstermek</a></td>
+<td><code>9-open-site.bat</code>/<code>.sh</code>'yi kullanın ve yazdırılan <code>http://localhost:8080/</code> URL'sini açın.</td>
+</tr>
+<tr>
+<td><code>9-open-site.bat</code>/<code>.sh</code>, siteyi sunmak yerine bir hatayla çıkıyor</td>
+<td>8080 portu (varsayılan) makinenizde başka bir şey tarafından zaten kullanılıyor</td>
+<td>Farklı bir port verin: <code>9-open-site.bat 8081</code> / <code>./9-open-site.sh 8081</code>.</td>
+</tr>
+<tr>
+<td><code>Compress-Archive</code> (<code>7-build-all.bat</code>'in rapor-zipleme adımında) dosya-kullanımda hatasıyla başarısız oluyor</td>
+<td>Script yeniden çalışırken bir raporun HTML dosyası hâlâ bir tarayıcıda/editörde açıktı, ya da antivirüs onu yazılırken tarıyordu (yukarıdaki antivirüs satırına bakın)</td>
+<td><code>docs/&lt;rapor&gt;/</code> altında açık bir dosyası olan her şeyi kapatın, sonra <code>7-build-all.bat</code>'i yeniden çalıştırın; adım yeniden çalıştırılabilir (idempotent).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hala-takldnz-m">Hâlâ takıldınız mı?<a class="headerlink" href="#hala-takldnz-m" title="Permanent link">&para;</a></h2>
+<p><a href="../daily-workflow.tr/">Günlük iş akışı</a> veya <a href="../use-the-template.tr/">Şablonu kullanma</a>'daki tam
+adımı yeniden okuyun, doğru dosyaya baktığınızdan emin olmak için
+<a href="../reports-explained.tr/">Hangi rapor hangisi?</a>'i kontrol edin.
+| <code>MSB4126: The specified solution configuration "Debug|windows" is invalid</code> | MSBuild, <strong><code>PLATFORM</code></strong> ortam değişkenini <code>Platform</code> özelliği olarak okur; <code>PLATFORM=windows</code> dışa aktaran bir betik her derlemeyi bozar | Betikler bunun yerine <code>PLATFORM_TOKEN</code> kullanır; <code>PLATFORM</code> adlı bir değişken dışa aktarmayın |
+| <code>mkdocs</code> / <code>ModuleNotFoundError: No module named 'material'</code> | MkDocs Material o Python için kurulu değil | <code>4-install-tools-&lt;platform&gt;</code> (veya <code>py -3.12 -m pip install --user -r requirements.txt</code>) |
+| <code>check-links</code> <code>broken link(s)</code> yazdırıyor | Bir sayfa eksik bir şeye bağlanıyor (yazım hatası ya da kopyalanmamış rapor klasörü) | Yazdırdığı yolu düzeltin; bkz. <a href="../embed-html-in-site.tr/">Sitenizin içinde HTML raporu göstermek</a> "Sık sorunlar" |
+| Bir rapor sayfasında "bu makinede üretilmedi" yazıyor | Yalnız bir platformda derlediniz; diğer platformun raporları orada üretilir (CI ikisini de üretir) | O platformda <code>7-build-all</code> çalıştırın veya sürümü kullanın |
+| <code>dotnet build</code> sonrası <code>dotnet test</code> dll'yi bulamıyor | Derleme ve test farklı <code>--artifacts-path</code> kullandı | Numaralı betikleri kullanın; ikisine de <code>build/&lt;platform&gt;-&lt;config&gt;</code> verirler |
+| <code>9-open-site</code> 8080 portunun kullanımda olduğunu söylüyor | Başka bir program orayı dinliyor | <code>9-open-site-windows.bat 8081</code> (veya <code>./9-open-site-linux.sh 8081</code>) |</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2019 - 2026 CORUH ARGE VE TEKNOLOJI
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ucoruh/vs-net-core-template" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/ucoruh/vs-net-core-template/releases/latest" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 32c0-17.7-14.3-32-32-32s-32 14.3-32 32v210.7l-41.4-41.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l96-96c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 242.7zM64 320c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64h320c35.3 0 64-28.7 64-64v-32c0-35.3-28.7-64-64-64h-46.9l-56.6 56.6c-31.2 31.2-81.9 31.2-113.1 0L110.9 320zm304 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.tracking", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.action.edit", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

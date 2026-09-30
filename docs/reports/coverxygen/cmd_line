@@ -1,1 +1,0 @@
-genhtml --legend --title 'Documentation Coverage Report' docs/coverxygen/lcov.info -o docs/coverxygen

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - Code Coverage Report - lcov via coverlet - CalculatorLibrary/CalculatorCli.cs</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">CalculatorLibrary</a> - CalculatorCli.cs<span style="font-size: 80%;"> (source / <a href="CalculatorCli.cs.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">Code Coverage Report - lcov via coverlet</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">25</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-09-30 01:14:32</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
+          </tr>
+                  <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : namespace CalculatorLibrary {</span>
+<span id="L2"><span class="lineNum">       2</span>              : </span>
+<span id="L3"><span class="lineNum">       3</span>              : /// &lt;summary&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              : /// Parses and runs the calculator's command-line arguments.</span>
+<span id="L5"><span class="lineNum">       5</span>              : /// &lt;/summary&gt;</span>
+<span id="L6"><span class="lineNum">       6</span>              : /// &lt;remarks&gt;</span>
+<span id="L7"><span class="lineNum">       7</span>              : /// &lt;para&gt;</span>
+<span id="L8"><span class="lineNum">       8</span>              : /// The parsing logic lives here, in the library, instead of in &lt;c&gt;CalculatorApp/Program.cs&lt;/c&gt;, so</span>
+<span id="L9"><span class="lineNum">       9</span>              : /// it can be unit tested directly (see &lt;c&gt;CalculatorLibrary.Tests/CalculatorCliTests.cs&lt;/c&gt;) without</span>
+<span id="L10"><span class="lineNum">      10</span>              : /// spawning the console application as a process. &lt;c&gt;Program.cs&lt;/c&gt; only calls</span>
+<span id="L11"><span class="lineNum">      11</span>              : /// &lt;see cref=&quot;Run(string[])&quot;/&gt; or &lt;see cref=&quot;RunDemo&quot;/&gt; and prints the result — it never reads from</span>
+<span id="L12"><span class="lineNum">      12</span>              : /// the console, so it never blocks when the app is launched from a script, a build pipeline or CI.</span>
+<span id="L13"><span class="lineNum">      13</span>              : /// &lt;/para&gt;</span>
+<span id="L14"><span class="lineNum">      14</span>              : /// &lt;para&gt;</span>
+<span id="L15"><span class="lineNum">      15</span>              : /// When you rename this sample into your own project, replace this class with your own</span>
+<span id="L16"><span class="lineNum">      16</span>              : /// argument-parsing entry point, keeping the same &quot;parsing is a library function, not something the</span>
+<span id="L17"><span class="lineNum">      17</span>              : /// console shell does inline&quot; shape.</span>
+<span id="L18"><span class="lineNum">      18</span>              : /// &lt;/para&gt;</span>
+<span id="L19"><span class="lineNum">      19</span>              : /// &lt;/remarks&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : public static class CalculatorCli {</span>
+<span id="L21"><span class="lineNum">      21</span>              :   /// &lt;summary&gt;The usage line shown when the arguments cannot be parsed.&lt;/summary&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              :   public const string UsageText = &quot;Usage: CalculatorApp &lt;add|subtract|multiply|divide&gt; &lt;a&gt; &lt;b&gt;&quot;;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              :   /// &lt;summary&gt;</span>
+<span id="L25"><span class="lineNum">      25</span>              :   /// Parses &lt;paramref name=&quot;args&quot;/&gt; as &lt;c&gt;&amp;lt;operation&amp;gt; &amp;lt;a&amp;gt; &amp;lt;b&amp;gt;&lt;/c&gt; and returns a</span>
+<span id="L26"><span class="lineNum">      26</span>              :   /// line of text describing the result.</span>
+<span id="L27"><span class="lineNum">      27</span>              :   /// &lt;/summary&gt;</span>
+<span id="L28"><span class="lineNum">      28</span>              :   /// &lt;param name=&quot;args&quot;&gt;</span>
+<span id="L29"><span class="lineNum">      29</span>              :   /// Exactly three arguments: the operation name (&lt;c&gt;add&lt;/c&gt;, &lt;c&gt;subtract&lt;/c&gt;, &lt;c&gt;multiply&lt;/c&gt; or</span>
+<span id="L30"><span class="lineNum">      30</span>              :   /// &lt;c&gt;divide&lt;/c&gt;, case-insensitive) followed by the two integer operands.</span>
+<span id="L31"><span class="lineNum">      31</span>              :   /// &lt;/param&gt;</span>
+<span id="L32"><span class="lineNum">      32</span>              :   /// &lt;returns&gt;A human-readable line such as &lt;c&gt;&quot;2 add 2 = 4&quot;&lt;/c&gt;.&lt;/returns&gt;</span>
+<span id="L33"><span class="lineNum">      33</span>              :   /// &lt;exception cref=&quot;ArgumentException&quot;&gt;</span>
+<span id="L34"><span class="lineNum">      34</span>              :   /// Thrown when the argument count is wrong, an operand is not a valid 32-bit integer, or the</span>
+<span id="L35"><span class="lineNum">      35</span>              :   /// operation name is not recognized. The message always ends with &lt;see cref=&quot;UsageText&quot;/&gt;.</span>
+<span id="L36"><span class="lineNum">      36</span>              :   /// &lt;/exception&gt;</span>
+<span id="L37"><span class="lineNum">      37</span>              :   /// &lt;exception cref=&quot;DivideByZeroException&quot;&gt;Thrown when dividing by zero.&lt;/exception&gt;</span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">          16 :   public static string Run(string[] args) {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">          16 :     if (args.Length != 3) {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           4 :       throw new ArgumentException($&quot;Expected 3 arguments (operation, a, b) but got {args.Length}. {UsageText}&quot;);</span></span>
+<span id="L41"><span class="lineNum">      41</span>              :     }</span>
+<span id="L42"><span class="lineNum">      42</span>              : </span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">          12 :     string operation = args[0].Trim().ToLowerInvariant();</span></span>
+<span id="L44"><span class="lineNum">      44</span>              : </span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          12 :     if (!int.TryParse(args[1], out int a)) {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           3 :       throw new ArgumentException($&quot;'{args[1]}' is not a valid 32-bit integer for &lt;a&gt;. {UsageText}&quot;);</span></span>
+<span id="L47"><span class="lineNum">      47</span>              :     }</span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           9 :     if (!int.TryParse(args[2], out int b)) {</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :       throw new ArgumentException($&quot;'{args[2]}' is not a valid 32-bit integer for &lt;b&gt;. {UsageText}&quot;);</span></span>
+<span id="L51"><span class="lineNum">      51</span>              :     }</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           8 :     var calculator = new Calculator();</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           8 :     int result = operation switch {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           2 :       &quot;add&quot; =&gt; calculator.Add(a, b),</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :         &quot;subtract&quot; =&gt; calculator.Subtract(a, b),</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :         &quot;multiply&quot; =&gt; calculator.Multiply(a, b),</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           2 :         &quot;divide&quot; =&gt; calculator.Divide(a, b),</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           2 :         _ =&gt; throw new ArgumentException($&quot;Unknown operation '{args[0]}'. {UsageText}&quot;),</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           8 :     };</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : </span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           5 :     return $&quot;{a} {operation} {b} = {result}&quot;;</span></span>
+<span id="L64"><span class="lineNum">      64</span>              :   }</span>
+<span id="L65"><span class="lineNum">      65</span>              : </span>
+<span id="L66"><span class="lineNum">      66</span>              :   /// &lt;summary&gt;</span>
+<span id="L67"><span class="lineNum">      67</span>              :   /// Runs a small built-in demonstration that exercises every operation once, used when the</span>
+<span id="L68"><span class="lineNum">      68</span>              :   /// application is started with no arguments at all (so a first run always shows something,</span>
+<span id="L69"><span class="lineNum">      69</span>              :   /// without waiting on keyboard input).</span>
+<span id="L70"><span class="lineNum">      70</span>              :   /// &lt;/summary&gt;</span>
+<span id="L71"><span class="lineNum">      71</span>              :   /// &lt;returns&gt;The combined demo output, ending with &lt;see cref=&quot;UsageText&quot;/&gt;.&lt;/returns&gt;</span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :   public static string RunDemo() {</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :     var calculator = new Calculator();</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :     var lines = new System.Text.StringBuilder();</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           1 :     lines.AppendLine(&quot;Calculator Application Running (no arguments given, showing the built-in demo)...&quot;);</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           1 :     lines.AppendLine($&quot;2 add 2 = {calculator.Add(2, 2)}&quot;);</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           1 :     lines.AppendLine($&quot;2 multiply 2 = {calculator.Multiply(2, 2)}&quot;);</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           1 :     lines.AppendLine($&quot;2 subtract 2 = {calculator.Subtract(2, 2)}&quot;);</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           1 :     lines.AppendLine($&quot;2 divide 2 = {calculator.Divide(2, 2)}&quot;);</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           1 :     lines.Append(UsageText);</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           1 :     return lines.ToString();</span></span>
+<span id="L82"><span class="lineNum">      82</span>              :   }</span>
+<span id="L83"><span class="lineNum">      83</span>              : }</span>
+<span id="L84"><span class="lineNum">      84</span>              : }</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

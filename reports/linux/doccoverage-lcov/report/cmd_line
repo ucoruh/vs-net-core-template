@@ -1,0 +1,1 @@
+genhtml --legend --title 'Documentation Coverage Report' reports/linux/_raw/doccoverage/lcov.info -o reports/linux/doccoverage-lcov

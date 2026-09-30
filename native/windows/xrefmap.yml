@@ -1,0 +1,120 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: CalculatorLibrary
+  name: CalculatorLibrary
+  href: api/CalculatorLibrary.html
+  commentId: N:CalculatorLibrary
+  fullName: CalculatorLibrary
+  nameWithType: CalculatorLibrary
+- uid: CalculatorLibrary.Calculator
+  name: Calculator
+  href: api/CalculatorLibrary.Calculator.html
+  commentId: T:CalculatorLibrary.Calculator
+  fullName: CalculatorLibrary.Calculator
+  nameWithType: Calculator
+- uid: CalculatorLibrary.Calculator.Add(System.Int32,System.Int32)
+  name: Add(int, int)
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Add_System_Int32_System_Int32_
+  commentId: M:CalculatorLibrary.Calculator.Add(System.Int32,System.Int32)
+  name.vb: Add(Integer, Integer)
+  fullName: CalculatorLibrary.Calculator.Add(int, int)
+  fullName.vb: CalculatorLibrary.Calculator.Add(Integer, Integer)
+  nameWithType: Calculator.Add(int, int)
+  nameWithType.vb: Calculator.Add(Integer, Integer)
+- uid: CalculatorLibrary.Calculator.Add*
+  name: Add
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Add_
+  commentId: Overload:CalculatorLibrary.Calculator.Add
+  isSpec: "True"
+  fullName: CalculatorLibrary.Calculator.Add
+  nameWithType: Calculator.Add
+- uid: CalculatorLibrary.Calculator.Divide(System.Int32,System.Int32)
+  name: Divide(int, int)
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Divide_System_Int32_System_Int32_
+  commentId: M:CalculatorLibrary.Calculator.Divide(System.Int32,System.Int32)
+  name.vb: Divide(Integer, Integer)
+  fullName: CalculatorLibrary.Calculator.Divide(int, int)
+  fullName.vb: CalculatorLibrary.Calculator.Divide(Integer, Integer)
+  nameWithType: Calculator.Divide(int, int)
+  nameWithType.vb: Calculator.Divide(Integer, Integer)
+- uid: CalculatorLibrary.Calculator.Divide*
+  name: Divide
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Divide_
+  commentId: Overload:CalculatorLibrary.Calculator.Divide
+  isSpec: "True"
+  fullName: CalculatorLibrary.Calculator.Divide
+  nameWithType: Calculator.Divide
+- uid: CalculatorLibrary.Calculator.Multiply(System.Int32,System.Int32)
+  name: Multiply(int, int)
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Multiply_System_Int32_System_Int32_
+  commentId: M:CalculatorLibrary.Calculator.Multiply(System.Int32,System.Int32)
+  name.vb: Multiply(Integer, Integer)
+  fullName: CalculatorLibrary.Calculator.Multiply(int, int)
+  fullName.vb: CalculatorLibrary.Calculator.Multiply(Integer, Integer)
+  nameWithType: Calculator.Multiply(int, int)
+  nameWithType.vb: Calculator.Multiply(Integer, Integer)
+- uid: CalculatorLibrary.Calculator.Multiply*
+  name: Multiply
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Multiply_
+  commentId: Overload:CalculatorLibrary.Calculator.Multiply
+  isSpec: "True"
+  fullName: CalculatorLibrary.Calculator.Multiply
+  nameWithType: Calculator.Multiply
+- uid: CalculatorLibrary.Calculator.Subtract(System.Int32,System.Int32)
+  name: Subtract(int, int)
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Subtract_System_Int32_System_Int32_
+  commentId: M:CalculatorLibrary.Calculator.Subtract(System.Int32,System.Int32)
+  name.vb: Subtract(Integer, Integer)
+  fullName: CalculatorLibrary.Calculator.Subtract(int, int)
+  fullName.vb: CalculatorLibrary.Calculator.Subtract(Integer, Integer)
+  nameWithType: Calculator.Subtract(int, int)
+  nameWithType.vb: Calculator.Subtract(Integer, Integer)
+- uid: CalculatorLibrary.Calculator.Subtract*
+  name: Subtract
+  href: api/CalculatorLibrary.Calculator.html#CalculatorLibrary_Calculator_Subtract_
+  commentId: Overload:CalculatorLibrary.Calculator.Subtract
+  isSpec: "True"
+  fullName: CalculatorLibrary.Calculator.Subtract
+  nameWithType: Calculator.Subtract
+- uid: CalculatorLibrary.CalculatorCli
+  name: CalculatorCli
+  href: api/CalculatorLibrary.CalculatorCli.html
+  commentId: T:CalculatorLibrary.CalculatorCli
+  fullName: CalculatorLibrary.CalculatorCli
+  nameWithType: CalculatorCli
+- uid: CalculatorLibrary.CalculatorCli.Run(System.String[])
+  name: Run(string[])
+  href: api/CalculatorLibrary.CalculatorCli.html#CalculatorLibrary_CalculatorCli_Run_System_String___
+  commentId: M:CalculatorLibrary.CalculatorCli.Run(System.String[])
+  name.vb: Run(String())
+  fullName: CalculatorLibrary.CalculatorCli.Run(string[])
+  fullName.vb: CalculatorLibrary.CalculatorCli.Run(String())
+  nameWithType: CalculatorCli.Run(string[])
+  nameWithType.vb: CalculatorCli.Run(String())
+- uid: CalculatorLibrary.CalculatorCli.Run*
+  name: Run
+  href: api/CalculatorLibrary.CalculatorCli.html#CalculatorLibrary_CalculatorCli_Run_
+  commentId: Overload:CalculatorLibrary.CalculatorCli.Run
+  isSpec: "True"
+  fullName: CalculatorLibrary.CalculatorCli.Run
+  nameWithType: CalculatorCli.Run
+- uid: CalculatorLibrary.CalculatorCli.RunDemo
+  name: RunDemo()
+  href: api/CalculatorLibrary.CalculatorCli.html#CalculatorLibrary_CalculatorCli_RunDemo
+  commentId: M:CalculatorLibrary.CalculatorCli.RunDemo
+  fullName: CalculatorLibrary.CalculatorCli.RunDemo()
+  nameWithType: CalculatorCli.RunDemo()
+- uid: CalculatorLibrary.CalculatorCli.RunDemo*
+  name: RunDemo
+  href: api/CalculatorLibrary.CalculatorCli.html#CalculatorLibrary_CalculatorCli_RunDemo_
+  commentId: Overload:CalculatorLibrary.CalculatorCli.RunDemo
+  isSpec: "True"
+  fullName: CalculatorLibrary.CalculatorCli.RunDemo
+  nameWithType: CalculatorCli.RunDemo
+- uid: CalculatorLibrary.CalculatorCli.UsageText
+  name: UsageText
+  href: api/CalculatorLibrary.CalculatorCli.html#CalculatorLibrary_CalculatorCli_UsageText
+  commentId: F:CalculatorLibrary.CalculatorCli.UsageText
+  fullName: CalculatorLibrary.CalculatorCli.UsageText
+  nameWithType: CalculatorCli.UsageText
