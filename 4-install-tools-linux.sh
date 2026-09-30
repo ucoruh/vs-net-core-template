@@ -18,7 +18,9 @@ if ! command -v apt-get >/dev/null 2>&1; then
 fi
 
 echo; echo "[1/6] apt packages (Doxygen, Graphviz, lcov, Perl, zip, astyle, Python pip, curl)..."
-sudo apt-get update -y
+# A broken third-party source (e.g. packages.microsoft.com answering 403) must not stop the install:
+# retry, then carry on with the package index we already have.
+sudo apt-get update -y -o Acquire::Retries=3 || echo "[WARN] apt-get update reported errors (a third-party apt source?); continuing with the existing package index."
 sudo apt-get install -y doxygen graphviz lcov perl zip astyle python3 python3-pip curl git
 
 echo; echo "[2/6] .NET SDK pinned in global.json (per user, no sudo)..."

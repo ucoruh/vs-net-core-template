@@ -86,6 +86,11 @@ github.com
   ✓ Token: gho_************************************
 ```
 
+!!! note "WSL'in kendi `gh` girişi vardır"
+    Windows'taki `gh` ve git kimlik bilgileri WSL ile **paylaşılmaz**. Ubuntu içinde `gh auth login`, ardından
+    `gh auth setup-git` çalıştırın (özel depoda `git clone`/`git push` çalışsın diye) ve `gh auth status` ile doğrulayın.
+    Bunu yapmazsanız WSL'de özel depoyu klonlarken komut parola sorarak takılır.
+
 ## Her sürüm dosyası (yerelde ve GitHub'da aynı adlar)
 
 ```text
@@ -94,12 +99,12 @@ github.com
 
 | Dosya | Ne |
 |---|---|
-| `calculator-2.1.1-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | uygulama, kendi kendine yeten (macOS: yalnız CI) |
-| `calculator-2.1.1-<platform>-report-tests.zip` | birim test sonuçları (TRX + HTML) |
+| `calculator-2.1.2-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | uygulama, kendi kendine yeten (macOS: yalnız CI) |
+| `calculator-2.1.2-<platform>-report-tests.zip` | birim test sonuçları (TRX + HTML) |
 | `-report-coverage-reportgenerator.zip`, `-report-coverage-lcov.zip` | kod kapsaması, iki aile |
 | `-report-doccoverage-reportgenerator.zip`, `-report-doccoverage-lcov.zip` | dokümantasyon kapsaması, iki aile |
 | `-api-doxygen.zip`, `-api-docfx.zip` | API dokümanları (Doxygen; DocFX eksiksiz bir sitedir) |
-| `calculator-2.1.1-source.zip`, `-site.zip` | etiketteki kaynak; tüm MkDocs sitesi (iki platform) |
+| `calculator-2.1.2-source.zip`, `-site.zip` | etiketteki kaynak; tüm MkDocs sitesi (iki platform) |
 | `ASSETS.md`, `SHA256SUMS.txt` | her dosyanın tablosu (platform, içerik, araç, site bağlantısı); sağlama toplamları |
 
 `<platform>` `windows` veya `linux`'tur (yerel Linux ve WSL ikisi de `linux`). Windows ikilileri ve tüm HTML için `.zip`;
@@ -119,9 +124,24 @@ düzenleyin, commit'leyin, sonra yayınlayın. `--dry-run` her şeyi üretir (`7
 ağacından gerçek sürümü reddeder; o etiketin sürümü zaten varsa (örn. CI oluşturduysa) yenisini yaratmak yerine
 `gh release upload --clobber` ile ona yükler.
 
+### İlk gerçek sürümden önce bilmeniz gerekenler
+
+- **Önce push edin.** `gh release create` yeni etiketi yerel commit'inize değil, *uzak* `main` başına koyar. Gerçek
+  bir `10-release`'ten **önce** her şeyi (`VERSION` artışı dahil) commit edip `git push` yapın; yoksa etiket eski
+  koda işaret eder.
+- **Yeniden üretilen dosyaları commit edin.** `7-build-all`, `docs/assets/` içindeki izlenen kapsama rozetlerini
+  yeniden yazar; `2-create-gitignore` da `.gitignore`'u yenileyebilir. Gerçek sürüm kirli çalışma ağacını reddeder;
+  bu yüzden derlemeden sonra `git status` bakın, bu dosyaları commit edip push yapın, sonra sürümü çıkarın.
+- **Bir `VERSION`, bir etiket.** Her yeni sürüm için `project.env` içinde yeni bir `VERSION` gerekir (etiket
+  `v<VERSION>`). O etiketin sürümü zaten varsa betik hata vermez, dosyaları ona yükler (`--clobber`); yeni bir sürüm
+  yayımlamak için önce `VERSION`'ı artırın, commit edip push yapın.
+- **Yerel sürüm + aynı etikette CI birleşir.** Betik etiketi oluşturur, CI de her `v*` etiketinde çalışır; böylece
+  aynı sürümde hem bu platformun yerel dosyaları hem CI'nin Windows, Linux ve macOS dosyaları bulunur (aynı adlılar
+  değiştirilir). Bu beklenen davranıştır; bir kez de Actions dakikası harcar.
+
 ## İsteğe bağlı: CI sürümü
 
-Bir etiket gönderin (`git tag v2.1.1 && git push origin v2.1.1`); `ci.yml` iki platformu ve macOS'u derler, sonra
+Bir etiket gönderin (`git tag v2.1.2 && git push origin v2.1.2`); `ci.yml` iki platformu ve macOS'u derler, sonra
 yukarıdaki **her** dosyayı, canlı siteye ve her rapor sayfasına bağlanan notlarla GitHub Release'e ekler. Actions
 dakikası harcar (üç çalıştırıcıda tam bir çalışma birkaç dakikadır); kaç dakikanız kaldığından emin değilseniz yerelde
 `10-release` tercih edin (Free: özel depolarda ayda 2.000 dk).

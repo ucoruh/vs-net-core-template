@@ -89,6 +89,11 @@ github.com
   ✓ Token: gho_************************************
 ```
 
+!!! note "WSL has its own `gh` login"
+    `gh` and git credentials on Windows are **not** shared with WSL. Inside Ubuntu run `gh auth login`, then
+    `gh auth setup-git` (so plain `git clone`/`git push` of a private repository work), and check with `gh auth status`.
+    Without this, cloning a private repository in WSL hangs asking for a password.
+
 ## Every release asset (the same names locally and on GitHub)
 
 ```text
@@ -97,12 +102,12 @@ github.com
 
 | Asset | What |
 |---|---|
-| `calculator-2.1.1-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | the app, self-contained (macOS: CI only) |
-| `calculator-2.1.1-<platform>-report-tests.zip` | unit test results (TRX + HTML) |
+| `calculator-2.1.2-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | the app, self-contained (macOS: CI only) |
+| `calculator-2.1.2-<platform>-report-tests.zip` | unit test results (TRX + HTML) |
 | `-report-coverage-reportgenerator.zip`, `-report-coverage-lcov.zip` | code coverage, both families |
 | `-report-doccoverage-reportgenerator.zip`, `-report-doccoverage-lcov.zip` | documentation coverage, both families |
 | `-api-doxygen.zip`, `-api-docfx.zip` | API docs (Doxygen; DocFX is a complete site) |
-| `calculator-2.1.1-source.zip`, `-site.zip` | source at the tag; the whole MkDocs site (both platforms) |
+| `calculator-2.1.2-source.zip`, `-site.zip` | source at the tag; the whole MkDocs site (both platforms) |
 | `ASSETS.md`, `SHA256SUMS.txt` | table of every file (platform, content, tool, site link); checksums |
 
 `<platform>` is `windows` or `linux` (native Linux and WSL are both `linux`). `.zip` for Windows binaries and all
@@ -122,9 +127,24 @@ exact `gh release create` command and the asset list instead of running it. The 
 dirty working tree, and if the release of that tag already exists (for example created by CI) it uploads to it with
 `gh release upload --clobber` instead.
 
+### Things to know before your first real release
+
+- **Push first.** `gh release create` puts the new tag on the *remote* `main` head, not on your local commit. Commit
+  and `git push` everything (including the `VERSION` bump) **before** a real `10-release`, otherwise the tag points
+  at older code.
+- **Commit the regenerated files.** `7-build-all` rewrites the tracked coverage badges in `docs/assets/`, and
+  `2-create-gitignore` may refresh `.gitignore`. A real release refuses a dirty working tree, so after a build run
+  `git status`, commit those files, push, then release.
+- **One `VERSION`, one tag.** Every new release needs a new `VERSION` in `project.env` (tag `v<VERSION>`). If a release
+  of that tag already exists, the script uploads its assets to it (`--clobber`) instead of failing, so to publish a
+  new release bump `VERSION`, commit and push first.
+- **A local release plus CI on the same tag merges.** The release script creates the tag, and CI runs on every
+  `v*` tag, so the same release ends up with this platform's local assets *and* CI's Windows, Linux and macOS
+  assets (same names are replaced). That is expected; it also uses Actions minutes once.
+
 ## Optional: the CI release
 
-Push a tag (`git tag v2.1.1 && git push origin v2.1.1`) and `ci.yml` builds both platforms plus macOS, then attaches
+Push a tag (`git tag v2.1.2 && git push origin v2.1.2`) and `ci.yml` builds both platforms plus macOS, then attaches
 **every** asset above to the GitHub Release with notes that link the live site and every report page. It uses
 Actions minutes (a full run is several minutes on each of three runners); prefer `10-release` locally when you are not
 sure how many minutes you have left (Free: 2,000 min/month, private repos).

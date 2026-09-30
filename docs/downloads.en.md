@@ -7,11 +7,11 @@ Asset names follow one pattern, the same in all three templates:
 
 ```text
 <project>-<version>[-<platform>[-<arch>]]-<content>[-<tool>].<ext>
-calculator-2.1.1-windows-x64-app.zip
-calculator-2.1.1-linux-x64-app.tar.gz          calculator-2.1.1-macos-arm64-app.tar.gz   (built by CI)
-calculator-2.1.1-windows-report-tests.zip      calculator-2.1.1-linux-report-coverage-lcov.zip
-calculator-2.1.1-linux-api-doxygen.zip         calculator-2.1.1-windows-api-docfx.zip
-calculator-2.1.1-source.zip   calculator-2.1.1-site.zip   ASSETS.md   SHA256SUMS.txt
+calculator-2.1.2-windows-x64-app.zip
+calculator-2.1.2-linux-x64-app.tar.gz          calculator-2.1.2-macos-arm64-app.tar.gz   (built by CI)
+calculator-2.1.2-windows-report-tests.zip      calculator-2.1.2-linux-report-coverage-lcov.zip
+calculator-2.1.2-linux-api-doxygen.zip         calculator-2.1.2-windows-api-docfx.zip
+calculator-2.1.2-source.zip   calculator-2.1.2-site.zip   ASSETS.md   SHA256SUMS.txt
 ```
 
 - Platform token: `windows`, `linux` (native Linux **and** WSL), `macos` (CI only, app only). Architecture

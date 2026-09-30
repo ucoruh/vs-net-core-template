@@ -58,7 +58,7 @@ chmod +x *.sh scripts/*.sh
 
 ## Project identity: `project.env`
 
-`PROJECT_NAME=calculator`, `VERSION=2.1.1` (plus the solution/project paths). Every script and the CI workflow read
+`PROJECT_NAME=calculator`, `VERSION=2.1.2` (plus the solution/project paths). Every script and the CI workflow read
 this one file; rename your project there. Release assets are named
 `<project>-<version>[-<platform>[-<arch>]]-<content>[-<tool>].<ext>` (platform `windows` | `linux` | `macos`; WSL is `linux`).
 

@@ -92,7 +92,9 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Install Doxygen, Graphviz and lcov
         run: |
-          sudo apt-get update
+          # a broken third-party apt source (e.g. packages.microsoft.com answering 403) must not fail the job
+          sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list* /etc/apt/sources.list.d/microsoft-prod.sources*
+          sudo apt-get update -o Acquire::Retries=3 || echo "::warning::apt-get update reported errors; installing from the existing package index"
           sudo apt-get install -y doxygen graphviz lcov zip
       - name: 7-build-all-linux (build, tests, reports, API docs, app, release assets)
         shell: bash

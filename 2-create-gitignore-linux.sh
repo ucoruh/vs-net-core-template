@@ -25,6 +25,7 @@ curl -fsS -o "$TMP_BASE" "$API_URL"
 
 cp "$TMP_BASE" "$OUTPUT_FILE"
 if [ "$HAVE_CUSTOM" -eq 1 ]; then
+    echo >> "$OUTPUT_FILE"
     cat "$TMP_CUSTOM" >> "$OUTPUT_FILE"
 else
     echo "No existing project-specific section found (first run); re-run this script after"

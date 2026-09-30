@@ -62,6 +62,11 @@ doxygen --version
 > **WSL and Google Drive do not mix.** Clone into a normal Linux path (`~/work/...`), not under
 > `/mnt/g/My Drive/...`. See [Troubleshooting](troubleshooting.en.md).
 
+!!! note "WSL has its own `gh` login"
+    `gh` and git credentials on Windows are **not** shared with WSL. To use a private repository in WSL, run
+    `gh auth login` and then `gh auth setup-git` inside Ubuntu, and check with `gh auth status`; otherwise
+    `git clone` hangs asking for a password.
+
 ## Optional: an IDE
 
 Visual Studio 2022+ (".NET desktop development" workload) or VS Code with the C# Dev Kit. Neither is needed to

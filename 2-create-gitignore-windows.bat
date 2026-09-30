@@ -33,6 +33,7 @@ if errorlevel 1 (
 
 copy /y "%TEMP_BASE%" "%OUTPUT_FILE%" >nul
 if exist "%TEMP_CUSTOM%" (
+    echo.>> "%OUTPUT_FILE%"
     type "%TEMP_CUSTOM%" >> "%OUTPUT_FILE%"
 ) else (
     echo No existing project-specific section found ^(first run^); re-run this script after

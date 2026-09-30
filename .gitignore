@@ -88,6 +88,8 @@ CTestTestfile.cmake
 _deps
 
 ### CMake Patch ###
+CMakeUserPresets.json
+
 # External projects
 *-prefix/
 
@@ -976,14 +978,11 @@ coverage*[.json, .xml, .info]
 /site/
 /site-native/
 /release/
-
 # DocFX API metadata (docfx metadata writes it next to docfx.json) and its template cache
 /docfx/api/
 /docfx/templates/rteu/obj
-
 # Test results / coverage data written by `dotnet test` outside the folders above
 /TestResults/
 **/TestResults/
-
 # ReportGenerator's history files (the trend graph); the folder itself is kept
 /report_history/
