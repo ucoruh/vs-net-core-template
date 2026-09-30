@@ -1,0 +1,8 @@
+# Windows batch files need CRLF (GOTO/CALL :label break with LF-only); shell scripts need LF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.sh  text eol=lf
+*.py  text eol=lf
+*.env text eol=lf
+*.yml text eol=lf
+*.md  text eol=lf

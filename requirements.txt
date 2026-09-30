@@ -1,0 +1,3 @@
+# Python tools used by the scripts (installed by 4-install-tools-*: pip install --user -r requirements.txt)
+mkdocs-material>=9.5      # the main site (MkDocs + Material theme)
+coverxygen>=1.7           # documentation coverage: Doxygen XML -> lcov
