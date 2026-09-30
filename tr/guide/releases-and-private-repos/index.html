@@ -869,6 +869,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="10-release&#39;i kullanma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ilk-gercek-surumden-once-bilmeniz-gerekenler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        İlk gerçek sürümden önce bilmeniz gerekenler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1799,6 +1816,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="10-release&#39;i kullanma">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ilk-gercek-surumden-once-bilmeniz-gerekenler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        İlk gerçek sürümden önce bilmeniz gerekenler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1945,6 +1979,12 @@ gerektiğini bilmiyorsanız <code>github.com</code>, HTTPS ve "Login with a web 
   ✓ Git operations for github.com configured to use https protocol.
   ✓ Token: gho_************************************
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">WSL'in kendi <code>gh</code> girişi vardır</p>
+<p>Windows'taki <code>gh</code> ve git kimlik bilgileri WSL ile <strong>paylaşılmaz</strong>. Ubuntu içinde <code>gh auth login</code>, ardından
+<code>gh auth setup-git</code> çalıştırın (özel depoda <code>git clone</code>/<code>git push</code> çalışsın diye) ve <code>gh auth status</code> ile doğrulayın.
+Bunu yapmazsanız WSL'de özel depoyu klonlarken komut parola sorarak takılır.</p>
+</div>
 <h2 id="her-surum-dosyas-yerelde-ve-githubda-ayn-adlar">Her sürüm dosyası (yerelde ve GitHub'da aynı adlar)<a class="headerlink" href="#her-surum-dosyas-yerelde-ve-githubda-ayn-adlar" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>&lt;proje&gt;-&lt;sürüm&gt;[-&lt;platform&gt;[-&lt;arch&gt;]]-&lt;içerik&gt;[-&lt;araç&gt;].&lt;uzantı&gt;      (sürüm "v" olmadan; project.env'den)
 </code></pre></div>
@@ -1957,11 +1997,11 @@ gerektiğini bilmiyorsanız <code>github.com</code>, HTTPS ve "Login with a web 
 </thead>
 <tbody>
 <tr>
-<td><code>calculator-2.1.1-windows-x64-app.zip</code>, <code>-linux-x64-app.tar.gz</code>, <code>-macos-arm64-app.tar.gz</code></td>
+<td><code>calculator-2.1.2-windows-x64-app.zip</code>, <code>-linux-x64-app.tar.gz</code>, <code>-macos-arm64-app.tar.gz</code></td>
 <td>uygulama, kendi kendine yeten (macOS: yalnız CI)</td>
 </tr>
 <tr>
-<td><code>calculator-2.1.1-&lt;platform&gt;-report-tests.zip</code></td>
+<td><code>calculator-2.1.2-&lt;platform&gt;-report-tests.zip</code></td>
 <td>birim test sonuçları (TRX + HTML)</td>
 </tr>
 <tr>
@@ -1977,7 +2017,7 @@ gerektiğini bilmiyorsanız <code>github.com</code>, HTTPS ve "Login with a web 
 <td>API dokümanları (Doxygen; DocFX eksiksiz bir sitedir)</td>
 </tr>
 <tr>
-<td><code>calculator-2.1.1-source.zip</code>, <code>-site.zip</code></td>
+<td><code>calculator-2.1.2-source.zip</code>, <code>-site.zip</code></td>
 <td>etiketteki kaynak; tüm MkDocs sitesi (iki platform)</td>
 </tr>
 <tr>
@@ -1998,8 +2038,23 @@ düzenleyin, commit'leyin, sonra yayınlayın. <code>--dry-run</code> her şeyi 
 çalıştırmak yerine tam <code>gh release create</code> komutunu ve dosya listesini <strong>yazdırır</strong>. Betik kirli bir çalışma
 ağacından gerçek sürümü reddeder; o etiketin sürümü zaten varsa (örn. CI oluşturduysa) yenisini yaratmak yerine
 <code>gh release upload --clobber</code> ile ona yükler.</p>
+<h3 id="ilk-gercek-surumden-once-bilmeniz-gerekenler">İlk gerçek sürümden önce bilmeniz gerekenler<a class="headerlink" href="#ilk-gercek-surumden-once-bilmeniz-gerekenler" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Önce push edin.</strong> <code>gh release create</code> yeni etiketi yerel commit'inize değil, <em>uzak</em> <code>main</code> başına koyar. Gerçek
+  bir <code>10-release</code>'ten <strong>önce</strong> her şeyi (<code>VERSION</code> artışı dahil) commit edip <code>git push</code> yapın; yoksa etiket eski
+  koda işaret eder.</li>
+<li><strong>Yeniden üretilen dosyaları commit edin.</strong> <code>7-build-all</code>, <code>docs/assets/</code> içindeki izlenen kapsama rozetlerini
+  yeniden yazar; <code>2-create-gitignore</code> da <code>.gitignore</code>'u yenileyebilir. Gerçek sürüm kirli çalışma ağacını reddeder;
+  bu yüzden derlemeden sonra <code>git status</code> bakın, bu dosyaları commit edip push yapın, sonra sürümü çıkarın.</li>
+<li><strong>Bir <code>VERSION</code>, bir etiket.</strong> Her yeni sürüm için <code>project.env</code> içinde yeni bir <code>VERSION</code> gerekir (etiket
+  <code>v&lt;VERSION&gt;</code>). O etiketin sürümü zaten varsa betik hata vermez, dosyaları ona yükler (<code>--clobber</code>); yeni bir sürüm
+  yayımlamak için önce <code>VERSION</code>'ı artırın, commit edip push yapın.</li>
+<li><strong>Yerel sürüm + aynı etikette CI birleşir.</strong> Betik etiketi oluşturur, CI de her <code>v*</code> etiketinde çalışır; böylece
+  aynı sürümde hem bu platformun yerel dosyaları hem CI'nin Windows, Linux ve macOS dosyaları bulunur (aynı adlılar
+  değiştirilir). Bu beklenen davranıştır; bir kez de Actions dakikası harcar.</li>
+</ul>
 <h2 id="istege-bagl-ci-surumu">İsteğe bağlı: CI sürümü<a class="headerlink" href="#istege-bagl-ci-surumu" title="Permanent link">&para;</a></h2>
-<p>Bir etiket gönderin (<code>git tag v2.1.1 &amp;&amp; git push origin v2.1.1</code>); <code>ci.yml</code> iki platformu ve macOS'u derler, sonra
+<p>Bir etiket gönderin (<code>git tag v2.1.2 &amp;&amp; git push origin v2.1.2</code>); <code>ci.yml</code> iki platformu ve macOS'u derler, sonra
 yukarıdaki <strong>her</strong> dosyayı, canlı siteye ve her rapor sayfasına bağlanan notlarla GitHub Release'e ekler. Actions
 dakikası harcar (üç çalıştırıcıda tam bir çalışma birkaç dakikadır); kaç dakikanız kaldığından emin değilseniz yerelde
 <code>10-release</code> tercih edin (Free: özel depolarda ayda 2.000 dk).</p>

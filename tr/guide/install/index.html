@@ -1822,6 +1822,12 @@ doxygen<span class="w"> </span>--version
 <p><strong>WSL ve Google Drive birlikte çalışmaz.</strong> Depoyu <code>/mnt/g/My Drive/...</code> altında değil, normal bir Linux yoluna
 (<code>~/work/...</code>) klonlayın. Bkz. <a href="../troubleshooting/">Sorun giderme</a>.</p>
 </blockquote>
+<div class="admonition note">
+<p class="admonition-title">WSL'in kendi <code>gh</code> girişi vardır</p>
+<p>Windows'taki <code>gh</code> ve git kimlik bilgileri WSL ile <strong>paylaşılmaz</strong>. Özel bir depoyu WSL'de kullanacaksanız Ubuntu
+içinde <code>gh auth login</code>, ardından <code>gh auth setup-git</code> çalıştırın ve <code>gh auth status</code> ile doğrulayın; yoksa
+<code>git clone</code> parola sorarak takılır.</p>
+</div>
 <h2 id="istege-bagl-bir-ide">İsteğe bağlı: bir IDE<a class="headerlink" href="#istege-bagl-bir-ide" title="Permanent link">&para;</a></h2>
 <p>Visual Studio 2022+ (".NET masaüstü geliştirme" iş yükü) veya C# Dev Kit ile VS Code. Betikleri çalıştırmak için
 ikisi de gerekmez.</p>

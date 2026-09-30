@@ -869,6 +869,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Using 10-release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#things-to-know-before-your-first-real-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Things to know before your first real release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1799,6 +1816,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Using 10-release">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#things-to-know-before-your-first-real-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Things to know before your first real release
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1948,6 +1982,12 @@ Verify:</p>
   ✓ Git operations for github.com configured to use https protocol.
   ✓ Token: gho_************************************
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">WSL has its own <code>gh</code> login</p>
+<p><code>gh</code> and git credentials on Windows are <strong>not</strong> shared with WSL. Inside Ubuntu run <code>gh auth login</code>, then
+<code>gh auth setup-git</code> (so plain <code>git clone</code>/<code>git push</code> of a private repository work), and check with <code>gh auth status</code>.
+Without this, cloning a private repository in WSL hangs asking for a password.</p>
+</div>
 <h2 id="every-release-asset-the-same-names-locally-and-on-github">Every release asset (the same names locally and on GitHub)<a class="headerlink" href="#every-release-asset-the-same-names-locally-and-on-github" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>&lt;project&gt;-&lt;version&gt;[-&lt;platform&gt;[-&lt;arch&gt;]]-&lt;content&gt;[-&lt;tool&gt;].&lt;ext&gt;      (version without "v"; from project.env)
 </code></pre></div>
@@ -1960,11 +2000,11 @@ Verify:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>calculator-2.1.1-windows-x64-app.zip</code>, <code>-linux-x64-app.tar.gz</code>, <code>-macos-arm64-app.tar.gz</code></td>
+<td><code>calculator-2.1.2-windows-x64-app.zip</code>, <code>-linux-x64-app.tar.gz</code>, <code>-macos-arm64-app.tar.gz</code></td>
 <td>the app, self-contained (macOS: CI only)</td>
 </tr>
 <tr>
-<td><code>calculator-2.1.1-&lt;platform&gt;-report-tests.zip</code></td>
+<td><code>calculator-2.1.2-&lt;platform&gt;-report-tests.zip</code></td>
 <td>unit test results (TRX + HTML)</td>
 </tr>
 <tr>
@@ -1980,7 +2020,7 @@ Verify:</p>
 <td>API docs (Doxygen; DocFX is a complete site)</td>
 </tr>
 <tr>
-<td><code>calculator-2.1.1-source.zip</code>, <code>-site.zip</code></td>
+<td><code>calculator-2.1.2-source.zip</code>, <code>-site.zip</code></td>
 <td>source at the tag; the whole MkDocs site (both platforms)</td>
 </tr>
 <tr>
@@ -2001,8 +2041,23 @@ edit it, commit, then release. <code>--dry-run</code> builds everything (<code>7
 exact <code>gh release create</code> command and the asset list instead of running it. The script refuses a real release from a
 dirty working tree, and if the release of that tag already exists (for example created by CI) it uploads to it with
 <code>gh release upload --clobber</code> instead.</p>
+<h3 id="things-to-know-before-your-first-real-release">Things to know before your first real release<a class="headerlink" href="#things-to-know-before-your-first-real-release" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Push first.</strong> <code>gh release create</code> puts the new tag on the <em>remote</em> <code>main</code> head, not on your local commit. Commit
+  and <code>git push</code> everything (including the <code>VERSION</code> bump) <strong>before</strong> a real <code>10-release</code>, otherwise the tag points
+  at older code.</li>
+<li><strong>Commit the regenerated files.</strong> <code>7-build-all</code> rewrites the tracked coverage badges in <code>docs/assets/</code>, and
+  <code>2-create-gitignore</code> may refresh <code>.gitignore</code>. A real release refuses a dirty working tree, so after a build run
+  <code>git status</code>, commit those files, push, then release.</li>
+<li><strong>One <code>VERSION</code>, one tag.</strong> Every new release needs a new <code>VERSION</code> in <code>project.env</code> (tag <code>v&lt;VERSION&gt;</code>). If a release
+  of that tag already exists, the script uploads its assets to it (<code>--clobber</code>) instead of failing, so to publish a
+  new release bump <code>VERSION</code>, commit and push first.</li>
+<li><strong>A local release plus CI on the same tag merges.</strong> The release script creates the tag, and CI runs on every
+  <code>v*</code> tag, so the same release ends up with this platform's local assets <em>and</em> CI's Windows, Linux and macOS
+  assets (same names are replaced). That is expected; it also uses Actions minutes once.</li>
+</ul>
 <h2 id="optional-the-ci-release">Optional: the CI release<a class="headerlink" href="#optional-the-ci-release" title="Permanent link">&para;</a></h2>
-<p>Push a tag (<code>git tag v2.1.1 &amp;&amp; git push origin v2.1.1</code>) and <code>ci.yml</code> builds both platforms plus macOS, then attaches
+<p>Push a tag (<code>git tag v2.1.2 &amp;&amp; git push origin v2.1.2</code>) and <code>ci.yml</code> builds both platforms plus macOS, then attaches
 <strong>every</strong> asset above to the GitHub Release with notes that link the live site and every report page. It uses
 Actions minutes (a full run is several minutes on each of three runners); prefer <code>10-release</code> locally when you are not
 sure how many minutes you have left (Free: 2,000 min/month, private repos).</p>
