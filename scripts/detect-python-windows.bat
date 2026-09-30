@@ -17,7 +17,7 @@ if not defined PYTHON_ANY (
     if not errorlevel 1 set "PYTHON_ANY=%~1"
 )
 if not defined PYTHON_CMD (
-    %~1 -c "import coverxygen, mkdocs" >nul 2>&1
+    %~1 -c "import coverxygen, mkdocs, mkdocs_static_i18n" >nul 2>&1
     if not errorlevel 1 set "PYTHON_CMD=%~1"
 )
 exit /b 0

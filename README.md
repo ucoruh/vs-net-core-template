@@ -5,7 +5,7 @@ documentation coverage generated with **both** ReportGenerator and the native lc
 Doxygen and DocFX API docs — **per platform (Windows and Linux/WSL)** — a MkDocs Material site, and local +
 CI/CD release packaging, all driven by a handful of numbered scripts.
 
-**Live site:** <https://ucoruh.github.io/vs-net-core-template/> (MkDocs Material; the DocFX API reference lives under
+**Live site:** <https://ucoruh.github.io/vs-net-core-template/> (English) · <https://ucoruh.github.io/vs-net-core-template/tr/> (Türkçe) — one bilingual MkDocs Material site (`mkdocs-static-i18n`, language switcher in the header; the DocFX API reference lives under
 [`/native/`](https://ucoruh.github.io/vs-net-core-template/native/windows/)).
 
 ## 1. Start your own PRIVATE repository from this template
@@ -58,7 +58,7 @@ chmod +x *.sh scripts/*.sh
 
 ## Project identity: `project.env`
 
-`PROJECT_NAME=calculator`, `VERSION=2.1.0` (plus the solution/project paths). Every script and the CI workflow read
+`PROJECT_NAME=calculator`, `VERSION=2.1.1` (plus the solution/project paths). Every script and the CI workflow read
 this one file; rename your project there. Release assets are named
 `<project>-<version>[-<platform>[-<arch>]]-<content>[-<tool>].<ext>` (platform `windows` | `linux` | `macos`; WSL is `linux`).
 

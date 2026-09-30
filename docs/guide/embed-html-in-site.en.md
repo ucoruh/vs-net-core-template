@@ -67,3 +67,18 @@ Example: a report your own tool writes to `reports/windows/mytool/index.html`.
 | `check-links` reports a broken link | A link in a page points to something that does not exist | Fix the path it prints (relative to that HTML file) |
 | Framed page refuses to load on a real website | The report's server sends `X-Frame-Options: DENY` | Link it in a new tab instead; GitHub Pages does not send it, so this only affects other hosts |
 | A DocFX/Maven page inside a frame shows two menus | You framed a site that has its own navigation | Do not frame it; link it (see the rule above) |
+
+## Two languages: the iframe path from `/` and from `/tr/`
+
+The site is bilingual (`mkdocs-static-i18n`, suffix mode): every page exists twice, `name.en.md` (English, at the site
+root) and `name.tr.md` (Turkish, under `/tr/`). The report files are copied **once**, to `site/reports/<platform>/<kind>/report/`.
+So the two page versions reach them differently:
+
+| Page | URL | Iframe `src` |
+|---|---|---|
+| `docs/reports/windows/coverage-lcov.en.md` | `/reports/windows/coverage-lcov/` | `report/index.html` (relative to the page) |
+| `docs/reports/windows/coverage-lcov.tr.md` | `/tr/reports/windows/coverage-lcov/` | `../../../../reports/windows/coverage-lcov/report/index.html` (four levels up to the site root) |
+
+Always use **relative** paths (never `/reports/...`): they keep working under GitHub Pages' `/<repo>/` prefix and on
+`http://localhost:8080/`. When you add a page, add both `.en.md` and `.tr.md`, and register the title in `mkdocs.yml`
+under `nav_translations`; `check-links` verifies both languages.

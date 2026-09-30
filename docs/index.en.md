@@ -27,7 +27,7 @@ site, and one-command local and CI/CD release packaging.</p>
 </div>
 
 <a class="md-button md-button--primary" href="https://github.com/ucoruh/vs-net-core-template/releases/latest">:material-download: Download the latest release</a>
-<a class="md-button" href="guide/use-the-template.en/">Start your project</a>
+<a class="md-button" href="guide/use-the-template/">Start your project</a>
 
 </div>
 
@@ -67,22 +67,14 @@ Windows and Linux/WSL results are produced and kept **separately** (they can dif
 
 <div class="grid cards" markdown>
 
-- :material-book-open-variant: **Guides (English)**
+- :material-book-open-variant: **Guides**
 
     ---
 
     Install, use the template, from a topic to your own project, daily workflow, showing your project without
-    GitHub Pages, troubleshooting.
+    GitHub Pages, troubleshooting. Türkçe: use the language switcher in the header.
 
-    [:octicons-arrow-right-24: Start here](guide/install.en.md)
-
-- :material-translate: **Kılavuz (Türkçe)**
-
-    ---
-
-    Aynı kılavuzlar Türkçe: kurulum, şablonu kullanma, konudan projeye, günlük iş akışı, sorun giderme.
-
-    [:octicons-arrow-right-24: Buradan başlayın](guide/install.tr.md)
+    [:octicons-arrow-right-24: Start here](guide/install.md)
 
 - :material-file-question: **Which report is which?**
 

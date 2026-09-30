@@ -97,12 +97,12 @@ github.com
 
 | Asset | What |
 |---|---|
-| `calculator-2.1.0-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | the app, self-contained (macOS: CI only) |
-| `calculator-2.1.0-<platform>-report-tests.zip` | unit test results (TRX + HTML) |
+| `calculator-2.1.1-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | the app, self-contained (macOS: CI only) |
+| `calculator-2.1.1-<platform>-report-tests.zip` | unit test results (TRX + HTML) |
 | `-report-coverage-reportgenerator.zip`, `-report-coverage-lcov.zip` | code coverage, both families |
 | `-report-doccoverage-reportgenerator.zip`, `-report-doccoverage-lcov.zip` | documentation coverage, both families |
 | `-api-doxygen.zip`, `-api-docfx.zip` | API docs (Doxygen; DocFX is a complete site) |
-| `calculator-2.1.0-source.zip`, `-site.zip` | source at the tag; the whole MkDocs site (both platforms) |
+| `calculator-2.1.1-source.zip`, `-site.zip` | source at the tag; the whole MkDocs site (both platforms) |
 | `ASSETS.md`, `SHA256SUMS.txt` | table of every file (platform, content, tool, site link); checksums |
 
 `<platform>` is `windows` or `linux` (native Linux and WSL are both `linux`). `.zip` for Windows binaries and all
@@ -124,7 +124,7 @@ dirty working tree, and if the release of that tag already exists (for example c
 
 ## Optional: the CI release
 
-Push a tag (`git tag v2.1.0 && git push origin v2.1.0`) and `ci.yml` builds both platforms plus macOS, then attaches
+Push a tag (`git tag v2.1.1 && git push origin v2.1.1`) and `ci.yml` builds both platforms plus macOS, then attaches
 **every** asset above to the GitHub Release with notes that link the live site and every report page. It uses
 Actions minutes (a full run is several minutes on each of three runners); prefer `10-release` locally when you are not
 sure how many minutes you have left (Free: 2,000 min/month, private repos).

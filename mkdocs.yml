@@ -56,7 +56,49 @@ theme:
     - toc.follow
 
 plugins:
-  - search
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - i18n:
+      docs_structure: suffix          # name.en.md + name.tr.md
+      reconfigure_material: true      # language switcher in the header
+      reconfigure_search: true        # search in both languages
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: "English"
+          build: true
+          default: true               # English at the site root
+          site_name: "Calculator (vs-net-core-template)"
+        - locale: tr
+          name: "Türkçe"
+          build: true                 # Turkish under /tr/
+          site_name: "Calculator (vs-net-core-template)"
+          nav_translations:
+            Home: "Anasayfa"
+            Guide: "Kılavuz"
+            "Install everything": "Her şeyi kurma"
+            "Use this template": "Şablonu kullanma"
+            "From topic to project": "Konudan projeye"
+            "Daily workflow": "Günlük iş akışı"
+            "Which report is which?": "Hangi rapor hangisi?"
+            "Showing an HTML report inside your site": "Sitenizin içinde HTML raporu göstermek"
+            "Showing your project without GitHub Pages": "Projenizi GitHub Pages olmadan göstermek"
+            "Releases & private repositories": "Sürümler ve özel depolar"
+            "Troubleshooting": "Sorun giderme"
+            Reports: "Raporlar"
+            Overview: "Genel bakış"
+            "Unit tests": "Birim testleri"
+            "Coverage - ReportGenerator": "Kapsama - ReportGenerator"
+            "Coverage - lcov": "Kapsama - lcov"
+            "Doc coverage - ReportGenerator": "Dok. kapsaması - ReportGenerator"
+            "Doc coverage - lcov": "Dok. kapsaması - lcov"
+            "API docs": "API dokümanları"
+            "Doxygen - Windows": "Doxygen - Windows"
+            "Doxygen - Linux": "Doxygen - Linux"
+            "DocFX - Windows": "DocFX - Windows"
+            "DocFX - Linux": "DocFX - Linux"
+            Downloads: "İndirmeler"
+            Developers: "Geliştiriciler"
 
 markdown_extensions:
   - attr_list
@@ -90,26 +132,16 @@ extra:
 
 nav:
   - Home: index.md
-  - Guide (EN):
-      - 'Install everything': guide/install.en.md
-      - 'Use this template': guide/use-the-template.en.md
-      - 'From topic to project': guide/from-topic-to-project.en.md
-      - 'Daily workflow': guide/daily-workflow.en.md
-      - 'Which report is which?': guide/reports-explained.en.md
-      - 'Showing an HTML report inside your site': guide/embed-html-in-site.en.md
-      - 'Showing your project without GitHub Pages': guide/showing-without-pages.en.md
-      - 'Releases & private repositories': guide/releases-and-private-repos.en.md
-      - 'Troubleshooting': guide/troubleshooting.en.md
-  - Kılavuz (TR):
-      - 'Her şeyi kurma': guide/install.tr.md
-      - 'Şablonu kullanma': guide/use-the-template.tr.md
-      - 'Konudan projeye': guide/from-topic-to-project.tr.md
-      - 'Günlük iş akışı': guide/daily-workflow.tr.md
-      - 'Hangi rapor hangisi?': guide/reports-explained.tr.md
-      - 'Sitenizin içinde HTML raporu göstermek': guide/embed-html-in-site.tr.md
-      - 'Projenizi GitHub Pages olmadan göstermek': guide/showing-without-pages.tr.md
-      - 'Sürümler ve özel depolar': guide/releases-and-private-repos.tr.md
-      - 'Sorun giderme': guide/troubleshooting.tr.md
+  - Guide:
+      - 'Install everything': guide/install.md
+      - 'Use this template': guide/use-the-template.md
+      - 'From topic to project': guide/from-topic-to-project.md
+      - 'Daily workflow': guide/daily-workflow.md
+      - 'Which report is which?': guide/reports-explained.md
+      - 'Showing an HTML report inside your site': guide/embed-html-in-site.md
+      - 'Showing your project without GitHub Pages': guide/showing-without-pages.md
+      - 'Releases & private repositories': guide/releases-and-private-repos.md
+      - 'Troubleshooting': guide/troubleshooting.md
   - Reports:
       - 'Overview': reports/index.md
       - Windows:

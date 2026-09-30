@@ -67,3 +67,18 @@ Doğru ve yanlış:
 | `check-links` kırık bağlantı bildiriyor | Bir sayfa var olmayan bir şeye bağlanıyor | Yazdırdığı yolu düzeltin (o HTML dosyasına göre göreli) |
 | Gerçek bir web sitesinde çerçeveli sayfa yüklenmiyor | Sunucu `X-Frame-Options: DENY` gönderiyor | Yeni sekmede bağlantı verin; GitHub Pages bunu göndermez, yalnızca başka barındırıcıları etkiler |
 | Çerçevedeki DocFX/Maven sayfasında iki menü var | Kendi gezinmesi olan bir siteyi çerçevelediniz | Çerçevelemeyin, bağlantı verin (yukarıdaki kural) |
+
+## İki dil: `/` ve `/tr/` altından iframe yolu
+
+Site iki dillidir (`mkdocs-static-i18n`, suffix modu): her sayfa iki kez bulunur, `ad.en.md` (İngilizce, site kökünde) ve
+`ad.tr.md` (Türkçe, `/tr/` altında). Rapor dosyaları **bir kez**, `site/reports/<platform>/<tür>/report/` altına kopyalanır.
+İki sayfa sürümü bu yüzden onlara farklı yollarla ulaşır:
+
+| Sayfa | Adres | Iframe `src` |
+|---|---|---|
+| `docs/reports/windows/coverage-lcov.en.md` | `/reports/windows/coverage-lcov/` | `report/index.html` (sayfaya göre göreli) |
+| `docs/reports/windows/coverage-lcov.tr.md` | `/tr/reports/windows/coverage-lcov/` | `../../../../reports/windows/coverage-lcov/report/index.html` (site köküne dört seviye yukarı) |
+
+Her zaman **göreli** yol kullanın (asla `/reports/...` değil): GitHub Pages'in `/<repo>/` önekinde ve
+`http://localhost:8080/` üzerinde çalışmaya devam eder. Sayfa eklerken hem `.en.md` hem `.tr.md` ekleyin ve başlığı
+`mkdocs.yml` içindeki `nav_translations` altına kaydedin; `check-links` iki dili de doğrular.

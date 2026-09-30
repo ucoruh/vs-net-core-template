@@ -310,7 +310,7 @@ def cmd_pack_neutral(a):
                     notes.append("- [%s](%snative/%s/) (opens as its own site)" % (title, base, plat))
                 else:
                     notes.append("- [%s](%sreports/%s/%s/)" % (title, base, plat, folder))
-        notes.append("- Guides: [English](%sguide/install.en/) / [Turkce](%sguide/install.tr/)" % (base, base))
+        notes.append("- Guides: [English](%sguide/install/) / [Turkce](%str/guide/install/)" % (base, base))
     else:
         notes.append("Pages is not enabled for this repository: download `%s-site.zip`, unzip it and serve it (see the guide "
                      "'Showing your project without GitHub Pages')." % pre)
@@ -348,6 +348,15 @@ def cmd_check_links(a):
     if not site.is_dir():
         sys.exit("[ERROR] %s not found" % site)
     broken, checked, pages = [], 0, 0
+    # site_url (mkdocs.yml) has a path prefix on GitHub Pages ("/<repo>/"): links that start with it point into the site root
+    prefix_path = ""
+    try:
+        for line in (ROOT / "mkdocs.yml").read_text(encoding="utf-8").splitlines():
+            if line.startswith("site_url:"):
+                m = re.match(r"https?://[^/]+(/.*)", line.split(":", 1)[1].strip().strip("'\""))
+                prefix_path = m.group(1) if m else ""
+    except OSError:
+        pass
     for f in sorted(site.rglob("*.html")):
         rel = f.relative_to(site).as_posix()
         parts = rel.split("/")
@@ -366,6 +375,8 @@ def cmd_check_links(a):
             l = l.split("#", 1)[0].split("?", 1)[0]
             if not l:
                 continue
+            if prefix_path and l.startswith(prefix_path):
+                l = "/" + l[len(prefix_path):]
             target = (site / l.lstrip("/")) if l.startswith("/") else (f.parent / l)
             try:
                 target = Path(os.path.normpath(str(target)))

@@ -94,12 +94,12 @@ github.com
 
 | Dosya | Ne |
 |---|---|
-| `calculator-2.1.0-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | uygulama, kendi kendine yeten (macOS: yalnız CI) |
-| `calculator-2.1.0-<platform>-report-tests.zip` | birim test sonuçları (TRX + HTML) |
+| `calculator-2.1.1-windows-x64-app.zip`, `-linux-x64-app.tar.gz`, `-macos-arm64-app.tar.gz` | uygulama, kendi kendine yeten (macOS: yalnız CI) |
+| `calculator-2.1.1-<platform>-report-tests.zip` | birim test sonuçları (TRX + HTML) |
 | `-report-coverage-reportgenerator.zip`, `-report-coverage-lcov.zip` | kod kapsaması, iki aile |
 | `-report-doccoverage-reportgenerator.zip`, `-report-doccoverage-lcov.zip` | dokümantasyon kapsaması, iki aile |
 | `-api-doxygen.zip`, `-api-docfx.zip` | API dokümanları (Doxygen; DocFX eksiksiz bir sitedir) |
-| `calculator-2.1.0-source.zip`, `-site.zip` | etiketteki kaynak; tüm MkDocs sitesi (iki platform) |
+| `calculator-2.1.1-source.zip`, `-site.zip` | etiketteki kaynak; tüm MkDocs sitesi (iki platform) |
 | `ASSETS.md`, `SHA256SUMS.txt` | her dosyanın tablosu (platform, içerik, araç, site bağlantısı); sağlama toplamları |
 
 `<platform>` `windows` veya `linux`'tur (yerel Linux ve WSL ikisi de `linux`). Windows ikilileri ve tüm HTML için `.zip`;
@@ -121,7 +121,7 @@ ağacından gerçek sürümü reddeder; o etiketin sürümü zaten varsa (örn. 
 
 ## İsteğe bağlı: CI sürümü
 
-Bir etiket gönderin (`git tag v2.1.0 && git push origin v2.1.0`); `ci.yml` iki platformu ve macOS'u derler, sonra
+Bir etiket gönderin (`git tag v2.1.1 && git push origin v2.1.1`); `ci.yml` iki platformu ve macOS'u derler, sonra
 yukarıdaki **her** dosyayı, canlı siteye ve her rapor sayfasına bağlanan notlarla GitHub Release'e ekler. Actions
 dakikası harcar (üç çalıştırıcıda tam bir çalışma birkaç dakikadır); kaç dakikanız kaldığından emin değilseniz yerelde
 `10-release` tercih edin (Free: özel depolarda ayda 2.000 dk).
