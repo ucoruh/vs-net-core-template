@@ -1,0 +1,134 @@
+# Main site of the template: MkDocs Material (same look and menu as the course sites).
+# The DocFX site (API reference) is a complete site of its own: it is published under native/ and only
+# LINKED from here, never framed (see docs/guide/embed-html-in-site.en.md).
+site_name: 'Calculator (vs-net-core-template)'
+docs_dir: docs
+site_dir: site
+site_author: 'Asst. Prof. Dr. Uğur CORUH'
+site_url: 'https://ucoruh.github.io/vs-net-core-template/'
+site_description: >-
+  A complete C# / .NET course-project template: xUnit tests, every report in two families side by side
+  (ReportGenerator and the native tools), Doxygen and DocFX API docs, per platform (Windows and Linux),
+  one-command local and CI/CD release packaging.
+
+repo_name: 'GitHub'
+repo_url: 'https://github.com/ucoruh/vs-net-core-template'
+edit_uri: 'edit/main/docs/'
+copyright: Copyright &copy; 2019 - 2026 CORUH ARGE VE TEKNOLOJI
+
+exclude_docs: |
+  desktop.ini
+  **/desktop.ini
+
+theme:
+  name: material
+  logo: assets/rteu_logo.jpg
+  favicon: assets/favicon.png
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - admonition
+  - tables
+  - footnotes
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+
+# The reports and the DocFX sites are copied into site/ AFTER `mkdocs build` (scripts/site_tools.py
+# assemble-site), so MkDocs cannot see them: raw-HTML links to them are not validated by MkDocs and
+# `check-links` verifies them on the finished site instead.
+extra_css:
+  - css/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ucoruh/vs-net-core-template
+    - icon: fontawesome/solid/download
+      link: https://github.com/ucoruh/vs-net-core-template/releases/latest
+
+nav:
+  - Home: index.md
+  - Guide (EN):
+      - 'Install everything': guide/install.en.md
+      - 'Use this template': guide/use-the-template.en.md
+      - 'From topic to project': guide/from-topic-to-project.en.md
+      - 'Daily workflow': guide/daily-workflow.en.md
+      - 'Which report is which?': guide/reports-explained.en.md
+      - 'Showing an HTML report inside your site': guide/embed-html-in-site.en.md
+      - 'Showing your project without GitHub Pages': guide/showing-without-pages.en.md
+      - 'Releases & private repositories': guide/releases-and-private-repos.en.md
+      - 'Troubleshooting': guide/troubleshooting.en.md
+  - Kılavuz (TR):
+      - 'Her şeyi kurma': guide/install.tr.md
+      - 'Şablonu kullanma': guide/use-the-template.tr.md
+      - 'Konudan projeye': guide/from-topic-to-project.tr.md
+      - 'Günlük iş akışı': guide/daily-workflow.tr.md
+      - 'Hangi rapor hangisi?': guide/reports-explained.tr.md
+      - 'Sitenizin içinde HTML raporu göstermek': guide/embed-html-in-site.tr.md
+      - 'Projenizi GitHub Pages olmadan göstermek': guide/showing-without-pages.tr.md
+      - 'Sürümler ve özel depolar': guide/releases-and-private-repos.tr.md
+      - 'Sorun giderme': guide/troubleshooting.tr.md
+  - Reports:
+      - 'Overview': reports/index.md
+      - Windows:
+          - 'Unit tests': reports/windows/tests-trx.md
+          - 'Coverage - ReportGenerator': reports/windows/coverage-reportgenerator.md
+          - 'Coverage - lcov': reports/windows/coverage-lcov.md
+          - 'Doc coverage - ReportGenerator': reports/windows/doccoverage-reportgenerator.md
+          - 'Doc coverage - lcov': reports/windows/doccoverage-lcov.md
+      - Linux:
+          - 'Unit tests': reports/linux/tests-trx.md
+          - 'Coverage - ReportGenerator': reports/linux/coverage-reportgenerator.md
+          - 'Coverage - lcov': reports/linux/coverage-lcov.md
+          - 'Doc coverage - ReportGenerator': reports/linux/doccoverage-reportgenerator.md
+          - 'Doc coverage - lcov': reports/linux/doccoverage-lcov.md
+  - API docs:
+      - 'Overview': api/index.md
+      - 'Doxygen - Windows': reports/windows/api-doxygen.md
+      - 'Doxygen - Linux': reports/linux/api-doxygen.md
+      - 'DocFX - Windows': reports/windows/api-docfx.md
+      - 'DocFX - Linux': reports/linux/api-docfx.md
+  - Downloads: downloads.md
+  - Developers: developers.md
