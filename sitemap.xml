@@ -1,151 +1,395 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/developers/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/developers/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/developers/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/developers/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/downloads/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/downloads/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/downloads/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/downloads/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/api/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/api/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/api/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/api/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/daily-workflow.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/daily-workflow/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/daily-workflow/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/daily-workflow/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/daily-workflow.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/embed-html-in-site/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/embed-html-in-site/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/embed-html-in-site/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/embed-html-in-site.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/from-topic-to-project/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/from-topic-to-project/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/from-topic-to-project/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/embed-html-in-site.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/install/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/install/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/install/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/from-topic-to-project.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/releases-and-private-repos/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/releases-and-private-repos/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/releases-and-private-repos/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/from-topic-to-project.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/reports-explained/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/reports-explained/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/reports-explained/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/install.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/showing-without-pages/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/showing-without-pages/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/showing-without-pages/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/install.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/troubleshooting/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/releases-and-private-repos.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/guide/use-the-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/use-the-template/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/use-the-template/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/releases-and-private-repos.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/reports-explained.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/api-docfx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/api-docfx/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-docfx/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/reports-explained.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-doxygen/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/showing-without-pages.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/showing-without-pages.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/use-the-template.en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/tests-trx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/tests-trx/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/tests-trx/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/guide/use-the-template.tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/api-docfx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/api-docfx/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-docfx/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-doxygen/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/api-docfx/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/api-doxygen/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/tests-trx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/tests-trx/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/tests-trx/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/developers/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/developers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/developers/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/linux/tests-trx/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/downloads/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/downloads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/downloads/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/api-docfx/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/api-doxygen/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/api/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/api/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/daily-workflow/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/daily-workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/daily-workflow/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/embed-html-in-site/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/embed-html-in-site/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/embed-html-in-site/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/from-topic-to-project/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/from-topic-to-project/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/from-topic-to-project/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/install/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/install/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/install/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/vs-net-core-template/reports/windows/tests-trx/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/releases-and-private-repos/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/releases-and-private-repos/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/releases-and-private-repos/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/reports-explained/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/reports-explained/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/reports-explained/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/showing-without-pages/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/showing-without-pages/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/showing-without-pages/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/troubleshooting/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/guide/use-the-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/guide/use-the-template/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/guide/use-the-template/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-docfx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-docfx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/api-docfx/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/api-doxygen/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/coverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/doccoverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/tests-trx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/linux/tests-trx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/linux/tests-trx/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-docfx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-docfx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/api-docfx/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/api-doxygen/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/coverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/doccoverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/tests-trx/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/vs-net-core-template/tr/reports/windows/tests-trx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/vs-net-core-template/reports/windows/tests-trx/"/>
     </url>
 </urlset>
