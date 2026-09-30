@@ -55,7 +55,17 @@ jobs:
         run: choco install doxygen.install graphviz lcov -y --no-progress
       - name: 7-build-all-windows (build, tests, reports, API docs, app, release assets)
         shell: cmd
-        run: call .\7-build-all-windows.bat --no-site
+        run: |
+          call .\7-build-all-windows.bat --no-site > build-all.log 2>&1
+          set RC=%ERRORLEVEL%
+          type build-all.log
+          exit /b %RC%
+      - name: Show the end of the build log as an annotation (visible without logging in)
+        if: failure()
+        shell: pwsh
+        run: |
+          $t = (Get-Content build-all.log -Tail 30) -join '%0A'
+          Write-Output "::error title=7-build-all-windows failed (last 30 lines)::$t"
       - uses: actions/upload-artifact@v7
         with:
           name: platform-windows
@@ -93,8 +103,7 @@ jobs:
         if: failure()
         shell: bash
         run: |
-          t="$(tail -n 30 build-all.log | sed ':a;N;$!ba;s/
-/%0A/g')"
+          t="$(tail -n 30 build-all.log | awk '{printf "%s%%0A", $0}')"
           echo "::error title=7-build-all-linux failed (last 30 lines)::$t"
       - uses: actions/upload-artifact@v7
         with:
