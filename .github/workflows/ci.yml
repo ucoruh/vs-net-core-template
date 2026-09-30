@@ -1,105 +1,239 @@
-name: Build and Test
+name: CI
 
-# Two jobs, both lean:
-#   build-and-test -- restore, build, run the sample's unit tests with coverage, on both Windows
-#                      and Ubuntu, on every push and PR. Publishes nothing.
-#   build-site      -- the full 7-build-app.sh (every report, both families, the DocFX site),
-#                      uploaded as a build artifact so a PR reviewer can download and preview it
-#                      without waiting for a Pages deploy. Runs once (ubuntu-latest only) to keep
-#                      this cheap; the actual Pages deploy is pages.yml, only on push to main.
-# See docs/guide/releases-and-private-repos.en.md for the Actions-minutes trade-off, and
-# docs/guide/embed-html-in-site.en.md for what "the site" means here.
+# One pipeline (replaces the former ci.yml + pages.yml + release.yml). The jobs run the SAME numbered
+# scripts a student runs locally, so CI and local produce the same files with the same names.
+#
+#   windows / linux  build, test, every report (both families), Doxygen + DocFX, the app, and the
+#                    per-platform release assets (7-build-all-<platform> --no-site). Upload artifacts.
+#   macos            builds the app only (arm64) and packs it.
+#   site             merges both platforms: MkDocs site + DocFX sites, link check, source/site zips,
+#                    ASSETS.md, SHA256SUMS.txt. Uploads the site and the complete release/ folder.
+#   deploy-pages     push to main (or manual): publish the site to the gh-pages branch. Private repos
+#                    skip it unless the variable PAGES_ON_PRIVATE is "true" (notice + summary explain).
+#   release          tag v*: create the GitHub Release with EVERY asset of release/ (one to one).
+#
+# Private repositories: Pages needs GitHub Pro/Team (or the Student Developer Pack). Releases work on
+# Free. See docs/guide/showing-without-pages.en.md and docs/guide/releases-and-private-repos.en.md.
+# Minutes: three runners per run; artifacts are kept 7 days.
 
 on:
   push:
+    branches: [ '**' ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
 
 jobs:
-  build-and-test:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ windows-latest, ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
+  windows:
+    runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup .NET (version pinned in global.json)
-        uses: actions/setup-dotnet@v6
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v6
         with:
           global-json-file: global.json
-
-      - name: Restore
-        run: dotnet restore CalculatorLibrary.sln
-
-      - name: Build (Release; warnings are errors, see Directory.Build.props)
-        run: dotnet build CalculatorLibrary.sln --configuration Release --no-restore
-
-      - name: Test with coverage
-        run: >
-          dotnet test CalculatorLibrary.Tests/CalculatorLibrary.Tests.csproj
-          --no-build --configuration Release --verbosity normal
-          --collect:"XPlat Code Coverage" --settings CalculatorLibrary.Tests/coverlet.runsettings
-          --results-directory TestResults
-          --logger "trx;LogFileName=test-results.trx"
-
-      - name: Coverage summary in the job summary
-        if: always() && matrix.os == 'ubuntu-latest'
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: TestResults/**/coverage.cobertura.xml
-          badge: false
-          format: markdown
-          output: both
-
-      - name: Add coverage summary to job summary
-        if: always() && matrix.os == 'ubuntu-latest'
-        shell: bash
-        run: |
-          if [ -f code-coverage-results.md ]; then
-            cat code-coverage-results.md >> "$GITHUB_STEP_SUMMARY"
-          fi
-
-  build-site:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup .NET (version pinned in global.json)
-        uses: actions/setup-dotnet@v6
-        with:
-          global-json-file: global.json
-
-      - name: Setup Python
-        uses: actions/setup-python@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
+      - name: Install Python tools (MkDocs Material, coverxygen)
+        run: python -m pip install -r requirements.txt
+      - name: Install Doxygen, Graphviz and lcov
+        shell: cmd
+        run: choco install doxygen.install graphviz lcov -y --no-progress
+      - name: 7-build-all-windows (build, tests, reports, API docs, app, release assets)
+        shell: cmd
+        run: call .\7-build-all-windows.bat --no-site
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-windows
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            release/*-windows-*
+            reports/windows/**
+            !reports/windows/_raw/**
 
-      - name: Install Doxygen, Graphviz, lcov and coverxygen
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install Python tools (MkDocs Material, coverxygen)
+        run: python -m pip install -r requirements.txt
+      - name: Install Doxygen, Graphviz and lcov
         run: |
           sudo apt-get update
-          sudo apt-get install -y doxygen graphviz lcov perl zip
-          python3 -m pip install --user coverxygen
-
-      - name: Restore local dotnet tools (ReportGenerator, DocFX)
-        run: dotnet tool restore
-
-      - name: Build everything (7-build-app.sh)
+          sudo apt-get install -y doxygen graphviz lcov zip
+      - name: 7-build-all-linux (build, tests, reports, API docs, app, release assets)
         run: |
-          chmod +x 7-build-app.sh dotnet-env.sh
-          ./7-build-app.sh
+          chmod +x *.sh scripts/*.sh
+          ./7-build-all-linux.sh --no-site
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-linux
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            release/*-linux-*
+            reports/linux/**
+            !reports/linux/_raw/**
 
-      - name: Upload the site as a build artifact
-        uses: actions/upload-artifact@v7
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+      - name: Publish and pack the app (osx-arm64)
+        run: |
+          set -a; . ./project.env; set +a
+          dotnet publish "$APP_PROJECT" -c Release -r osx-arm64 --self-contained true \
+            --artifacts-path build/macos-release -o publish/macos-arm64 --nologo
+          python3 scripts/site_tools.py pack-platform --platform macos --arch arm64 --app-only
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-macos
+          retention-days: 7
+          if-no-files-found: error
+          path: release/*-macos-*
+
+  site:
+    needs: [ windows, linux, macos ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install Python tools (MkDocs Material, coverxygen)
+        run: python -m pip install -r requirements.txt
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: platform-*
+          merge-multiple: true
+      - name: Build the MkDocs site, add both platforms' reports and the DocFX sites, check links, pack neutral assets
+        run: |
+          chmod +x scripts/*.sh
+          ./scripts/build-site-linux.sh
+          ls -1 release
+      - uses: actions/upload-artifact@v7
         with:
           name: site
           path: site/
           retention-days: 7
           if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        with:
+          name: release-all
+          path: |
+            release/*
+            build/release-notes.md
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy-pages:
+    needs: site
+    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Decide whether to deploy Pages
+        id: decide
+        env:
+          IS_PRIVATE: ${{ github.event.repository.private }}
+          PAGES_ON_PRIVATE: ${{ vars.PAGES_ON_PRIVATE }}
+          GUIDE_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main/docs/guide/showing-without-pages.en.md
+        run: |
+          if [ "$IS_PRIVATE" = "true" ] && [ "$PAGES_ON_PRIVATE" != "true" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Pages deploy skipped::This repository is private; GitHub Pages needs GitHub Pro/Team (the free Student Developer Pack gives Pro). Show your project locally instead (7-build-all + 9-open-site, and the release/ folder): $GUIDE_URL . Once you have Pro and Pages is on, set the repository variable PAGES_ON_PRIVATE to true."
+            {
+              echo "## Pages deploy skipped"
+              echo
+              echo "This repository is **private**. GitHub Pages does not serve a private repository unless it has"
+              echo "GitHub Pro/Team (the free [GitHub Student Developer Pack](https://education.github.com/pack) gives Pro)."
+              echo
+              echo "**What to do instead:** build and show everything locally (\`7-build-all-<platform>\`, then"
+              echo "\`9-open-site-<platform>\`; the \`release/\` folder holds every output). Step by step, with the demo"
+              echo "checklist: [Showing your project without GitHub Pages]($GUIDE_URL)."
+              echo
+              echo "To enable Pages later: get Pro, turn Pages on under **Settings -> Pages**, set the repository variable"
+              echo "\`PAGES_ON_PRIVATE\` to \`true\` (**Settings -> Secrets and variables -> Actions -> Variables**) and re-run."
+              echo "The site is also attached to every release as \`<project>-<version>-site.zip\`."
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/download-artifact@v8
+        if: steps.decide.outputs.skip != 'true'
+        with:
+          name: site
+          path: site
+      - name: Deploy site/ to the gh-pages branch
+        if: steps.decide.outputs.skip != 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          commit_message: "Deploy site for ${{ github.sha }}"
+      - name: Live site URL in the job summary
+        if: steps.decide.outputs.skip != 'true'
+        run: |
+          {
+            echo "## Site deployed"
+            echo
+            echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: site
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: release-all
+      - name: Check the tag matches VERSION in project.env
+        run: |
+          set -a; . ./project.env; set +a
+          if [ "${GITHUB_REF_NAME}" != "v${VERSION}" ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} does not match VERSION=${VERSION} in project.env (asset names use it). Fix project.env or the tag."
+            exit 1
+          fi
+          ls -1 release
+      - name: Note private-repository visibility
+        if: github.event.repository.private == true
+        run: |
+          echo "::notice title=Private repository release::This release is visible only to collaborators. Add your instructor under Settings -> Collaborators."
+      - uses: softprops/action-gh-release@v3
+        with:
+          name: ${{ github.ref_name }}
+          body_path: build/release-notes.md
+          files: release/*
