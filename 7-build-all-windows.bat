@@ -81,7 +81,9 @@ echo Done.
 echo.
 
 rem ---------------------------------------------------------------------------
-echo [1/9] Restoring and building the solution ^(Release^)...
+echo [1/9] Restoring the local dotnet tools ^(ReportGenerator, DocFX^) and building the solution ^(Release^)...
+call dotnet tool restore
+call :check "dotnet tool restore" || exit /b 1
 call dotnet build "%SOLUTION_FILE%" --configuration Release --artifacts-path "build\windows-release" --nologo
 call :check "dotnet build" || exit /b 1
 echo.
@@ -147,8 +149,6 @@ echo.
 
 rem ---------------------------------------------------------------------------
 echo [6/9] DocFX API reference ^(a complete site of its own, kept under native\ -- never framed^)...
-call dotnet tool restore
-call :check "dotnet tool restore" || exit /b 1
 call dotnet docfx metadata docfx\docfx.json
 call :check "docfx metadata" || exit /b 1
 call dotnet docfx build docfx\docfx.json -o %R%\api-docfx

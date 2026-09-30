@@ -43,7 +43,8 @@ rm -rf "$R" build/doxygen site site-native
 mkdir -p "$R/_raw"
 echo "Done."; echo
 
-echo "[1/9] Restoring and building the solution (Release)..."
+echo "[1/9] Restoring the local dotnet tools (ReportGenerator, DocFX) and building the solution (Release)..."
+dotnet tool restore
 dotnet build "$SOLUTION_FILE" --configuration Release --artifacts-path build/linux-release --nologo
 echo
 
@@ -90,7 +91,6 @@ fi
 echo
 
 echo "[6/9] DocFX API reference (a complete site of its own, kept under native/ -- never framed)..."
-dotnet tool restore
 dotnet docfx metadata docfx/docfx.json
 dotnet docfx build docfx/docfx.json -o "$R/api-docfx"
 echo
