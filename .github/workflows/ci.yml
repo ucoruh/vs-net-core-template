@@ -147,10 +147,19 @@ jobs:
           python-version: '3.12'
       - name: Install Python tools (MkDocs Material, coverxygen)
         run: python -m pip install -r requirements.txt
+      # Windows/Linux artifacts contain release/* AND reports/<platform>/**, so their common root is the repo
+      # root and the paths are kept. The macOS artifact is a single file: upload-artifact stores it WITHOUT
+      # the release/ folder, so it must be downloaded into release/ explicitly.
       - uses: actions/download-artifact@v8
         with:
-          pattern: platform-*
-          merge-multiple: true
+          name: platform-windows
+      - uses: actions/download-artifact@v8
+        with:
+          name: platform-linux
+      - uses: actions/download-artifact@v8
+        with:
+          name: platform-macos
+          path: release
       - name: Build the MkDocs site, add both platforms' reports and the DocFX sites, check links, pack neutral assets
         run: |
           chmod +x scripts/*.sh
